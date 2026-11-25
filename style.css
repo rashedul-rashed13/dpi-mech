@@ -139,11 +139,11 @@ button {
 
 .navbar {
   width: 100%;
-  min-height: 55px;
+  min-height: 50px;
   background: var(--green);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 0 2%;
   position: relative;
 }
@@ -151,8 +151,8 @@ button {
 .nav-menu {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2px;
+  justify-content: center;
+  gap: 3px;
   list-style: none;
 }
 
