@@ -74,8 +74,8 @@ button {
 
 .header {
   width: 100%;
-  min-height: 160px;
-  padding: 12px 3%;
+  min-height: 100px;
+  padding: 8px 3%;
   display: grid;
   grid-template-columns: 100px 1fr 100px;
   align-items: center;
