@@ -1,23 +1,1127 @@
-<div class="header">
 
-  <div class="header-logo">
-    <img src="./assets/alumni.png"
-         alt="Mechanical Alumni Association Logo">
-  </div>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="header-title">
+<head>
 
-    <h1>Mechanical Alumni Association</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <p>Dhaka Govt. Polytechnic Institute</p>
+    <meta name="description" content="Mechanical Alumni Association - Dhaka Govt. Polytechnic Institute">
 
-    <span>Shared Roots, Lifelong Fellowship</span>
+    <meta name="theme-color" content="#103e35">
 
-  </div>
+    <title>Mechanical Alumni Association | DGPI</title>
 
-  <div class="header-logo">
-    <img src="./assets/logo.png"
-         alt="Dhaka Govt. Polytechnic Institute Logo">
-  </div>
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header class="site-header">
+
+    <div class="header">
+
+        <!-- LEFT LOGO -->
+
+        <div class="header-logo">
+
+            <a href="./index.html">
+
+                <img src="./assets/alumni.png"
+                     alt="Mechanical Alumni Association Logo">
+
+            </a>
+
+        </div>
+
+
+        <!-- ASSOCIATION NAME -->
+
+        <div class="header-title">
+
+            <h1>Mechanical Alumni Association</h1>
+
+            <p>Dhaka Govt. Polytechnic Institute</p>
+
+            <span>Shared Roots, Lifelong Fellowship</span>
+
+        </div>
+
+
+        <!-- RIGHT LOGO -->
+
+        <div class="header-logo">
+
+            <img src="./assets/logo.png"
+                 alt="Dhaka Govt. Polytechnic Institute Logo">
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         MAIN NAVIGATION
+    ====================================== -->
+
+    <nav class="navbar">
+
+        <!-- MOBILE MENU BUTTON -->
+
+        <button class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Open Menu"
+                aria-expanded="false">
+
+            ☰
+
+        </button>
+
+
+        <ul class="nav-menu" id="navMenu">
+
+
+            <!-- HOME -->
+
+            <li>
+
+                <a href="./index.html">Home</a>
+
+            </li>
+
+
+            <!-- ABOUT US DROPDOWN -->
+
+            <li class="has-dropdown">
+
+                <button class="dropdown-toggle"
+                        type="button"
+                        aria-expanded="false">
+
+                    About Us <span>▾</span>
+
+                </button>
+
+
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a href="./about/overview.html">
+                            Overview
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./about/teachers.html">
+                            Teachers
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./about/leader-message.html">
+                            Leader Message
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./about/mentors.html">
+                            Mentors
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+
+            <!-- COMMITTEE DROPDOWN -->
+
+            <li class="has-dropdown">
+
+                <button class="dropdown-toggle"
+                        type="button"
+                        aria-expanded="false">
+
+                    Committee <span>▾</span>
+
+                </button>
+
+
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a href="./committee/executive.html">
+                            Executive
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./committee/advisory.html">
+                            Advisory
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./committee/former-leaders.html">
+                            Former Leaders
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+
+            <!-- ALUMNI DIRECTORY -->
+
+            <li>
+
+                <a href="./alumni/index.html">
+                    Alumni Directory
+                </a>
+
+            </li>
+
+
+            <!-- EVENTS -->
+
+            <li>
+
+                <a href="./events/index.html">
+                    Events
+                </a>
+
+            </li>
+
+
+            <!-- NOTICES -->
+
+            <li>
+
+                <a href="./notices/index.html">
+                    Notices
+                </a>
+
+            </li>
+
+
+            <!-- MORE DROPDOWN -->
+
+            <li class="has-dropdown">
+
+                <button class="dropdown-toggle"
+                        type="button"
+                        aria-expanded="false">
+
+                    More <span>▾</span>
+
+                </button>
+
+
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a href="./career/index.html">
+                            Jobs / Career
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./donation/index.html">
+                            Donation / Fund
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+
+            <!-- CONTACT -->
+
+            <li>
+
+                <a href="./contact/index.html">
+                    Contact
+                </a>
+
+            </li>
+
+
+            <!-- LANGUAGE -->
+
+            <li>
+
+                <button id="languageToggle"
+                        class="language-toggle"
+                        type="button">
+
+                    BN
+
+                </button>
+
+            </li>
+
+
+            <!-- LOGIN -->
+
+            <li>
+
+                <button class="login-trigger nav-action"
+                        type="button">
+
+                    Login
+
+                </button>
+
+            </li>
+
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
+
+<main>
+
+
+    <!-- ======================================
+         HERO BANNER
+    ====================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="hero-label">
+                Welcome to
+            </p>
+
+
+            <h2>
+                Mechanical Alumni Association
+            </h2>
+
+
+            <h3>
+                Shared Roots, Lifelong Fellowship
+            </h3>
+
+
+            <p class="hero-message">
+
+                Together again—Mechanical alumni, friends,
+                and respected teachers bound by shared memories.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+
+                <button class="hero-btn register-trigger"
+                        type="button">
+
+                    Join Our Community →
+
+                </button>
+
+
+                <a href="./alumni/index.html"
+                   class="hero-btn secondary-btn">
+
+                    Alumni Directory
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         ABOUT OUR ASSOCIATION
+    ====================================== -->
+
+    <section class="about-section">
+
+        <div class="section-title">
+
+            <h2>About Our Association</h2>
+
+            <p>
+                Our History, Our Pride, Our Community
+            </p>
+
+        </div>
+
+
+        <div class="about-content">
+
+
+            <div class="about-image">
+
+                <img src="./assets/hero-banner.jpg"
+                     alt="Dhaka Govt. Polytechnic Institute">
+
+            </div>
+
+
+
+            <div class="about-text">
+
+                <h3>
+                    Welcome to Our Alumni Community
+                </h3>
+
+
+                <p>
+
+                    Mechanical Alumni Association is a platform
+                    for former students and respected teachers
+                    of Dhaka Govt. Polytechnic Institute.
+
+                </p>
+
+
+                <p>
+
+                    Our goal is to maintain lifelong connections,
+                    promote mutual support, preserve memories
+                    and contribute to the development of our
+                    institution.
+
+                </p>
+
+
+                <a href="./about/overview.html"
+                   class="read-more">
+
+                    Read More →
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         NOTICE BOARD
+    ====================================== -->
+
+    <section class="notice-section">
+
+        <div class="section-title">
+
+            <h2>Notice Board</h2>
+
+            <p>
+                Latest announcements and updates
+            </p>
+
+        </div>
+
+
+        <div class="notice-box">
+
+            <p>
+                No notices available at the moment.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         UPCOMING EVENTS
+    ====================================== -->
+
+    <section class="events-section">
+
+        <div class="section-title">
+
+            <h2>Upcoming Events</h2>
+
+            <p>
+                Stay connected with our activities
+            </p>
+
+        </div>
+
+
+        <div class="event-box">
+
+            <p>
+                Upcoming events will be published here.
+            </p>
+
+
+            <a href="./events/index.html">
+
+                View All Events →
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         PHOTO GALLERY
+    ====================================== -->
+
+    <section class="gallery-section">
+
+        <div class="section-title">
+
+            <h2>Photo Gallery</h2>
+
+            <p>
+                Memories that bring us together
+            </p>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+            <img src="./assets/hero-banner.jpg"
+                 alt="Institute Campus">
+
+            <img src="./assets/hero-banner.jpg"
+                 alt="Institute Building">
+
+            <img src="./assets/hero-banner.jpg"
+                 alt="Institute Memories">
+
+        </div>
+
+
+        <div class="gallery-link">
+
+            <a href="./gallery/index.html">
+
+                Explore Gallery →
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         BECOME A MEMBER
+    ====================================== -->
+
+    <section class="membership-section">
+
+        <div class="section-title">
+
+            <h2>Become a Member</h2>
+
+            <p>
+                Reconnect with your institution and alumni family.
+            </p>
+
+        </div>
+
+
+        <button class="membership-btn register-trigger"
+                type="button">
+
+            Register Now
+
+        </button>
+
+
+        <a class="membership-btn"
+           href="./alumni/index.html">
+
+            Alumni Directory
+
+        </a>
+
+    </section>
+
+
+
+    <!-- ======================================
+         CONTACT US
+    ====================================== -->
+
+    <section class="contact-section">
+
+        <div class="section-title">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                We would love to hear from you
+            </p>
+
+        </div>
+
+
+        <p>
+
+            Dhaka Govt. Polytechnic Institute,
+            Dhaka, Bangladesh
+
+        </p>
+
+
+        <a href="./contact/index.html">
+
+            Contact Details →
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer class="footer">
+
+
+    <div class="footer-container">
+
+
+        <!-- ABOUT -->
+
+        <div class="footer-column footer-about">
+
+            <h3>
+                Mechanical Alumni Association
+            </h3>
+
+
+            <p>
+
+                Connecting former students and respected
+                teachers of Dhaka Govt. Polytechnic Institute.
+
+                Shared Roots, Lifelong Fellowship.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- QUICK LINKS -->
+
+        <div class="footer-column">
+
+            <h4>Quick Links</h4>
+
+
+            <ul>
+
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="./about/overview.html">
+                        About Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./committee/executive.html">
+                        Committee
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./alumni/index.html">
+                        Alumni Directory
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./events/index.html">
+                        Events
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./notices/index.html">
+                        Notices
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./contact/index.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- MEMBERSHIP -->
+
+        <div class="footer-column">
+
+            <h4>Membership</h4>
+
+
+            <ul>
+
+                <li>
+
+                    <button class="footer-link register-trigger"
+                            type="button">
+
+                        Join Our Community
+
+                    </button>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./alumni/index.html">
+
+                        Alumni Directory
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <button class="footer-link login-trigger"
+                            type="button">
+
+                        Member Login
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- CONTACT INFORMATION -->
+
+        <div class="footer-column">
+
+            <h4>Contact Information</h4>
+
+
+            <p>
+                Dhaka Govt. Polytechnic Institute
+            </p>
+
+
+            <p>
+                Dhaka, Bangladesh
+            </p>
+
+
+            <a href="./contact/index.html">
+
+                Contact Us →
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+
+        <p>
+
+            © 2026 Mechanical Alumni Association.
+            All Rights Reserved.
+
+        </p>
+
+
+        <div class="legal-links">
+
+            <a href="./privacy-policy.html">
+
+                Privacy Policy
+
+            </a>
+
+
+            <a href="./terms.html">
+
+                Terms & Conditions
+
+            </a>
+
+        </div>
+
+
+        <p>
+            Shared Roots, Lifelong Fellowship
+        </p>
+
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- ==========================================
+     REGISTRATION POPUP
+========================================== -->
+
+<div class="modal register-modal"
+     id="registerModal"
+     aria-hidden="true"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="registerTitle">
+
+
+    <div class="modal-overlay register-modal-overlay"></div>
+
+
+    <div class="modal-content register-modal-content">
+
+
+        <button type="button"
+                class="modal-close"
+                id="closeRegisterModal"
+                aria-label="Close">
+
+            &times;
+
+        </button>
+
+
+        <div class="modal-icon">
+            🎓
+        </div>
+
+
+        <h2 id="registerTitle">
+            Choose Registration Type
+        </h2>
+
+
+        <p>
+            Please select your membership category.
+        </p>
+
+
+
+        <div class="modal-options">
+
+
+            <!-- STUDENT REGISTRATION -->
+
+            <a href="./register/students/student.html"
+               class="modal-option student-option">
+
+
+                <span class="option-icon">
+                    🎓
+                </span>
+
+
+                <span class="option-text">
+
+                    <strong>
+                        Student
+                    </strong>
+
+                    <small>
+                        Register as a former student
+                    </small>
+
+                </span>
+
+
+                <span class="option-arrow">
+                    →
+                </span>
+
+
+            </a>
+
+
+
+            <!-- TEACHER REGISTRATION -->
+
+            <a href="./register/teacher/teacher.html"
+               class="modal-option teacher-option">
+
+
+                <span class="option-icon">
+                    👨‍🏫
+                </span>
+
+
+                <span class="option-text">
+
+                    <strong>
+                        Honorable Teacher
+                    </strong>
+
+                    <small>
+                        Register as a respected teacher
+                    </small>
+
+                </span>
+
+
+                <span class="option-arrow">
+                    →
+                </span>
+
+
+            </a>
+
+
+        </div>
+
+
+        <p class="modal-footer">
+            Mechanical Alumni Association
+        </p>
+
+
+    </div>
 
 </div>
+
+
+
+<!-- ==========================================
+     LOGIN POPUP
+========================================== -->
+
+<div class="modal login-modal"
+     id="loginModal"
+     aria-hidden="true"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="loginTitle">
+
+
+    <div class="modal-overlay login-modal-overlay"></div>
+
+
+    <div class="modal-content login-modal-content">
+
+
+        <button type="button"
+                class="modal-close"
+                id="closeLoginModal"
+                aria-label="Close">
+
+            &times;
+
+        </button>
+
+
+        <div class="modal-icon">
+            🔐
+        </div>
+
+
+        <h2 id="loginTitle">
+            Choose Login Type
+        </h2>
+
+
+        <p>
+            Select your account category to continue.
+        </p>
+
+
+
+        <div class="modal-options">
+
+
+            <!-- STUDENT LOGIN -->
+
+            <a href="./login/student.html"
+               class="modal-option">
+
+
+                <span class="option-icon">
+                    🎓
+                </span>
+
+
+                <span class="option-text">
+
+                    <strong>
+                        Student
+                    </strong>
+
+                    <small>
+                        Student account login
+                    </small>
+
+                </span>
+
+
+                <span class="option-arrow">
+                    →
+                </span>
+
+
+            </a>
+
+
+
+            <!-- TEACHER LOGIN -->
+
+            <a href="./login/teacher.html"
+               class="modal-option">
+
+
+                <span class="option-icon">
+                    👨‍🏫
+                </span>
+
+
+                <span class="option-text">
+
+                    <strong>
+                        Honorable Teacher
+                    </strong>
+
+                    <small>
+                        Teacher account login
+                    </small>
+
+                </span>
+
+
+                <span class="option-arrow">
+                    →
+                </span>
+
+
+            </a>
+
+
+
+            <!-- ADMIN LOGIN -->
+
+            <a href="./login/admin.html"
+               class="modal-option admin-option">
+
+
+                <span class="option-icon">
+                    ⚙️
+                </span>
+
+
+                <span class="option-text">
+
+                    <strong>
+                        Administration
+                    </strong>
+
+                    <small>
+                        Management panel login
+                    </small>
+
+                </span>
+
+
+                <span class="option-arrow">
+                    →
+                </span>
+
+
+            </a>
+
+
+        </div>
+
+
+        <p class="modal-footer">
+            Mechanical Alumni Association
+        </p>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT FILE
+========================================== -->
+
+<script src="./script.js"></script>
+
+
+</body>
+
+</html>
