@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#062e24">
+
+    <title>Student Registration | Mechanical Alumni Association</title>
+
+    <meta name="description" content="Student Registration - Mechanical Alumni Association, Dhaka Govt. Polytechnic Institute">
+
+    <!-- Main Website CSS -->
+    <link rel="stylesheet" href="../../style.css">
+
+    <!-- Student Registration CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="registration-header">
+
+    <a href="../../index.html" class="header-back">
+        ← Main Website
+    </a>
+
+    <div class="registration-brand">
+
+        <img src="../../assets/alumni.png"
+             alt="Mechanical Alumni Association Logo">
+
+        <div>
+            <h1>Mechanical Alumni Association</h1>
+            <p>Dhaka Govt. Polytechnic Institute</p>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN CONTENT -->
+<main class="registration-container">
+
+    <!-- PAGE TITLE -->
+    <div class="registration-title">
+
+        <span class="page-label">STUDENT PORTAL</span>
+
+        <h2>Student Registration</h2>
+
+        <p>
+            Register your information to become a part of
+            the Mechanical Alumni Association community.
+        </p>
+
+    </div>
+
+
+    <!-- REGISTRATION FORM -->
+    <form id="studentRegistrationForm">
+
+
+        <!-- PERSONAL INFORMATION -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Personal Information</h3>
+                <p>Provide your basic personal details.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text"
+                           id="fullName"
+                           name="fullName"
+                           placeholder="Enter your full name"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="fatherName">Father's Name *</label>
+                    <input type="text"
+                           id="fatherName"
+                           name="fatherName"
+                           placeholder="Father's name"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="motherName">Mother's Name *</label>
+                    <input type="text"
+                           id="motherName"
+                           name="motherName"
+                           placeholder="Mother's name"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth *</label>
+                    <input type="date"
+                           id="dateOfBirth"
+                           name="dateOfBirth"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="bloodGroup">Blood Group</label>
+                    <select id="bloodGroup" name="bloodGroup">
+                        <option value="">Select Blood Group</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>Unknown</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT INFORMATION -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Contact Information</h3>
+                <p>Provide your active contact details.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number *</label>
+                    <input type="tel"
+                           id="mobile"
+                           name="mobile"
+                           placeholder="01XXXXXXXXX"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           placeholder="example@email.com"
+                           required>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACADEMIC INFORMATION -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Academic Information</h3>
+                <p>Provide your educational information.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label>Academic Qualification *</label>
+
+                    <div class="checkbox-group">
+
+                        <label class="checkbox-item">
+                            <input type="checkbox"
+                                   name="qualification"
+                                   value="Diploma in Engineering">
+                            Diploma in Engineering
+                        </label>
+
+                        <label class="checkbox-item">
+                            <input type="checkbox"
+                                   name="qualification"
+                                   value="Allied Group Make-up Course">
+                            Allied Group Make-up Course
+                        </label>
+
+                    </div>
+                </div>
+
+
+                <!-- DIPLOMA INFORMATION -->
+                <div id="diplomaFields" class="conditional-fields full-width">
+
+                    <h4>Diploma in Engineering</h4>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="department">Department *</label>
+
+                            <select id="department" name="department">
+                                <option value="">Select Department</option>
+                                <option value="70 - Mechanical Technology">
+                                    70 - Mechanical Technology
+                                </option>
+                                <option value="Other">
+                                    Other Department
+                                </option>
+                            </select>
+
+                            <small>
+                                Membership eligibility is subject to the
+                                association's department requirements.
+                            </small>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="session">Session *</label>
+
+                            <select id="session" name="session">
+                                <option value="">Select Session</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="passingYear">Passing Year *</label>
+
+                            <select id="passingYear" name="passingYear">
+                                <option value="">Select Passing Year</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <p id="eligibilityMessage"
+                       class="eligibility-message"
+                       aria-live="polite">
+                    </p>
+
+                </div>
+
+
+                <!-- MAKE-UP COURSE INFORMATION -->
+                <div id="makeupFields" class="conditional-fields full-width">
+
+                    <h4>Allied Group Make-up Course</h4>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="makeupInstitute">
+                                Polytechnic Institute *
+                            </label>
+
+                            <select id="makeupInstitute"
+                                    name="makeupInstitute">
+
+                                <option value="">Select Institute</option>
+                                <option value="Dhaka Polytechnic Institute">
+                                    Dhaka Polytechnic Institute
+                                </option>
+                                <option value="Other">Others</option>
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="makeupPassingYear">
+                                Passing Year *
+                            </label>
+
+                            <select id="makeupPassingYear"
+                                    name="makeupPassingYear">
+
+                                <option value="">Select Passing Year</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group full-width"
+                         id="otherInstituteGroup">
+
+                        <label for="otherInstitute">
+                            Institute Name
+                        </label>
+
+                        <input type="text"
+                               id="otherInstitute"
+                               name="otherInstitute"
+                               placeholder="Enter institute name">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRESENT ADDRESS -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Present Address</h3>
+                <p>Provide your current residential address.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="division">Division *</label>
+
+                    <select id="division" name="division" required>
+                        <option value="">Select Division</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="district">District *</label>
+
+                    <select id="district" name="district" required>
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="areaType">Area Type *</label>
+
+                    <select id="areaType" name="areaType" required>
+                        <option value="">Select Area Type</option>
+                        <option value="City Corporation">City Corporation</option>
+                        <option value="Upazila">Upazila</option>
+                        <option value="Municipality">Municipality</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+
+                    <select id="location" name="location" required>
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group full-width">
+                    <label for="presentAddress">
+                        Village / Road / House / Area
+                    </label>
+
+                    <textarea id="presentAddress"
+                              name="presentAddress"
+                              rows="3"
+                              placeholder="Enter detailed present address"></textarea>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERMANENT ADDRESS -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Permanent Address</h3>
+                <p>Provide your permanent residential address.</p>
+            </div>
+
+            <label class="checkbox-item same-address">
+                <input type="checkbox" id="sameAddress">
+                Same as present address
+            </label>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="permanentDivision">Division *</label>
+
+                    <select id="permanentDivision"
+                            name="permanentDivision"
+                            required>
+                        <option value="">Select Division</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="permanentDistrict">District *</label>
+
+                    <select id="permanentDistrict"
+                            name="permanentDistrict"
+                            required>
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="permanentAreaType">Area Type *</label>
+
+                    <select id="permanentAreaType"
+                            name="permanentAreaType"
+                            required>
+                        <option value="">Select Area Type</option>
+                        <option value="City Corporation">City Corporation</option>
+                        <option value="Upazila">Upazila</option>
+                        <option value="Municipality">Municipality</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="permanentLocation">Location *</label>
+
+                    <select id="permanentLocation"
+                            name="permanentLocation"
+                            required>
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group full-width">
+                    <label for="permanentAddress">
+                        Village / Road / House / Area
+                    </label>
+
+                    <textarea id="permanentAddress"
+                              name="permanentAddress"
+                              rows="3"
+                              placeholder="Enter detailed permanent address"></textarea>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CURRENT STATUS -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Current Status</h3>
+                <p>Tell us about your current professional status.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label for="currentStatus">Current Status *</label>
+
+                    <select id="currentStatus"
+                            name="currentStatus"
+                            required>
+
+                        <option value="">Select Current Status</option>
+                        <option value="Higher Studies">Higher Studies</option>
+                        <option value="Job Holder">Job Holder</option>
+                        <option value="Entrepreneur / Business">
+                            Entrepreneur / Business
+                        </option>
+                        <option value="Others">Others</option>
+
+                    </select>
+                </div>
+
+
+                <div id="jobFields" class="conditional-fields full-width">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="jobType">Job Type *</label>
+
+                            <select id="jobType" name="jobType">
+                                <option value="">Select Job Type</option>
+                                <option value="Government">Government</option>
+                                <option value="Private">Private</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="organization">Organization</label>
+
+                            <input type="text"
+                                   id="organization"
+                                   name="organization"
+                                   placeholder="Organization name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="designation">Designation</label>
+
+                            <input type="text"
+                                   id="designation"
+                                   name="designation"
+                                   placeholder="Your designation">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="higherStudyFields"
+                     class="conditional-fields full-width">
+
+                    <div class="form-group">
+                        <label for="studyInstitution">
+                            Institution Name
+                        </label>
+
+                        <input type="text"
+                               id="studyInstitution"
+                               name="studyInstitution"
+                               placeholder="Enter institution name">
+                    </div>
+
+                </div>
+
+
+                <div id="businessFields"
+                     class="conditional-fields full-width">
+
+                    <div class="form-group">
+                        <label for="businessName">Business Name</label>
+
+                        <input type="text"
+                               id="businessName"
+                               name="businessName"
+                               placeholder="Enter business name">
+                    </div>
+
+                </div>
+
+
+                <div id="otherStatusFields"
+                     class="conditional-fields full-width">
+
+                    <div class="form-group">
+                        <label for="otherStatus">Please Specify</label>
+
+                        <input type="text"
+                               id="otherStatus"
+                               name="otherStatus"
+                               placeholder="Enter your current status">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ASSOCIATION INFORMATION -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Association Information</h3>
+                <p>Share your interest in the association.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="suggestion">
+                    Your Suggestions / Comments
+                </label>
+
+                <textarea id="suggestion"
+                          name="suggestion"
+                          rows="4"
+                          placeholder="Write your suggestions here..."></textarea>
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNT INFORMATION -->
+        <section class="form-section">
+
+            <div class="section-heading">
+                <h3>Account Information</h3>
+                <p>Create your registration account.</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="accountEmail">Account Email *</label>
+
+                    <input type="email"
+                           id="accountEmail"
+                           name="accountEmail"
+                           placeholder="Enter account email"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="accountMobile">Account Mobile *</label>
+
+                    <input type="tel"
+                           id="accountMobile"
+                           name="accountMobile"
+                           placeholder="01XXXXXXXXX"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           minlength="8"
+                           placeholder="Minimum 8 characters"
+                           required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        Confirm Password *
+                    </label>
+
+                    <input type="password"
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           minlength="8"
+                           placeholder="Confirm your password"
+                           required>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DISPLAY CONTACT DETAILS -->
+        <section class="form-section contact-visibility-section">
+
+            <div class="section-heading">
+                <h3>Display Contact Details</h3>
+
+                <p>
+                    Do you want to display your contact details to others?
+                </p>
+
+                <small>
+                    Allowing this makes it easier for your friends,
+                    seniors, juniors, and teachers to reach you.
+                </small>
+            </div>
+
+
+            <div class="radio-group">
+
+                <label class="radio-item">
+                    <input type="radio"
+                           name="displayContact"
+                           value="Yes"
+                           required>
+
+                    Yes, show my contact details
+                </label>
+
+
+                <label class="radio-item">
+                    <input type="radio"
+                           name="displayContact"
+                           value="No">
+
+                    No, keep them private
+                </label>
+
+            </div>
+
+
+            <!-- PUBLIC CONTACT FIELDS -->
+            <div id="publicContactFields"
+                 class="conditional-fields">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp Number</label>
+
+                        <input type="tel"
+                               id="whatsapp"
+                               name="whatsapp"
+                               placeholder="WhatsApp number">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="publicEmail">Email</label>
+
+                        <input type="email"
+                               id="publicEmail"
+                               name="publicEmail"
+                               placeholder="Public email address">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="facebook">Facebook Profile</label>
+
+                        <input type="url"
+                               id="facebook"
+                               name="facebook"
+                               placeholder="Facebook profile link">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn Profile</label>
+
+                        <input type="url"
+                               id="linkedin"
+                               name="linkedin"
+                               placeholder="LinkedIn profile link">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="instagram">Instagram Profile</label>
+
+                        <input type="url"
+                               id="instagram"
+                               name="instagram"
+                               placeholder="Instagram profile link">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TERMS AND SUBMIT -->
+        <section class="form-submit-section">
+
+            <label class="checkbox-item terms-checkbox">
+                <input type="checkbox"
+                       id="agreeTerms"
+                       name="agreeTerms"
+                       required>
+
+                I confirm that the information provided above
+                is correct.
+            </label>
+
+
+            <button type="submit" id="submitRegistration">
+                Submit Registration →
+            </button>
+
+            <p id="formMessage" aria-live="polite"></p>
+
+        </section>
+
+    </form>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="registration-footer">
+
+    <p>
+        © 2026 Mechanical Alumni Association.
+        All Rights Reserved.
+    </p>
+
+    <p>Dhaka Govt. Polytechnic Institute</p>
+
+    <a href="../../index.html">Back to Main Website</a>
+
+</footer>
+
+
+<!-- STUDENT JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
