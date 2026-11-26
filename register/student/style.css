@@ -1,88 +1,81 @@
-
-/* =========================================
-   MECHANICAL ALUMNI ASSOCIATION
-   MEMBERSHIP REGISTRATION FORM
-   ========================================= */
-
-/* ROOT */
 :root {
   --primary: #07372b;
-  --primary-light: #0d5944;
-  --secondary: #eaf3ef;
-  --accent: #c6a45c;
-  --text: #24332d;
-  --muted: #6b7771;
-  --border: #dce5df;
-  --background: #f3f6f4;
-  --white: #ffffff;
-  --danger: #c0392b;
-  --shadow: 0 5px 22px rgba(7, 55, 43, 0.07);
+  --primary-hover: #0b4f3e;
+  --accent: #d97706;
+  --bg-page: #f3f6f5;
+  --bg-card: #ffffff;
+  --bg-panel: #f8faf9;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #d1d5db;
+  --danger: #dc2626;
+  --radius: 8px;
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
-  color: var(--text);
-  line-height: 1.6;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding-bottom: 50px;
 }
 
-/* =========================================
-   HEADER
-   ========================================= */
+.hidden {
+  display: none !important;
+}
 
+.top-gap {
+  margin-top: 14px;
+}
+
+/* HEADER */
 .site-header {
-  width: 100%;
   position: relative;
-  background: var(--primary);
-  overflow: hidden;
-}
-
-.site-header > img {
-  display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  background-color: var(--primary);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Login Button */
+.site-header img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
 .header-login {
   position: absolute;
-  top: 18px;
-  right: 22px;
-  z-index: 5;
-  background: var(--accent);
+  top: 16px;
+  right: 20px;
+  background-color: #ffffff;
   color: var(--primary);
   border: none;
-  border-radius: 6px;
-  padding: 9px 22px;
+  padding: 8px 20px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s, transform 0.1s;
 }
 
 .header-login:hover {
-  background: #dfbd76;
-  transform: translateY(-2px);
+  background-color: #f0fdf4;
+  transform: translateY(-1px);
 }
 
-/* =========================================
-   MAIN WRAPPER
-   ========================================= */
-
+/* MAIN CONTAINER */
 .page-wrap {
-  width: min(1100px, 94%);
-  margin: 35px auto 60px;
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 0 16px;
 }
 
 .page-heading {
@@ -92,493 +85,256 @@ body {
 
 .page-heading h1 {
   color: var(--primary);
-  font-size: clamp(23px, 4vw, 32px);
-  font-weight: 800;
-  margin-bottom: 7px;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .page-heading p {
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-top: 4px;
 }
 
-/* =========================================
-   FORM SECTIONS
-   ========================================= */
-
+/* FORM SECTIONS */
 .form-section {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: var(--bg-card);
   padding: 26px;
-  margin-bottom: 22px;
-  box-shadow: var(--shadow);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+  border-top: 4px solid var(--primary);
 }
 
 .form-section h2 {
+  font-size: 20px;
   color: var(--primary);
-  font-size: 19px;
-  font-weight: 750;
-  padding-bottom: 13px;
-  margin-bottom: 22px;
-  border-bottom: 2px solid var(--secondary);
-  position: relative;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.form-section h2::before {
-  content: "";
-  position: absolute;
-  width: 48px;
-  height: 3px;
-  background: var(--accent);
-  bottom: -2px;
-  left: 0;
-  border-radius: 5px;
+.form-section h3 {
+  font-size: 16px;
+  color: #111827;
+  margin: 12px 0;
 }
 
-/* =========================================
-   FORM GRID
-   ========================================= */
+.subheading {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  color: var(--primary) !important;
+}
 
+.small-heading {
+  margin-top: 18px !important;
+}
+
+.section-note {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* GRID & INPUTS */
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  gap: 7px;
 }
 
-.field label {
-  color: #33443b;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.field label span,
-.required {
-  color: var(--danger);
-}
-
-.field input,
-.field select,
-.field textarea,
-.field > textarea {
-  width: 100%;
-  min-height: 45px;
-  padding: 11px 13px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: #fff;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.field textarea {
-  min-height: 115px;
-  resize: vertical;
-}
-
-.field input::placeholder,
-.field textarea::placeholder {
-  color: #a0aaa4;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  border-color: var(--primary-light);
-  box-shadow: 0 0 0 3px rgba(13, 89, 68, 0.10);
-}
-
-.field input[type="file"] {
-  padding: 9px;
-  background: #f9fbfa;
-  cursor: pointer;
-}
-
-.field input[type="file"]::file-selector-button {
-  background: var(--secondary);
-  color: var(--primary);
-  border: none;
-  border-radius: 5px;
-  padding: 7px 12px;
-  margin-right: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* Full width field */
-.full-width {
+.field.full {
   grid-column: 1 / -1;
 }
 
-/* =========================================
-   DATE GRID
-   ========================================= */
+label {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input:not([type]),
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(7, 55, 43, 0.12);
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+input[type="file"] {
+  padding: 8px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-panel);
+  cursor: pointer;
+}
 
 .date-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: 1fr 1.3fr 1.1fr;
+  gap: 8px;
 }
 
-/* =========================================
-   CHECKBOX & RADIO
-   ========================================= */
+/* CONDITIONAL PANELS & CHECKBOXES */
+.conditional-panel {
+  background-color: var(--bg-panel);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-top: 12px;
+  margin-bottom: 14px;
+}
 
 .check-row {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 12px 20px;
-  margin: 12px 0;
-}
-
-.check-row label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #35443c;
-  font-size: 14px;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14.5px;
   cursor: pointer;
+  margin: 12px 0 6px;
+  user-select: none;
 }
 
 .check-row input[type="checkbox"],
-.check-row input[type="radio"],
-input[type="checkbox"],
-input[type="radio"] {
+.check-row input[type="radio"] {
   width: 17px;
   height: 17px;
-  accent-color: var(--primary-light);
+  accent-color: var(--primary);
   cursor: pointer;
-  flex-shrink: 0;
 }
-
-/* =========================================
-   CONDITIONAL PANELS
-   ========================================= */
-
-.conditional-panel {
-  background: #f7faf8;
-  border: 1px solid #dce9e1;
-  border-left: 4px solid var(--primary-light);
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 15px;
-  margin-bottom: 16px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* =========================================
-   SUBHEADINGS
-   ========================================= */
-
-.subheading {
-  color: var(--primary);
-  font-size: 16px;
-  font-weight: 750;
-  margin: 20px 0 13px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-.small-heading {
-  color: var(--primary-light);
-  font-size: 14px;
-  font-weight: 700;
-  margin: 15px 0 10px;
-}
-
-/* =========================================
-   WARNING MESSAGE
-   ========================================= */
 
 .warning {
-  background: #fff6e8;
-  border: 1px solid #f0d5a8;
-  border-left: 4px solid #d18a27;
-  border-radius: 6px;
-  color: #80551d;
-  padding: 11px 14px;
-  margin: 12px 0;
+  color: var(--danger);
   font-size: 13px;
   font-weight: 600;
+  margin-top: 6px;
 }
 
-/* =========================================
-   TOP GAP
-   ========================================= */
-
-.top-gap {
-  margin-top: 20px;
-}
-
-/* =========================================
-   BUTTONS
-   ========================================= */
-
-.submit-button,
-button.submit-button {
-  display: block;
+/* BUTTONS */
+.submit-button {
   width: 100%;
-  min-height: 49px;
-  background: var(--primary);
-  color: var(--white);
+  background-color: var(--primary);
+  color: #ffffff;
   border: none;
-  border-radius: 7px;
   padding: 13px 20px;
-  font-size: 15px;
-  font-weight: 750;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: 0.25s ease;
+  transition: background-color 0.2s;
 }
 
 .submit-button:hover {
-  background: var(--primary-light);
-  transform: translateY(-1px);
+  background-color: var(--primary-hover);
 }
 
 .google-button {
+  width: 100%;
+  margin-top: 12px;
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid var(--border);
+  padding: 11px 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  width: 100%;
-  min-height: 46px;
-  margin-top: 12px;
-  background: #fff;
-  color: #333;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s ease;
+  gap: 8px;
+  transition: background-color 0.2s;
 }
 
 .google-button:hover {
-  background: #f7faf8;
-  border-color: var(--primary-light);
+  background-color: #f9fafb;
 }
 
-/* =========================================
-   LOGIN MODAL
-   ========================================= */
+.fine-print {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+}
 
+/* MODAL POPUP */
 .modal {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
-  background: rgba(0, 0, 0, 0.60);
-  backdrop-filter: blur(3px);
-}
-
-.modal.hidden {
-  display: none !important;
+  padding: 16px;
+  z-index: 1000;
 }
 
 .modal-card {
-  width: min(430px, 100%);
-  max-height: 90vh;
-  overflow-y: auto;
-  background: #fff;
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
   border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
-  animation: modalOpen 0.25s ease;
-}
-
-@keyframes modalOpen {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 .modal-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 6px;
 }
 
 .modal-head h2 {
   color: var(--primary);
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .close-modal {
-  width: 32px;
-  height: 32px;
+  background: none;
   border: none;
-  border-radius: 50%;
-  background: #f0f3f1;
-  color: #34443b;
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1;
+  color: var(--text-muted);
   cursor: pointer;
 }
 
 .close-modal:hover {
-  background: #e4ebe6;
+  color: #111827;
 }
 
-.modal .field {
-  margin-bottom: 15px;
-}
-
-/* =========================================
-   FINE PRINT
-   ========================================= */
-
-.fine-print {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-  margin-top: 12px;
-  text-align: center;
-}
-
-/* =========================================
-   LINKS
-   ========================================= */
-
-a {
-  color: var(--primary-light);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* =========================================
-   RESPONSIVE DESIGN
-   ========================================= */
-
-@media (max-width: 768px) {
-
-  .page-wrap {
-    width: 94%;
-    margin-top: 25px;
-  }
-
-  .form-section {
-    padding: 20px;
-    margin-bottom: 17px;
-  }
-
-  .form-section h2 {
-    font-size: 17px;
-  }
-
+/* RESPONSIVE */
+@media (max-width: 640px) {
   .form-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .full-width {
-    grid-column: auto;
-  }
-
-  .header-login {
-    top: 10px;
-    right: 10px;
-    padding: 7px 14px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .page-wrap {
-    width: 93%;
-    margin-top: 20px;
-  }
-
-  .page-heading {
-    margin-bottom: 20px;
-  }
-
-  .page-heading h1 {
-    font-size: 22px;
-  }
-
-  .page-heading p {
-    font-size: 12px;
-  }
-
-  .form-section {
-    padding: 16px;
-    border-radius: 9px;
-  }
-
-  .form-section h2 {
-    font-size: 16px;
-    margin-bottom: 17px;
-  }
-
-  .field input,
-  .field select,
-  .field textarea {
-    font-size: 13px;
-    min-height: 43px;
-  }
-
-  .date-grid {
-    gap: 7px;
-  }
-
-  .check-row {
-    gap: 12px;
-  }
-
-  .check-row label {
-    font-size: 13px;
-  }
-
-  .conditional-panel {
-    padding: 14px;
-  }
-
-  .modal-card {
-    padding: 19px;
-  }
-}
-
-/* =========================================
-   ACCESSIBILITY
-   ========================================= */
-
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+    grid-template-
