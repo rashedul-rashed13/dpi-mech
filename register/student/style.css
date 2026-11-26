@@ -1,0 +1,601 @@
+
+/* =========================================
+   STUDENT REGISTRATION
+   MECHANICAL ALUMNI ASSOCIATION
+========================================= */
+
+
+/* ROOT */
+:root {
+    --primary: #062e24;
+    --primary-light: #0b4938;
+    --secondary: #d5a84b;
+    --background: #f4f7f5;
+    --white: #ffffff;
+    --text: #26352f;
+    --muted: #718078;
+    --border: #dce5df;
+    --danger: #d93025;
+    --success: #16834a;
+}
+
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.registration-header {
+    background: var(--primary);
+    color: var(--white);
+    padding: 12px 5%;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+.header-back {
+    display: inline-block;
+    color: #e5eee9;
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 12px;
+    transition: 0.3s;
+}
+
+
+.header-back:hover {
+    color: var(--secondary);
+}
+
+
+.registration-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+}
+
+
+.registration-brand img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+
+.registration-brand h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+
+.registration-brand p {
+    font-size: 13px;
+    color: #d3e2da;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.registration-container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 0 18px;
+}
+
+
+/* =========================================
+   PAGE TITLE
+========================================= */
+
+.registration-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.page-label {
+    display: inline-block;
+    color: var(--primary-light);
+    background: #e0eee7;
+    padding: 5px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+
+.registration-title h2 {
+    color: var(--primary);
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+
+.registration-title p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+#studentRegistrationForm {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 5px 25px rgba(6, 46, 36, 0.05);
+}
+
+
+/* =========================================
+   FORM SECTIONS
+========================================= */
+
+.form-section {
+    padding-bottom: 27px;
+    margin-bottom: 27px;
+    border-bottom: 1px solid var(--border);
+}
+
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+
+.section-heading h3 {
+    font-size: 19px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+
+.section-heading p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+
+.section-heading small {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* =========================================
+   TWO COLUMN GRID
+========================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px 22px;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #34483e;
+    margin-bottom: 7px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    min-height: 45px;
+    padding: 11px 13px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a0aaa4;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(11, 73, 56, 0.09);
+}
+
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+    background: #f0f3f1;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   CHECKBOX & RADIO
+========================================= */
+
+.checkbox-group,
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 25px;
+}
+
+
+.checkbox-item,
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+}
+
+
+.checkbox-item input,
+.radio-item input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+
+.same-address {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   CONDITIONAL FIELDS
+   JavaScript will add .show class
+========================================= */
+
+.conditional-fields {
+    display: none;
+    width: 100%;
+    margin-top: 18px;
+}
+
+
+.conditional-fields.show {
+    display: block;
+}
+
+
+.conditional-fields h4 {
+    color: var(--primary);
+    font-size: 15px;
+    margin-bottom: 17px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--border);
+}
+
+
+.eligibility-message {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.eligibility-message.error {
+    color: var(--danger);
+}
+
+
+.eligibility-message.success {
+    color: var(--success);
+}
+
+
+/* =========================================
+   CONTACT VISIBILITY
+========================================= */
+
+.contact-visibility-section {
+    background: #f8fbf9;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+}
+
+
+.contact-visibility-section .section-heading {
+    margin-bottom: 17px;
+}
+
+
+.contact-visibility-section .radio-group {
+    margin-bottom: 10px;
+}
+
+
+.contact-visibility-section .conditional-fields {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+
+/* =========================================
+   TERMS & SUBMIT
+========================================= */
+
+.form-submit-section {
+    padding-top: 5px;
+}
+
+
+.terms-checkbox {
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+
+#submitRegistration {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+#submitRegistration:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+
+#submitRegistration:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+#formMessage {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.registration-footer {
+    background: var(--primary);
+    color: #d6e3dc;
+    text-align: center;
+    padding: 22px 15px;
+    font-size: 12px;
+    line-height: 2;
+}
+
+
+.registration-footer a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+
+.registration-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+    .registration-container {
+        margin: 25px auto;
+    }
+
+    #studentRegistrationForm {
+        padding: 22px;
+    }
+
+    .registration-brand h1 {
+        font-size: 18px;
+    }
+
+    .registration-brand img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .registration-title h2 {
+        font-size: 26px;
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .registration-header {
+        padding: 12px 15px;
+    }
+
+    .registration-brand {
+        gap: 9px;
+    }
+
+    .registration-brand img {
+        width: 43px;
+        height: 43px;
+    }
+
+    .registration-brand h1 {
+        font-size: 14px;
+    }
+
+    .registration-brand p {
+        font-size: 11px;
+    }
+
+    .registration-container {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    .registration-title {
+        margin-bottom: 20px;
+    }
+
+    .registration-title h2 {
+        font-size: 23px;
+    }
+
+    .registration-title p {
+        font-size: 12px;
+    }
+
+    #studentRegistrationForm {
+        padding: 17px 14px;
+        border-radius: 9px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .section-heading h3 {
+        font-size: 17px;
+    }
+
+    .section-heading p {
+        font-size: 12px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        min-height: 43px;
+        font-size: 13px;
+    }
+
+    .checkbox-group,
+    .radio-group {
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .contact-visibility-section {
+        padding: 16px 12px;
+    }
+
+    #submitRegistration {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+    .registration-brand h1 {
+        font-size: 12px;
+    }
+
+    .registration-brand p {
+        font-size: 10px;
+    }
+
+    .registration-brand img {
+        width: 36px;
+        height: 36px;
+    }
+
+    #studentRegistrationForm {
+        padding: 14px 11px;
+    }
+
+}
