@@ -1,601 +1,584 @@
 
 /* =========================================
-   STUDENT REGISTRATION
    MECHANICAL ALUMNI ASSOCIATION
-========================================= */
-
+   MEMBERSHIP REGISTRATION FORM
+   ========================================= */
 
 /* ROOT */
 :root {
-    --primary: #062e24;
-    --primary-light: #0b4938;
-    --secondary: #d5a84b;
-    --background: #f4f7f5;
-    --white: #ffffff;
-    --text: #26352f;
-    --muted: #718078;
-    --border: #dce5df;
-    --danger: #d93025;
-    --success: #16834a;
+  --primary: #07372b;
+  --primary-light: #0d5944;
+  --secondary: #eaf3ef;
+  --accent: #c6a45c;
+  --text: #24332d;
+  --muted: #6b7771;
+  --border: #dce5df;
+  --background: #f3f6f4;
+  --white: #ffffff;
+  --danger: #c0392b;
+  --shadow: 0 5px 22px rgba(7, 55, 43, 0.07);
 }
 
-
-/* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--background);
-    color: var(--text);
-    line-height: 1.6;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.6;
 }
-
 
 /* =========================================
    HEADER
-========================================= */
+   ========================================= */
 
-.registration-header {
-    background: var(--primary);
-    color: var(--white);
-    padding: 12px 5%;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+.site-header {
+  width: 100%;
+  position: relative;
+  background: var(--primary);
+  overflow: hidden;
 }
 
-
-.header-back {
-    display: inline-block;
-    color: #e5eee9;
-    text-decoration: none;
-    font-size: 13px;
-    margin-bottom: 12px;
-    transition: 0.3s;
+.site-header > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-
-.header-back:hover {
-    color: var(--secondary);
+/* Login Button */
+.header-login {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 5;
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  border-radius: 6px;
+  padding: 9px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
-
-.registration-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    text-align: center;
+.header-login:hover {
+  background: #dfbd76;
+  transform: translateY(-2px);
 }
-
-
-.registration-brand img {
-    width: 65px;
-    height: 65px;
-    object-fit: contain;
-}
-
-
-.registration-brand h1 {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.4;
-}
-
-
-.registration-brand p {
-    font-size: 13px;
-    color: #d3e2da;
-}
-
 
 /* =========================================
-   MAIN CONTAINER
-========================================= */
+   MAIN WRAPPER
+   ========================================= */
 
-.registration-container {
-    width: 100%;
-    max-width: 1050px;
-    margin: 35px auto;
-    padding: 0 18px;
+.page-wrap {
+  width: min(1100px, 94%);
+  margin: 35px auto 60px;
 }
 
-
-/* =========================================
-   PAGE TITLE
-========================================= */
-
-.registration-title {
-    text-align: center;
-    margin-bottom: 30px;
+.page-heading {
+  text-align: center;
+  margin-bottom: 28px;
 }
 
-
-.page-label {
-    display: inline-block;
-    color: var(--primary-light);
-    background: #e0eee7;
-    padding: 5px 14px;
-    border-radius: 30px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+.page-heading h1 {
+  color: var(--primary);
+  font-size: clamp(23px, 4vw, 32px);
+  font-weight: 800;
+  margin-bottom: 7px;
 }
 
-
-.registration-title h2 {
-    color: var(--primary);
-    font-size: 30px;
-    margin-bottom: 7px;
+.page-heading p {
+  color: var(--muted);
+  font-size: 14px;
 }
-
-
-.registration-title p {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-
-/* =========================================
-   FORM
-========================================= */
-
-#studentRegistrationForm {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px;
-    box-shadow: 0 5px 25px rgba(6, 46, 36, 0.05);
-}
-
 
 /* =========================================
    FORM SECTIONS
-========================================= */
+   ========================================= */
 
 .form-section {
-    padding-bottom: 27px;
-    margin-bottom: 27px;
-    border-bottom: 1px solid var(--border);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 26px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
 }
 
-
-.section-heading {
-    margin-bottom: 20px;
+.form-section h2 {
+  color: var(--primary);
+  font-size: 19px;
+  font-weight: 750;
+  padding-bottom: 13px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--secondary);
+  position: relative;
 }
 
-
-.section-heading h3 {
-    font-size: 19px;
-    color: var(--primary);
-    font-weight: 700;
-    margin-bottom: 4px;
+.form-section h2::before {
+  content: "";
+  position: absolute;
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  bottom: -2px;
+  left: 0;
+  border-radius: 5px;
 }
-
-
-.section-heading p {
-    font-size: 13px;
-    color: var(--muted);
-}
-
-
-.section-heading small {
-    display: block;
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
 
 /* =========================================
-   TWO COLUMN GRID
-========================================= */
+   FORM GRID
+   ========================================= */
 
 .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 19px 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 7px;
 }
 
+.field label {
+  color: #33443b;
+  font-size: 13px;
+  font-weight: 700;
+}
 
+.field label span,
+.required {
+  color: var(--danger);
+}
+
+.field input,
+.field select,
+.field textarea,
+.field > textarea {
+  width: 100%;
+  min-height: 45px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field textarea {
+  min-height: 115px;
+  resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #a0aaa4;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(13, 89, 68, 0.10);
+}
+
+.field input[type="file"] {
+  padding: 9px;
+  background: #f9fbfa;
+  cursor: pointer;
+}
+
+.field input[type="file"]::file-selector-button {
+  background: var(--secondary);
+  color: var(--primary);
+  border: none;
+  border-radius: 5px;
+  padding: 7px 12px;
+  margin-right: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Full width field */
 .full-width {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
-
-
-.form-group label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #34483e;
-    margin-bottom: 7px;
-}
-
 
 /* =========================================
-   INPUTS
-========================================= */
+   DATE GRID
+   ========================================= */
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    min-height: 45px;
-    padding: 11px 13px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
-
-
-.form-group textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #a0aaa4;
-}
-
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: var(--primary-light);
-    box-shadow: 0 0 0 3px rgba(11, 73, 56, 0.09);
-}
-
-
-.form-group input:disabled,
-.form-group select:disabled,
-.form-group textarea:disabled {
-    background: #f0f3f1;
-    cursor: not-allowed;
-}
-
 
 /* =========================================
    CHECKBOX & RADIO
-========================================= */
+   ========================================= */
 
-.checkbox-group,
-.radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 25px;
+.check-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 12px 0;
 }
 
-
-.checkbox-item,
-.radio-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: 13px;
-    color: var(--text);
-    cursor: pointer;
+.check-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #35443c;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-
-.checkbox-item input,
-.radio-item input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--primary);
-    cursor: pointer;
-    flex-shrink: 0;
+.check-row input[type="checkbox"],
+.check-row input[type="radio"],
+input[type="checkbox"],
+input[type="radio"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--primary-light);
+  cursor: pointer;
+  flex-shrink: 0;
 }
-
-
-.same-address {
-    margin-bottom: 20px;
-}
-
 
 /* =========================================
-   CONDITIONAL FIELDS
-   JavaScript will add .show class
-========================================= */
+   CONDITIONAL PANELS
+   ========================================= */
 
-.conditional-fields {
-    display: none;
-    width: 100%;
-    margin-top: 18px;
+.conditional-panel {
+  background: #f7faf8;
+  border: 1px solid #dce9e1;
+  border-left: 4px solid var(--primary-light);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+  margin-bottom: 16px;
 }
 
-
-.conditional-fields.show {
-    display: block;
+.hidden {
+  display: none !important;
 }
-
-
-.conditional-fields h4 {
-    color: var(--primary);
-    font-size: 15px;
-    margin-bottom: 17px;
-    padding-bottom: 9px;
-    border-bottom: 1px solid var(--border);
-}
-
-
-.eligibility-message {
-    margin-top: 12px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-
-.eligibility-message.error {
-    color: var(--danger);
-}
-
-
-.eligibility-message.success {
-    color: var(--success);
-}
-
 
 /* =========================================
-   CONTACT VISIBILITY
-========================================= */
+   SUBHEADINGS
+   ========================================= */
 
-.contact-visibility-section {
-    background: #f8fbf9;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 22px;
+.subheading {
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 750;
+  margin: 20px 0 13px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
 }
 
-
-.contact-visibility-section .section-heading {
-    margin-bottom: 17px;
+.small-heading {
+  color: var(--primary-light);
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px 0 10px;
 }
-
-
-.contact-visibility-section .radio-group {
-    margin-bottom: 10px;
-}
-
-
-.contact-visibility-section .conditional-fields {
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-}
-
 
 /* =========================================
-   TERMS & SUBMIT
-========================================= */
+   WARNING MESSAGE
+   ========================================= */
 
-.form-submit-section {
-    padding-top: 5px;
+.warning {
+  background: #fff6e8;
+  border: 1px solid #f0d5a8;
+  border-left: 4px solid #d18a27;
+  border-radius: 6px;
+  color: #80551d;
+  padding: 11px 14px;
+  margin: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
 }
-
-
-.terms-checkbox {
-    margin-bottom: 20px;
-    align-items: flex-start;
-}
-
-
-#submitRegistration {
-    display: block;
-    width: 100%;
-    min-height: 48px;
-    border: none;
-    border-radius: 6px;
-    background: var(--primary);
-    color: var(--white);
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-
-#submitRegistration:hover {
-    background: var(--primary-light);
-    transform: translateY(-1px);
-}
-
-
-#submitRegistration:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-
-#formMessage {
-    text-align: center;
-    font-size: 13px;
-    margin-top: 12px;
-}
-
 
 /* =========================================
-   FOOTER
-========================================= */
+   TOP GAP
+   ========================================= */
 
-.registration-footer {
-    background: var(--primary);
-    color: #d6e3dc;
-    text-align: center;
-    padding: 22px 15px;
-    font-size: 12px;
-    line-height: 2;
+.top-gap {
+  margin-top: 20px;
 }
-
-
-.registration-footer a {
-    color: var(--secondary);
-    text-decoration: none;
-}
-
-
-.registration-footer a:hover {
-    text-decoration: underline;
-}
-
 
 /* =========================================
-   RESPONSIVE TABLET
-========================================= */
+   BUTTONS
+   ========================================= */
+
+.submit-button,
+button.submit-button {
+  display: block;
+  width: 100%;
+  min-height: 49px;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 7px;
+  padding: 13px 20px;
+  font-size: 15px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.submit-button:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 12px;
+  background: #fff;
+  color: #333;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.google-button:hover {
+  background: #f7faf8;
+  border-color: var(--primary-light);
+}
+
+/* =========================================
+   LOGIN MODAL
+   ========================================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.60);
+  backdrop-filter: blur(3px);
+}
+
+.modal.hidden {
+  display: none !important;
+}
+
+.modal-card {
+  width: min(430px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+  animation: modalOpen 0.25s ease;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.modal-head h2 {
+  color: var(--primary);
+  font-size: 20px;
+}
+
+.close-modal {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #f0f3f1;
+  color: #34443b;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: #e4ebe6;
+}
+
+.modal .field {
+  margin-bottom: 15px;
+}
+
+/* =========================================
+   FINE PRINT
+   ========================================= */
+
+.fine-print {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+a {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
 
 @media (max-width: 768px) {
 
-    .registration-container {
-        margin: 25px auto;
-    }
+  .page-wrap {
+    width: 94%;
+    margin-top: 25px;
+  }
 
-    #studentRegistrationForm {
-        padding: 22px;
-    }
+  .form-section {
+    padding: 20px;
+    margin-bottom: 17px;
+  }
 
-    .registration-brand h1 {
-        font-size: 18px;
-    }
+  .form-section h2 {
+    font-size: 17px;
+  }
 
-    .registration-brand img {
-        width: 55px;
-        height: 55px;
-    }
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
-    .registration-title h2 {
-        font-size: 26px;
-    }
+  .full-width {
+    grid-column: auto;
+  }
 
+  .header-login {
+    top: 10px;
+    right: 10px;
+    padding: 7px 14px;
+    font-size: 12px;
+  }
 }
 
+@media (max-width: 480px) {
 
-/* =========================================
-   RESPONSIVE MOBILE
-========================================= */
+  .page-wrap {
+    width: 93%;
+    margin-top: 20px;
+  }
 
-@media (max-width: 600px) {
+  .page-heading {
+    margin-bottom: 20px;
+  }
 
-    .registration-header {
-        padding: 12px 15px;
-    }
+  .page-heading h1 {
+    font-size: 22px;
+  }
 
-    .registration-brand {
-        gap: 9px;
-    }
+  .page-heading p {
+    font-size: 12px;
+  }
 
-    .registration-brand img {
-        width: 43px;
-        height: 43px;
-    }
+  .form-section {
+    padding: 16px;
+    border-radius: 9px;
+  }
 
-    .registration-brand h1 {
-        font-size: 14px;
-    }
+  .form-section h2 {
+    font-size: 16px;
+    margin-bottom: 17px;
+  }
 
-    .registration-brand p {
-        font-size: 11px;
-    }
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 13px;
+    min-height: 43px;
+  }
 
-    .registration-container {
-        margin: 20px auto;
-        padding: 0 12px;
-    }
+  .date-grid {
+    gap: 7px;
+  }
 
-    .registration-title {
-        margin-bottom: 20px;
-    }
+  .check-row {
+    gap: 12px;
+  }
 
-    .registration-title h2 {
-        font-size: 23px;
-    }
+  .check-row label {
+    font-size: 13px;
+  }
 
-    .registration-title p {
-        font-size: 12px;
-    }
+  .conditional-panel {
+    padding: 14px;
+  }
 
-    #studentRegistrationForm {
-        padding: 17px 14px;
-        border-radius: 9px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .full-width {
-        grid-column: auto;
-    }
-
-    .section-heading h3 {
-        font-size: 17px;
-    }
-
-    .section-heading p {
-        font-size: 12px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        min-height: 43px;
-        font-size: 13px;
-    }
-
-    .checkbox-group,
-    .radio-group {
-        flex-direction: column;
-        gap: 13px;
-    }
-
-    .contact-visibility-section {
-        padding: 16px 12px;
-    }
-
-    #submitRegistration {
-        font-size: 14px;
-    }
-
+  .modal-card {
+    padding: 19px;
+  }
 }
 
-
 /* =========================================
-   SMALL MOBILE
-========================================= */
+   ACCESSIBILITY
+   ========================================= */
 
-@media (max-width: 360px) {
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
-    .registration-brand h1 {
-        font-size: 12px;
-    }
-
-    .registration-brand p {
-        font-size: 10px;
-    }
-
-    .registration-brand img {
-        width: 36px;
-        height: 36px;
-    }
-
-    #studentRegistrationForm {
-        padding: 14px 11px;
-    }
-
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
