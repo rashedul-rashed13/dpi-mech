@@ -4,253 +4,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07372b">
-  <title>Membership Registration | Mechanical Alumni Association</title>
-  <link rel="stylesheet" href="membership.css">
+  <meta name="theme-color" content="#103e35">
+  <title>Alumni Registration | Mechanical Alumni Association</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- HEADER -->
   <header class="site-header">
-    <img src="assets/membership-header.jpg"
-      alt="Mechanical Alumni Association - Dhaka Govt. Polytechnic Institute">
-    <button class="header-login" type="button" id="openLogin">Login</button>
+    <div class="header-inner">
+      <div class="logo-area">
+        <img src="assets/alumni.png" alt="Association Logo">
+      </div>
+
+      <div class="header-title">
+        <h1>MECHANICAL ALUMNI ASSOCIATION</h1>
+        <p>Dhaka Govt. Polytechnic Institute</p>
+      </div>
+
+      <div class="logo-area">
+        <img src="assets/dpi.png" alt="Institute Logo">
+      </div>
+    </div>
   </header>
 
-  <main class="page-wrap">
+  <!-- REGISTRATION FORM -->
+  <main class="registration-container">
 
-    <div class="page-heading">
-      <h1>Membership Registration Form</h1>
-      <p>Mechanical Alumni Association · Dhaka Govt. Polytechnic Institute</p>
+    <div class="form-heading">
+      <h2>Alumni Registration Form</h2>
+      <p>Join the Mechanical Alumni Association of DPI</p>
     </div>
 
-    <form id="membershipForm">
+    <form id="registrationForm">
 
       <!-- PERSONAL INFORMATION -->
       <section class="form-section">
-        <h2>Personal &amp; Contact Information</h2>
+        <h3>Personal & Contact Information</h3>
+        <p class="section-description">
+          General and mandatory information for all applicants.
+        </p>
+
+        <div class="form-group">
+          <label for="photo">Photo Upload</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
 
         <div class="form-grid">
-          <div class="field full photo-field">
-            <label for="photo">Photo Upload *</label>
-            <input id="photo" name="photo" type="file" accept="image/*" required>
+          <div class="form-group">
+            <label for="name">Name as per Certificate *</label>
+            <input type="text" id="name" name="name"
+              placeholder="Enter your full name" required>
           </div>
 
-          <div class="field full">
-            <label for="fullName">Name as per Certificate *</label>
-            <input id="fullName" name="fullName" required placeholder="e.g. RASHEDUL ISLAM">
+          <div class="form-group">
+            <label for="fatherName">Father's Name *</label>
+            <input type="text" id="fatherName" name="fatherName"
+              placeholder="Father's name" required>
           </div>
 
-          <div class="field">
-            <label for="fatherName">Father Name *</label>
-            <input id="fatherName" name="fatherName" required>
+          <div class="form-group">
+            <label for="motherName">Mother's Name *</label>
+            <input type="text" id="motherName" name="motherName"
+              placeholder="Mother's name" required>
           </div>
 
-          <div class="field">
-            <label for="motherName">Mother Name *</label>
-            <input id="motherName" name="motherName" required>
+          <div class="form-group">
+            <label for="dob">Date of Birth *</label>
+            <input type="date" id="dob" name="dob" required>
           </div>
 
-          <div class="field">
-            <label>Date of Birth *</label>
-            <div class="date-grid">
-              <select id="birthDay" name="birthDay" required>
-                <option value="">Day</option>
-              </select>
-              <select id="birthMonth" name="birthMonth" required>
-                <option value="">Month</option>
-              </select>
-              <select id="birthYear" name="birthYear" required>
-                <option value="">Year</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
+          <div class="form-group">
             <label for="bloodGroup">Blood Group *</label>
             <select id="bloodGroup" name="bloodGroup" required>
               <option value="">Select Blood Group</option>
-              <option>A+</option><option>A-</option>
-              <option>B+</option><option>B-</option>
-              <option>O+</option><option>O-</option>
-              <option>AB+</option><option>AB-</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>O+</option>
+              <option>O-</option>
+              <option>AB+</option>
+              <option>AB-</option>
             </select>
           </div>
 
-          <div class="field">
+          <div class="form-group">
             <label for="phone">Contact Number *</label>
-            <input id="phone" name="phone" type="tel" required placeholder="01XXXXXXXXX">
+            <input type="tel" id="phone" name="phone"
+              placeholder="01XXXXXXXXX" required>
           </div>
 
-          <div class="field">
-            <label for="email">Email *</label>
-            <input id="email" name="email" type="email" required>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email"
+              placeholder="example@email.com" required>
           </div>
         </div>
       </section>
 
-      <!-- ADDRESS -->
+      <!-- PRESENT ADDRESS -->
       <section class="form-section">
-        <h2>Present &amp; Permanent Address</h2>
-
         <h3>Present Address</h3>
 
-        <div class="field">
-          <label for="presentAddressType">Address Type *</label>
-          <select id="presentAddressType" name="presentAddressType">
-            <option value="district">District</option>
+        <div class="form-group">
+          <label for="presentType">Address Type *</label>
+          <select id="presentType" name="presentType" required>
+            <option value="">Select Address Type</option>
             <option value="city">City Corporation</option>
+            <option value="district">District</option>
           </select>
         </div>
 
-        <div id="presentCityFields" class="conditional-panel hidden">
-          <div class="form-grid">
-            <div class="field">
-              <label for="presentCity">City Corporation</label>
-              <select id="presentCity" name="presentCity">
-                <option value="">Select City Corporation</option>
-              </select>
-            </div>
+        <div id="presentAddressFields" class="form-grid">
+          <div class="form-group">
+            <label for="presentDivision">Division</label>
+            <select id="presentDivision" name="presentDivision">
+              <option value="">Select Division</option>
+            </select>
+          </div>
 
-            <div class="field">
-              <label for="presentCityWard">Ward</label>
-              <select id="presentCityWard" name="presentCityWard">
-                <option value="">Select Ward</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="presentDistrict">District / City</label>
+            <select id="presentDistrict" name="presentDistrict">
+              <option value="">Select District</option>
+            </select>
+          </div>
 
-            <div class="field">
-              <label for="presentCityPost">Post Office</label>
-              <input id="presentCityPost" name="presentCityPost">
-            </div>
+          <div class="form-group">
+            <label for="presentArea">Area / Upazila</label>
+            <input type="text" id="presentArea" name="presentArea"
+              placeholder="Enter area or upazila">
+          </div>
 
-            <div class="field">
-              <label for="presentCityPostcode">Post Code</label>
-              <input id="presentCityPostcode" name="presentCityPostcode">
-            </div>
+          <div class="form-group">
+            <label for="presentPost">Post Office</label>
+            <input type="text" id="presentPost" name="presentPost"
+              placeholder="Post Office">
+          </div>
 
-            <div class="field full">
-              <label for="presentCityAddress">Address (House, Area, City)</label>
-              <textarea id="presentCityAddress" name="presentCityAddress"></textarea>
-            </div>
+          <div class="form-group">
+            <label for="presentPostCode">Post Code</label>
+            <input type="text" id="presentPostCode" name="presentPostCode"
+              placeholder="Post Code">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="presentAddress">House, Road, Area & Address</label>
+            <textarea id="presentAddress" name="presentAddress"
+              placeholder="Enter full present address"></textarea>
           </div>
         </div>
+      </section>
 
-        <div id="presentDistrictFields" class="conditional-panel">
-          <div class="form-grid">
-            <div class="field">
-              <label for="presentDivision">Division</label>
-              <select id="presentDivision" name="presentDivision">
-                <option value="">Select Division</option>
-              </select>
-            </div>
+      <!-- PERMANENT ADDRESS -->
+      <section class="form-section">
+        <h3>Permanent Address</h3>
 
-            <div class="field">
-              <label for="presentDistrict">District</label>
-              <select id="presentDistrict" name="presentDistrict">
-                <option value="">Select District</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="presentAreaType">Area Type</label>
-              <select id="presentAreaType" name="presentAreaType">
-                <option value="">Select Area Type</option>
-                <option value="upazila">Upazila</option>
-                <option value="municipality">Municipality</option>
-              </select>
-            </div>
-
-            <div class="field hidden" id="presentUpazilaWrap">
-              <label for="presentUpazila">Upazila</label>
-              <select id="presentUpazila" name="presentUpazila">
-                <option value="">Select Upazila</option>
-              </select>
-            </div>
-
-            <div class="field hidden" id="presentUnionWrap">
-              <label for="presentUnion">Union</label>
-              <input id="presentUnion" name="presentUnion" placeholder="Write Union name">
-            </div>
-
-            <div class="field hidden" id="presentMunicipalityWrap">
-              <label for="presentMunicipality">Municipality</label>
-              <select id="presentMunicipality" name="presentMunicipality">
-                <option value="">Select Municipality</option>
-              </select>
-            </div>
-
-            <div class="field hidden" id="presentMunicipalityWardWrap">
-              <label for="presentMunicipalityWard">Ward</label>
-              <select id="presentMunicipalityWard" name="presentMunicipalityWard">
-                <option value="">Select Ward</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="presentPost">Post Office</label>
-              <input id="presentPost" name="presentPost">
-            </div>
-
-            <div class="field">
-              <label for="presentPostcode">Post Code</label>
-              <input id="presentPostcode" name="presentPostcode">
-            </div>
-
-            <div class="field full">
-              <label for="presentAddress">Address (House, Area, City)</label>
-              <textarea id="presentAddress" name="presentAddress"></textarea>
-            </div>
-          </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="sameAddress">
+            Same as Present Address
+          </label>
         </div>
 
-        <label class="check-row">
-          <input type="checkbox" id="sameAddress" name="sameAddress">
-          Permanent address same as present address
-        </label>
-
-        <div id="permanentAddressPanel" class="conditional-panel">
-          <h3>Permanent Address</h3>
+        <div id="permanentAddressFields">
+          <div class="form-group">
+            <label for="permanentType">Address Type *</label>
+            <select id="permanentType" name="permanentType" required>
+              <option value="">Select Address Type</option>
+              <option value="city">City Corporation</option>
+              <option value="district">District</option>
+            </select>
+          </div>
 
           <div class="form-grid">
-            <div class="field">
-              <label for="permanentAddressType">Address Type</label>
-              <select id="permanentAddressType" name="permanentAddressType">
-                <option value="district">District</option>
-                <option value="city">City Corporation</option>
-              </select>
-            </div>
-
-            <div class="field">
+            <div class="form-group">
               <label for="permanentDivision">Division</label>
               <select id="permanentDivision" name="permanentDivision">
                 <option value="">Select Division</option>
               </select>
             </div>
 
-            <div class="field">
-              <label for="permanentDistrict">District / City Corporation</label>
-              <input id="permanentDistrict" name="permanentDistrict">
+            <div class="form-group">
+              <label for="permanentDistrict">District / City</label>
+              <select id="permanentDistrict" name="permanentDistrict">
+                <option value="">Select District</option>
+              </select>
             </div>
 
-            <div class="field">
-              <label for="permanentArea">Upazila / Municipality / Ward</label>
-              <input id="permanentArea" name="permanentArea">
+            <div class="form-group">
+              <label for="permanentArea">Area / Upazila</label>
+              <input type="text" id="permanentArea" name="permanentArea"
+                placeholder="Enter area or upazila">
             </div>
 
-            <div class="field">
+            <div class="form-group">
               <label for="permanentPost">Post Office</label>
-              <input id="permanentPost" name="permanentPost">
+              <input type="text" id="permanentPost" name="permanentPost"
+                placeholder="Post Office">
             </div>
 
-            <div class="field">
-              <label for="permanentPostcode">Post Code</label>
-              <input id="permanentPostcode" name="permanentPostcode">
+            <div class="form-group">
+              <label for="permanentPostCode">Post Code</label>
+              <input type="text" id="permanentPostCode"
+                name="permanentPostCode" placeholder="Post Code">
             </div>
 
-            <div class="field full">
-              <label for="permanentAddress">Address (House, Area, City)</label>
-              <textarea id="permanentAddress" name="permanentAddress"></textarea>
+            <div class="form-group full-width">
+              <label for="permanentAddress">House, Road, Area & Address</label>
+              <textarea id="permanentAddress" name="permanentAddress"
+                placeholder="Enter full permanent address"></textarea>
             </div>
           </div>
         </div>
@@ -258,158 +223,142 @@
 
       <!-- ACADEMIC INFORMATION -->
       <section class="form-section">
-        <h2>Academic Information</h2>
-        <p class="section-note">Which was your last exam at DPI? Select one or both examinations.</p>
+        <h3>Academic Information</h3>
+        <p class="section-description">
+          Which was your last exam at DPI? You can select both.
+        </p>
 
-        <label class="check-row">
-          <input type="checkbox" id="diplomaCheck" name="examination[]" value="Diploma in Engineering">
-          Diploma in Engineering
-        </label>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="diplomaCheck">
+            Diploma in Engineering
+          </label>
 
-        <div id="diplomaPanel" class="conditional-panel hidden">
-          <h3>Diploma in Engineering</h3>
+          <label>
+            <input type="checkbox" id="alliedCheck">
+            Allied Group Make-up Course
+          </label>
+        </div>
+
+        <div id="diplomaFields" class="conditional-fields hidden">
+          <h4>Diploma in Engineering</h4>
 
           <div class="form-grid">
-            <div class="field full">
-              <label for="diplomaDepartment">Department</label>
-              <select id="diplomaDepartment" name="diplomaDepartment">
+            <div class="form-group">
+              <label for="department">Department *</label>
+              <select id="department" name="department">
                 <option value="">Select Department</option>
-                <option value="67">67 - Electrical Technology</option>
-                <option value="64">64 - Civil Technology</option>
-                <option value="70">70 - Mechanical Technology</option>
-                <option value="85">85 - Computer Science &amp; Technology</option>
-                <option value="71">71 - Power Technology</option>
-                <option value="68">68 - Electronics Technology</option>
-                <option value="61">61 - Architecture Technology</option>
-                <option value="69">69 - Food Technology</option>
-                <option value="63">63 - Chemical Technology</option>
-                <option value="72">72 - Refrigeration &amp; Air-Conditioning (RAC) Technology</option>
-                <option value="62">62 - Automobile Technology</option>
-                <option value="90">90 - Environmental Technology</option>
+                <option value="67">67 Electrical Technology</option>
+                <option value="64">64 Civil Technology</option>
+                <option value="70">70 Mechanical Technology</option>
+                <option value="85">85 Computer Science & Technology</option>
+                <option value="71">71 Power Technology</option>
+                <option value="68">68 Electronics Technology</option>
+                <option value="61">61 Architecture Technology</option>
+                <option value="69">69 Food Technology</option>
+                <option value="63">63 Chemical Technology</option>
+                <option value="72">72 Refrigeration & Air-Conditioning</option>
+                <option value="62">62 Automobile Technology</option>
+                <option value="90">90 Environmental Technology</option>
                 <option value="other">Other</option>
               </select>
-              <p id="departmentWarning" class="warning hidden">Other Departments are not allowed.</p>
+              <small id="departmentWarning" class="warning hidden">
+                Other Departments are not allowed.
+              </small>
             </div>
 
-            <div class="field">
-              <label for="diplomaSession">Session</label>
-              <select id="diplomaSession" name="diplomaSession">
+            <div class="form-group">
+              <label for="session">Session *</label>
+              <select id="session" name="session">
                 <option value="">Select Session</option>
               </select>
             </div>
 
-            <div class="field hidden" id="otherSessionWrap">
-              <label for="otherSession">Other Session</label>
-              <input id="otherSession" name="otherSession">
+            <div class="form-group">
+              <label for="diplomaRoll">Diploma Roll *</label>
+              <input type="text" id="diplomaRoll" name="diplomaRoll">
             </div>
 
-            <div class="field">
-              <label for="diplomaRoll">Diploma Roll</label>
-              <input id="diplomaRoll" name="diplomaRoll">
+            <div class="form-group">
+              <label for="diplomaReg">Diploma Registration *</label>
+              <input type="text" id="diplomaReg" name="diplomaReg">
             </div>
 
-            <div class="field">
-              <label for="diplomaReg">Diploma Reg</label>
-              <input id="diplomaReg" name="diplomaReg">
+            <div class="form-group">
+              <label for="diplomaCGPA">CGPA</label>
+              <input type="number" id="diplomaCGPA" name="diplomaCGPA"
+                min="0" max="4" step="0.01">
             </div>
 
-            <div class="field">
-              <label for="diplomaCgpa">CGPA</label>
-              <input id="diplomaCgpa" name="diplomaCgpa" type="number" step="0.01" min="0" max="4">
-            </div>
-
-            <div class="field">
-              <label for="diplomaPassingYear">Passing Year</label>
-              <select id="diplomaPassingYear" name="diplomaPassingYear">
+            <div class="form-group">
+              <label for="diplomaPassing">Passing Year</label>
+              <select id="diplomaPassing" name="diplomaPassing">
                 <option value="">Select Year</option>
               </select>
             </div>
           </div>
         </div>
 
-        <label class="check-row">
-          <input type="checkbox" id="makeupCheck" name="examination[]" value="Allied Group Make-up Course">
-          Allied Group Make-up Course
-        </label>
-
-        <div id="makeupPanel" class="conditional-panel hidden">
-          <h3>Allied Group Make-up Course</h3>
+        <div id="alliedFields" class="conditional-fields hidden">
+          <h4>Allied Group Make-up Course</h4>
 
           <div class="form-grid">
-            <div class="field full">
+            <div class="form-group">
               <label for="polytechnic">Polytechnic Name</label>
-              <select id="polytechnic" name="polytechnic">
-                <option value="">Select Polytechnic</option>
-                <option>Dhaka Polytechnic Institute</option>
-                <option>Chattogram Polytechnic Institute</option>
-                <option>Comilla Polytechnic Institute</option>
-                <option>Feni Polytechnic Institute</option>
-                <option>Rajshahi Polytechnic Institute</option>
-                <option>Khulna Polytechnic Institute</option>
-                <option>Barishal Polytechnic Institute</option>
-                <option>Rangpur Polytechnic Institute</option>
-                <option>Sylhet Polytechnic Institute</option>
-                <option>Other</option>
-              </select>
+              <input type="text" id="polytechnic" name="polytechnic"
+                placeholder="Enter Polytechnic Name">
             </div>
 
-            <div class="field full hidden" id="otherPolytechnicWrap">
-              <label for="otherPolytechnic">Other Polytechnic Name</label>
-              <input id="otherPolytechnic" name="otherPolytechnic">
-            </div>
-
-            <div class="field full">
-              <label for="makeupDepartment">Department</label>
-              <select id="makeupDepartment" name="makeupDepartment">
+            <div class="form-group">
+              <label for="alliedDepartment">Department</label>
+              <select id="alliedDepartment" name="alliedDepartment">
                 <option value="">Select Department</option>
-                <option>71 - Power Technology</option>
-                <option>72 - Refrigeration &amp; Air-Conditioning (RAC) Technology</option>
-                <option>62 - Automobile Technology</option>
-                <option>92 - Mechatronics Technology</option>
+                <option>71 Power Technology</option>
+                <option>72 Refrigeration & Air-Conditioning</option>
+                <option>62 Automobile Technology</option>
+                <option>92 Mechatronics</option>
               </select>
             </div>
 
-            <div class="field">
+            <div class="form-group">
               <label for="boardRoll">Diploma Board Roll</label>
-              <input id="boardRoll" name="boardRoll">
+              <input type="text" id="boardRoll" name="boardRoll">
             </div>
 
-            <div class="field">
-              <label for="boardReg">Diploma Board Reg</label>
-              <input id="boardReg" name="boardReg">
+            <div class="form-group">
+              <label for="boardReg">Diploma Board Registration</label>
+              <input type="text" id="boardReg" name="boardReg">
             </div>
 
-            <div class="field">
-              <label for="makeupCgpa">CGPA</label>
-              <input id="makeupCgpa" name="makeupCgpa" type="number" step="0.01" min="0" max="4">
+            <div class="form-group">
+              <label for="alliedCGPA">CGPA</label>
+              <input type="number" id="alliedCGPA" name="alliedCGPA"
+                min="0" max="4" step="0.01">
             </div>
 
-            <div class="field">
-              <label for="makeupPassingYear">Passing Year</label>
-              <select id="makeupPassingYear" name="makeupPassingYear">
+            <div class="form-group">
+              <label for="alliedPassing">Passing Year</label>
+              <select id="alliedPassing" name="alliedPassing">
                 <option value="">Select Year</option>
               </select>
             </div>
+          </div>
 
-            <div class="field full">
-              <h3 class="subheading">Make-up Course Details</h3>
-            </div>
-
-            <div class="field">
+          <h4>Make-Up Course Details</h4>
+          <div class="form-grid">
+            <div class="form-group">
               <label for="makeupRoll">Roll No</label>
-              <input id="makeupRoll" name="makeupRoll">
+              <input type="text" id="makeupRoll" name="makeupRoll">
             </div>
 
-            <div class="field">
+            <div class="form-group">
               <label for="makeupReg">Registration No</label>
-              <input id="makeupReg" name="makeupReg">
+              <input type="text" id="makeupReg" name="makeupReg">
             </div>
 
-            <div class="field">
-              <label for="makeupCourseYear">Passing Year</label>
-              <select id="makeupCourseYear" name="makeupCourseYear">
-                <option value="">Select Year</option>
-              </select>
+            <div class="form-group">
+              <label for="makeupYear">Passing Year</label>
+              <input type="number" id="makeupYear" name="makeupYear">
             </div>
           </div>
         </div>
@@ -417,223 +366,181 @@
 
       <!-- CURRENT STATUS -->
       <section class="form-section">
-        <h2>Current Status</h2>
+        <h3>Current Status</h3>
 
-        <label class="check-row">
-          <input type="checkbox" id="higherStudies" name="status[]" value="Higher Studies">
-          Higher Studies
-        </label>
+        <div class="form-group">
+          <label for="currentStatus">Select Current Status *</label>
+          <select id="currentStatus" name="currentStatus" required>
+            <option value="">Select Status</option>
+            <option value="higher">Higher Studies</option>
+            <option value="job">Job Holder</option>
+            <option value="business">Entrepreneur / Business</option>
+            <option value="other">Others</option>
+          </select>
+        </div>
 
-        <div id="higherStudiesPanel" class="conditional-panel hidden">
-          <h3>Higher Studies Details</h3>
+        <div id="higherFields" class="conditional-fields hidden">
           <div class="form-grid">
-            <div class="field">
-              <label for="instituteName">Institute Name (University or College)</label>
-              <input id="instituteName" name="instituteName">
+            <div class="form-group">
+              <label for="instituteName">Institute Name</label>
+              <input type="text" id="instituteName" name="instituteName">
             </div>
-            <div class="field">
-              <label for="studyDepartment">Department</label>
-              <input id="studyDepartment" name="studyDepartment">
+            <div class="form-group">
+              <label for="higherDepartment">Department</label>
+              <input type="text" id="higherDepartment"
+                name="higherDepartment">
             </div>
           </div>
         </div>
 
-        <label class="check-row">
-          <input type="checkbox" id="jobHolder" name="status[]" value="Job Holder">
-          Job Holder
-        </label>
-
-        <div id="jobPanel" class="conditional-panel hidden">
-          <h3>Employment Details</h3>
-          <div class="field">
-            <label for="serviceType">Service Type</label>
-            <select id="serviceType" name="serviceType">
-              <option value="">Select Service</option>
+        <div id="jobFields" class="conditional-fields hidden">
+          <div class="form-group">
+            <label for="jobType">Service Type</label>
+            <select id="jobType" name="jobType">
+              <option value="">Select Service Type</option>
               <option value="government">Government Service</option>
-              <option value="private">Private</option>
+              <option value="private">Private Service</option>
             </select>
           </div>
 
-          <div id="employmentFields" class="form-grid hidden top-gap">
-            <div class="field full">
-              <label for="organization" id="organizationLabel">Organization Name</label>
-              <input id="organization" name="organization">
-            </div>
-            <div class="field">
-              <label for="designation">Designation</label>
-              <input id="designation" name="designation">
-            </div>
-            <div class="field">
-              <label for="jobDepartment">Department</label>
-              <input id="jobDepartment" name="jobDepartment">
-            </div>
-            <div class="field full">
-              <label for="jobLocation">Location</label>
-              <input id="jobLocation" name="jobLocation">
-            </div>
-          </div>
-        </div>
-
-        <label class="check-row">
-          <input type="checkbox" id="entrepreneur" name="status[]" value="Entrepreneur / Business">
-          Entrepreneur / Business
-        </label>
-
-        <div id="businessPanel" class="conditional-panel hidden">
-          <h3>Business Details</h3>
           <div class="form-grid">
-            <div class="field">
-              <label for="businessName">Business Name</label>
-              <input id="businessName" name="businessName">
+            <div class="form-group">
+              <label for="organization">Organization / Company</label>
+              <input type="text" id="organization" name="organization">
             </div>
-            <div class="field">
-              <label for="businessType">Business Type</label>
-              <input id="businessType" name="businessType">
+            <div class="form-group">
+              <label for="designation">Designation</label>
+              <input type="text" id="designation" name="designation">
             </div>
-            <div class="field full">
-              <label for="businessLocation">Location</label>
-              <input id="businessLocation" name="businessLocation">
+            <div class="form-group">
+              <label for="jobDepartment">Department</label>
+              <input type="text" id="jobDepartment" name="jobDepartment">
+            </div>
+            <div class="form-group">
+              <label for="jobLocation">Location</label>
+              <input type="text" id="jobLocation" name="jobLocation">
             </div>
           </div>
         </div>
 
-        <label class="check-row">
-          <input type="checkbox" id="otherStatus" name="status[]" value="Others">
-          Others
-        </label>
+        <div id="businessFields" class="conditional-fields hidden">
+          <div class="form-group">
+            <label for="businessName">Business Name</label>
+            <input type="text" id="businessName" name="businessName">
+          </div>
+          <div class="form-group">
+            <label for="businessDetails">Business Details</label>
+            <textarea id="businessDetails" name="businessDetails"></textarea>
+          </div>
+        </div>
 
-        <div id="otherStatusPanel" class="conditional-panel hidden">
-          <div class="field">
-            <label for="otherStatusText">Please specify</label>
-            <input id="otherStatusText" name="otherStatusText">
+        <div id="otherStatusFields" class="conditional-fields hidden">
+          <div class="form-group">
+            <label for="otherStatus">Please Specify</label>
+            <input type="text" id="otherStatus" name="otherStatus">
           </div>
         </div>
       </section>
 
       <!-- ASSOCIATION DETAILS -->
       <section class="form-section">
-        <h2>Association Details</h2>
+        <h3>Association Details</h3>
 
-        <div class="field">
+        <div class="form-group">
           <label for="suggestions">
-            Please tell us suggestions regarding the Mechanical Alumni Association of DPI *
+            Please tell us your suggestions regarding the Mechanical Alumni
+            Association of DPI *
           </label>
-          <textarea id="suggestions" name="suggestions" required placeholder="Write your valuable suggestions..."></textarea>
+          <textarea id="suggestions" name="suggestions"
+            placeholder="Write your valuable suggestions..." required></textarea>
         </div>
+      </section>
 
-        <h3 class="small-heading">Do you want to display your contact details to others?</h3>
-        <p class="section-note">
-          Allowing this makes it easier for your friends, seniors, juniors, and teachers to reach you.
-          You can choose to show your mobile number, WhatsApp, email, Facebook, LinkedIn and Instagram.
+      <!-- CONTACT VISIBILITY -->
+      <section class="form-section">
+        <h3>Contact Information Visibility</h3>
+
+        <p class="section-description">
+          Do you want to display your contact details to others?
+          Displaying your contact details can help friends, seniors,
+          juniors and teachers contact you.
         </p>
 
-        <label class="check-row">
-          <input type="radio" name="displayContact" id="displayYes" value="yes" checked>
-          Yes, show my contact details
-        </label>
+        <div class="form-group">
+          <label for="visibility">Choose Your Preference *</label>
+          <select id="visibility" name="visibility" required>
+            <option value="">Select Preference</option>
+            <option value="yes">Yes, Show My Contact Details</option>
+            <option value="no">No, Keep My Details Private</option>
+          </select>
+        </div>
 
-        <label class="check-row">
-          <input type="radio" name="displayContact" id="displayNo" value="no">
-          No, keep them private
-        </label>
-
-        <div id="socialPanel" class="conditional-panel">
+        <div id="socialFields" class="conditional-fields hidden">
           <div class="form-grid">
-            <div class="field">
+            <div class="form-group">
               <label for="whatsapp">WhatsApp</label>
-              <input id="whatsapp" name="whatsapp">
+              <input type="text" id="whatsapp" name="whatsapp">
             </div>
-            <div class="field">
+            <div class="form-group">
               <label for="publicEmail">Email</label>
-              <input id="publicEmail" name="publicEmail" type="email">
+              <input type="email" id="publicEmail" name="publicEmail">
             </div>
-            <div class="field">
-              <label for="facebook">Facebook</label>
-              <input id="facebook" name="facebook" placeholder="Profile URL">
+            <div class="form-group">
+              <label for="facebook">Facebook Profile</label>
+              <input type="url" id="facebook" name="facebook">
             </div>
-            <div class="field">
-              <label for="linkedin">LinkedIn</label>
-              <input id="linkedin" name="linkedin" placeholder="Profile URL">
+            <div class="form-group">
+              <label for="linkedin">LinkedIn Profile</label>
+              <input type="url" id="linkedin" name="linkedin">
             </div>
-            <div class="field full">
-              <label for="instagram">Instagram</label>
-              <input id="instagram" name="instagram" placeholder="Profile URL">
+            <div class="form-group">
+              <label for="instagram">Instagram Profile</label>
+              <input type="url" id="instagram" name="instagram">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- LOGIN AND PROFILE -->
+      <!-- LOGIN -->
       <section class="form-section">
-        <h2>Login &amp; Manage Your Profile</h2>
-        <p class="section-note">
-          These details will be used for your future member login.
-          If you register with Google, a separate password is not required.
-        </p>
+        <h3>Login & Manage Your Profile</h3>
 
-        <div class="form-grid top-gap">
-          <div class="field full">
-            <label for="loginIdentity">Email / Mobile *</label>
-            <input id="loginIdentity" name="loginIdentity" required placeholder="Email or mobile number">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="loginId">Email / Mobile Number *</label>
+            <input type="text" id="loginId" name="loginId" required>
           </div>
 
-          <div class="field full">
-            <label for="accountPassword">Password *</label>
-            <input id="accountPassword" name="accountPassword" type="password"
-              minlength="8" required placeholder="Create password (minimum 8 characters)">
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password"
+              minlength="8" required>
           </div>
         </div>
 
-        <button class="google-button" type="button" id="googleSignup">
-          Continue with Google
+        <button type="button" id="googleSignIn" class="google-button">
+          Sign in with Google
         </button>
-        <p class="fine-print">Google authentication requires Firebase Authentication setup.</p>
       </section>
 
       <!-- SUBMIT -->
-      <section class="form-section submit-section">
-        <button class="submit-button" type="submit">Submit Membership Application</button>
-        <p class="fine-print">
-          This front-end demo does not send or save applications yet.
-          Connect a secure backend before accepting real registrations.
-        </p>
-      </section>
+      <div class="form-actions">
+        <button type="reset" class="reset-button">Reset Form</button>
+        <button type="submit" class="submit-button">
+          Submit Registration
+        </button>
+      </div>
 
     </form>
   </main>
 
-  <!-- LOGIN POPUP -->
-  <div class="modal hidden" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2 id="loginTitle">Member Login</h2>
-        <button type="button" class="close-modal" id="closeLogin" aria-label="Close">×</button>
-      </div>
+  <footer class="site-footer">
+    <p>
+      © <span id="currentYear"></span>
+      Mechanical Alumni Association of DPI. All Rights Reserved.
+    </p>
+  </footer>
 
-      <p class="section-note">Login to manage your alumni profile.</p>
-
-      <form id="loginForm">
-        <div class="field">
-          <label for="loginEmail">Email / Mobile</label>
-          <input id="loginEmail" required placeholder="Email or mobile number">
-        </div>
-
-        <div class="field top-gap">
-          <label for="loginPassword">Password</label>
-          <input id="loginPassword" type="password" required placeholder="Your password">
-        </div>
-
-        <button class="submit-button top-gap" type="submit">Login</button>
-      </form>
-
-      <button class="google-button" type="button" id="googleLogin">
-        Continue with Google
-      </button>
-
-      <p class="fine-print">Secure login will work after backend authentication is connected.</p>
-    </div>
-  </div>
-
-  <script src="membership.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
