@@ -1,9 +1,8 @@
 
 /* =========================================
    MECHANICAL ALUMNI ASSOCIATION
-   REGISTRATION FORM - FULL CSS
+   REGISTRATION FORM - UPDATED FULL CSS
 ========================================= */
-
 
 /* GOOGLE FONT */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -30,8 +29,7 @@
 
   --danger: #c0392b;
 
-  --shadow:
-    0 4px 18px rgba(15, 50, 33, 0.07);
+  --shadow: 0 4px 18px rgba(15, 50, 33, 0.07);
 
   --radius: 10px;
 }
@@ -77,30 +75,50 @@ a {
 
 
 /* =========================================
-   3. TOP BAR
+   3. MAIN HEADER
 ========================================= */
 
-.topbar {
+.site-header {
   width: 100%;
-  min-height: 48px;
+  background: var(--primary);
+  color: var(--white);
 
-  padding: 10px 5%;
+  padding: 10px 5% 22px;
+
+  border-bottom: 5px solid var(--secondary);
+}
+
+
+/* HEADER TOP LINKS */
+
+.header-top-links {
+  width: 100%;
+  max-width: 1150px;
+
+  margin: 0 auto 15px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  background: var(--primary-dark);
 }
+
+
+/* HOME AND LOGIN HYPERLINK */
 
 .back-home,
 .login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
   color: var(--white);
 
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
 
-  transition: 0.25s ease;
+  text-decoration: none;
+
+  transition: color 0.25s ease;
 }
 
 .back-home:hover,
@@ -108,24 +126,17 @@ a {
   color: var(--secondary);
 }
 
-
-/* =========================================
-   4. WEBSITE HEADER
-========================================= */
-
-.site-header {
-  width: 100%;
-
-  background: var(--primary);
-
-  color: var(--white);
-
-  padding: 28px 15px;
-
-  border-bottom: 5px solid var(--secondary);
+.back-home svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
+
+/* HEADER CONTENT */
+
 .header-content {
+  width: 100%;
   max-width: 1150px;
 
   margin: auto;
@@ -134,17 +145,23 @@ a {
   align-items: center;
   justify-content: center;
 
-  gap: 22px;
+  gap: 18px;
 }
 
+
+/* LOGO */
+
 .header-logo {
-  width: 105px;
-  height: 105px;
+  width: 85px;
+  height: 85px;
 
   object-fit: contain;
 
   flex-shrink: 0;
 }
+
+
+/* ASSOCIATION NAME */
 
 .header-title {
   min-width: 0;
@@ -163,25 +180,24 @@ a {
 
   white-space: nowrap;
 
-  margin-bottom: 9px;
+  margin-bottom: 7px;
 }
 
 .header-title p {
   color: #e1ece5;
 
-  font-size: clamp(13px, 2vw, 21px);
+  font-size: clamp(13px, 2vw, 19px);
 
   font-weight: 500;
 }
 
 
 /* =========================================
-   5. MAIN CONTAINER
+   4. MAIN CONTAINER
 ========================================= */
 
 .registration-container {
   width: 100%;
-
   max-width: 1000px;
 
   margin: auto;
@@ -191,7 +207,7 @@ a {
 
 
 /* =========================================
-   6. PAGE HEADING
+   5. PAGE HEADING
 ========================================= */
 
 .page-heading {
@@ -204,7 +220,6 @@ a {
   color: var(--primary);
 
   font-size: 27px;
-
   font-weight: 800;
 
   margin-bottom: 6px;
@@ -212,13 +227,12 @@ a {
 
 .page-heading p {
   color: var(--text-light);
-
   font-size: 13px;
 }
 
 
 /* =========================================
-   7. FORM SECTIONS
+   6. FORM SECTIONS
 ========================================= */
 
 .form-section {
@@ -241,7 +255,6 @@ a {
   color: var(--primary);
 
   font-size: 18px;
-
   font-weight: 700;
 
   padding-bottom: 13px;
@@ -255,7 +268,6 @@ a {
   color: var(--primary);
 
   font-size: 14px;
-
   font-weight: 700;
 
   margin-bottom: 15px;
@@ -263,7 +275,7 @@ a {
 
 
 /* =========================================
-   8. FORM GRID
+   7. FORM GRID
 ========================================= */
 
 .form-grid {
@@ -289,7 +301,7 @@ a {
 
 
 /* =========================================
-   9. FORM LABEL
+   8. FORM LABEL
 ========================================= */
 
 .form-group label {
@@ -298,7 +310,6 @@ a {
   color: #405248;
 
   font-size: 12px;
-
   font-weight: 700;
 
   margin-bottom: 7px;
@@ -306,7 +317,7 @@ a {
 
 
 /* =========================================
-   10. INPUT / SELECT / TEXTAREA
+   9. INPUT / SELECT / TEXTAREA
 ========================================= */
 
 .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
@@ -353,30 +364,26 @@ a {
 
 .form-group textarea {
   min-height: 95px;
-
   resize: vertical;
 }
 
 
 /* =========================================
-   11. FILE UPLOAD
+   10. FILE UPLOAD
 ========================================= */
 
 .form-group input[type="file"] {
   width: 100%;
-
   min-height: 43px;
 
   padding: 9px;
 
   border: 1px dashed #b7c9bc;
-
   border-radius: 7px;
 
   background: #f9fcfa;
 
   color: var(--text-light);
-
   font-size: 12px;
 
   cursor: pointer;
@@ -386,7 +393,6 @@ a {
   border: none;
 
   background: var(--primary-light);
-
   color: var(--primary);
 
   padding: 7px 12px;
@@ -402,7 +408,7 @@ a {
 
 
 /* =========================================
-   12. DATE OF BIRTH
+   11. DATE OF BIRTH
 ========================================= */
 
 .three-columns {
@@ -417,13 +423,12 @@ a {
 
 .three-columns select {
   min-width: 0;
-
   width: 100%;
 }
 
 
 /* =========================================
-   13. CHECKBOX GRID
+   12. CHECKBOX GRID
 ========================================= */
 
 .checkbox-grid {
@@ -456,7 +461,6 @@ a {
   color: #405248;
 
   font-size: 12px;
-
   font-weight: 600;
 
   cursor: pointer;
@@ -466,7 +470,6 @@ a {
 
 .checkbox-card:hover {
   border-color: var(--primary);
-
   background: var(--primary-light);
 }
 
@@ -483,7 +486,7 @@ a {
 
 
 /* =========================================
-   14. CONDITIONAL SECTIONS
+   13. CONDITIONAL SECTIONS
 ========================================= */
 
 .conditional-section {
@@ -496,7 +499,6 @@ a {
   margin-top: 17px;
 
   border: 1px solid #e2ebe4;
-
   border-left: 4px solid var(--secondary);
 
   border-radius: 8px;
@@ -518,7 +520,7 @@ a {
 
 
 /* =========================================
-   15. SECTION DESCRIPTION
+   14. SECTION DESCRIPTION
 ========================================= */
 
 .section-description {
@@ -543,7 +545,7 @@ a {
 
 
 /* =========================================
-   16. WARNING MESSAGE
+   15. WARNING MESSAGE
 ========================================= */
 
 .warning-message {
@@ -552,7 +554,6 @@ a {
   color: var(--danger);
 
   font-size: 12px;
-
   font-weight: 600;
 
   padding: 9px 12px;
@@ -572,7 +573,7 @@ a {
 
 
 /* =========================================
-   17. ADDRESS SAME CHECKBOX
+   16. ADDRESS SAME CHECKBOX
 ========================================= */
 
 #sameAddress {
@@ -589,7 +590,7 @@ a {
 
 
 /* =========================================
-   18. GOOGLE INFO
+   17. GOOGLE INFO
 ========================================= */
 
 .google-info {
@@ -616,12 +617,11 @@ a {
 
 
 /* =========================================
-   19. FORM SUBMIT BUTTON
+   18. FORM SUBMIT BUTTON
 ========================================= */
 
 .form-submit {
   text-align: center;
-
   padding: 10px 0 20px;
 }
 
@@ -631,15 +631,12 @@ a {
   padding: 14px 25px;
 
   border: none;
-
   border-radius: 7px;
 
   background: var(--primary);
-
   color: var(--white);
 
   font-size: 14px;
-
   font-weight: 700;
 
   cursor: pointer;
@@ -661,146 +658,7 @@ a {
 
 
 /* =========================================
-   20. LOGIN POPUP
-========================================= */
-
-.login-modal {
-  display: none;
-
-  position: fixed;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  padding: 20px;
-
-  background: rgba(3, 25, 18, 0.75);
-
-  z-index: 9999;
-
-  align-items: center;
-  justify-content: center;
-}
-
-.login-modal.show {
-  display: flex;
-}
-
-.login-box {
-  width: 100%;
-
-  max-width: 400px;
-
-  padding: 25px;
-
-  background: var(--white);
-
-  border-radius: 12px;
-
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
-
-  animation: popupAnimation 0.25s ease;
-}
-
-@keyframes popupAnimation {
-  from {
-    opacity: 0;
-
-    transform: translateY(15px) scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-
-    transform: translateY(0) scale(1);
-  }
-}
-
-.login-header {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  padding-bottom: 15px;
-
-  margin-bottom: 20px;
-
-  border-bottom: 1px solid var(--border);
-}
-
-.login-header h3 {
-  color: var(--primary);
-
-  font-size: 20px;
-
-  font-weight: 800;
-}
-
-.close-btn {
-  width: 32px;
-  height: 32px;
-
-  border: none;
-
-  border-radius: 50%;
-
-  background: #edf3ee;
-
-  color: var(--primary);
-
-  font-size: 22px;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-.close-btn:hover {
-  background: #dce9df;
-}
-
-.login-box .form-group {
-  margin-bottom: 16px;
-}
-
-.login-box .form-group input {
-  width: 100%;
-}
-
-.login-submit {
-  width: 100%;
-
-  padding: 13px;
-
-  margin-top: 5px;
-
-  border: none;
-
-  border-radius: 7px;
-
-  background: var(--primary);
-
-  color: white;
-
-  font-size: 14px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.25s ease;
-}
-
-.login-submit:hover {
-  background: #0b6047;
-}
-
-
-/* =========================================
-   21. FOOTER
+   19. FOOTER
 ========================================= */
 
 .site-footer {
@@ -811,7 +669,6 @@ a {
   text-align: center;
 
   background: var(--primary-dark);
-
   color: #dce9df;
 
   font-size: 11px;
@@ -819,7 +676,7 @@ a {
 
 
 /* =========================================
-   22. REQUIRED / INVALID FIELDS
+   20. REQUIRED / INVALID FIELDS
 ========================================= */
 
 .form-group input:required:invalid:not(:focus),
@@ -833,7 +690,7 @@ a {
 
 
 /* =========================================
-   23. TABLET RESPONSIVE
+   21. TABLET RESPONSIVE
 ========================================= */
 
 @media screen and (max-width: 768px) {
@@ -843,16 +700,16 @@ a {
   }
 
   .site-header {
-    padding: 23px 12px;
+    padding: 10px 12px 18px;
   }
 
   .header-content {
-    gap: 14px;
+    gap: 12px;
   }
 
   .header-logo {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
 
   .header-title h1 {
@@ -871,7 +728,7 @@ a {
 
 
 /* =========================================
-   24. MOBILE RESPONSIVE
+   22. MOBILE RESPONSIVE
 ========================================= */
 
 @media screen and (max-width: 560px) {
@@ -880,32 +737,33 @@ a {
     font-size: 12px;
   }
 
-  .topbar {
-    min-height: 43px;
+  .site-header {
+    padding: 9px 10px 17px;
+    border-bottom-width: 4px;
+  }
 
-    padding: 9px 4%;
+  .header-top-links {
+    margin-bottom: 13px;
   }
 
   .back-home,
   .login-link {
-    font-size: 12px;
+    font-size: 11px;
   }
 
-  .site-header {
-    padding: 20px 7px;
-
-    border-bottom-width: 4px;
+  .back-home svg {
+    width: 14px;
+    height: 14px;
   }
 
   .header-content {
     gap: 8px;
-
     justify-content: center;
   }
 
   .header-logo {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
   }
 
   .header-title {
@@ -913,17 +771,14 @@ a {
   }
 
   .header-title h1 {
-    font-size: clamp(12px, 3.35vw, 19px);
-
+    font-size: clamp(11px, 3.3vw, 18px);
     letter-spacing: -0.3px;
-
     white-space: nowrap;
-
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .header-title p {
-    font-size: clamp(10px, 2.5vw, 14px);
+    font-size: clamp(9px, 2.5vw, 13px);
   }
 
   .registration-container {
@@ -944,17 +799,13 @@ a {
 
   .form-section {
     padding: 16px 12px;
-
     margin-bottom: 12px;
-
     border-radius: 8px;
   }
 
   .form-section h3 {
     font-size: 15px;
-
     margin-bottom: 15px;
-
     padding-bottom: 10px;
   }
 
@@ -964,13 +815,11 @@ a {
 
   .form-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     gap: 13px 9px;
   }
 
   .form-group label {
     font-size: 10px;
-
     margin-bottom: 6px;
   }
 
@@ -978,11 +827,8 @@ a {
   .form-group select,
   .form-group textarea {
     min-height: 39px;
-
     padding: 9px 7px;
-
     font-size: 11px;
-
     border-radius: 6px;
   }
 
@@ -996,7 +842,6 @@ a {
 
   .three-columns select {
     padding: 8px 4px !important;
-
     font-size: 10px !important;
   }
 
@@ -1006,11 +851,8 @@ a {
 
   .checkbox-card {
     min-height: 40px;
-
     padding: 9px 7px;
-
     font-size: 10px;
-
     gap: 6px;
   }
 
@@ -1021,7 +863,6 @@ a {
 
   .conditional-section {
     padding: 13px 9px;
-
     margin-top: 13px;
   }
 
@@ -1035,21 +876,15 @@ a {
 
   .submit-btn {
     width: 100%;
-
     max-width: 320px;
-
     font-size: 13px;
-  }
-
-  .login-box {
-    padding: 20px 16px;
   }
 
 }
 
 
 /* =========================================
-   25. SMALL MOBILE
+   23. SMALL MOBILE
 ========================================= */
 
 @media screen and (max-width: 350px) {
@@ -1059,13 +894,12 @@ a {
   }
 
   .header-logo {
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
   }
 
   .header-title h1 {
-    font-size: 11px;
-
+    font-size: 10px;
     letter-spacing: -0.4px;
   }
 
@@ -1084,13 +918,11 @@ a {
   .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
   .form-group select {
     font-size: 10px;
-
     padding: 8px 5px;
   }
 
   .checkbox-card {
     font-size: 9px;
-
     padding: 8px 5px;
   }
 
@@ -1098,7 +930,7 @@ a {
 
 
 /* =========================================
-   26. ACCESSIBILITY
+   24. ACCESSIBILITY
 ========================================= */
 
 button:focus-visible,
@@ -1107,19 +939,17 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
   outline: 2px solid var(--secondary);
-
   outline-offset: 2px;
 }
 
 
 /* =========================================
-   27. PRINT
+   25. PRINT
 ========================================= */
 
 @media print {
 
-  .topbar,
-  .login-modal,
+  .header-top-links,
   .form-submit {
     display: none !important;
   }
@@ -1130,7 +960,6 @@ textarea:focus-visible {
 
   .form-section {
     box-shadow: none;
-
     break-inside: avoid;
   }
 
