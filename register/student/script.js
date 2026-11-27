@@ -6,10 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const $ = id => document.getElementById(id);
-  const currentYear = new Date().getFullYear();
 
   const field = name =>
     document.querySelector(`[name="${name}"]`);
+
+  const currentYear = new Date().getFullYear();
 
   function populateSelect(select, placeholder, values = []) {
     if (!select) return;
@@ -36,30 +37,78 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function toggleSection(id, show) {
-    const element = $(id);
-    if (element) element.classList.toggle("active", show);
-  }
 
+  // Preserve original required state.
   function setRequired(container, required) {
     if (!container) return;
 
     container.querySelectorAll("input, select, textarea")
       .forEach(input => {
+
         if (input.dataset.originalRequired === undefined) {
           input.dataset.originalRequired =
             input.required ? "true" : "false";
         }
 
         input.required =
-          required && input.dataset.originalRequired === "true";
+          required &&
+          input.dataset.originalRequired === "true";
       });
   }
 
-  function getName(item) {
-    if (typeof item === "string") return item;
-    return item?.name || item?.en_name || item?.english_name || "";
+
+  // Show / hide conditional sections.
+  function toggleSection(id, show) {
+    const element = $(id);
+
+    if (!element) return;
+
+    element.classList.toggle("active", show);
+
+    setRequired(element, show);
   }
+
+
+  // Safely read names from different JSON structures.
+  function getName(item) {
+
+    if (typeof item === "string") return item;
+
+    if (!item || typeof item !== "object") return "";
+
+    const name =
+      item.name ||
+      item.en_name ||
+      item.english_name ||
+      item.name_en ||
+      "";
+
+    if (typeof name === "string") return name;
+
+    if (typeof name === "object") {
+      return (
+        name.en ||
+        name.english ||
+        name.name ||
+        Object.values(name)[0] ||
+        ""
+      );
+    }
+
+    return "";
+  }
+
+
+  function setSelectValue(select, value) {
+    if (!select) return;
+
+    const exists = Array.from(select.options).some(
+      option => option.value === value
+    );
+
+    select.value = exists ? value : "";
+  }
+
 
   // =========================================
   // 2. DATE OF BIRTH
@@ -72,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
       String(i + 1).padStart(2, "0")
     )
   );
+
 
   populateSelect($("dobMonth"), "Month", [
     { value: "01", label: "January" },
@@ -88,10 +138,13 @@ document.addEventListener("DOMContentLoaded", function () {
     { value: "12", label: "December" }
   ]);
 
+
   const dobYears = [];
+
   for (let year = currentYear; year >= 1930; year--) {
     dobYears.push(year);
   }
+
   populateSelect($("dobYear"), "Year", dobYears);
 
 
@@ -102,7 +155,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const sessions = [];
 
   for (let year = currentYear; year >= 1955; year--) {
-    const nextYear = String((year + 1) % 100).padStart(2, "0");
+
+    const nextYear = String((year + 1) % 100)
+      .padStart(2, "0");
 
     sessions.push({
       value: `${year}-${nextYear}`,
@@ -110,9 +165,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  sessions.push({ value: "other", label: "Other" });
+  sessions.push({
+    value: "other",
+    label: "Other"
+  });
 
-  populateSelect($("diplomaSession"), "Select Session", sessions);
+  populateSelect(
+    $("diplomaSession"),
+    "Select Session",
+    sessions
+  );
 
 
   // =========================================
@@ -124,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "alliedPassingYear",
     "makeupPassingYear"
   ].forEach(id => {
+
     const years = [];
 
     for (let year = currentYear; year >= 1955; year--) {
@@ -131,6 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     populateSelect($(id), "Select Year", years);
+
   });
 
 
@@ -159,13 +223,17 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   let bangladeshData = [];
+
   let locationDataLoaded = false;
 
   const GEO_DATA_URL =
     "https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json";
 
+
   async function loadBangladeshData() {
+
     try {
+
       const response = await fetch(GEO_DATA_URL);
 
       if (!response.ok) {
@@ -174,7 +242,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const data = await response.json();
 
-      // Dataset root is expected to contain divisions.
       bangladeshData = Array.isArray(data)
         ? data
         : data.divisions || data.data || [];
@@ -185,39 +252,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
       locationDataLoaded = true;
 
-      setupAddress("present");
-      setupAddress("permanent");
+      // Populate both division dropdowns.
+      ["present", "permanent"].forEach(prefix => {
 
-      // If Same Address was checked before data finished loading
-      if ($("sameAddress")?.checked) {
+        const division = field(prefix + "Division");
+
+        populateSelect(
+          division,
+          "Select Division",
+          getDivisionNames()
+        );
+
+      });
+
+
+      // Copy address if checkbox was selected
+      // before location data finished loading.
+      if (sameAddress?.checked) {
         copyPresentToPermanent();
       }
 
-      console.log("Bangladesh location data loaded.");
+      console.log("Bangladesh location data loaded successfully.");
 
     } catch (error) {
-      console.error("Location data error:", error);
 
-      document.querySelectorAll(
-        '[name="presentDivision"], [name="permanentDivision"]'
-      ).forEach(select => {
+      console.error("Bangladesh location data error:", error);
+
+      ["present", "permanent"].forEach(prefix => {
+
         populateSelect(
-          select,
+          field(prefix + "Division"),
           "Location data unavailable - reload page",
           []
         );
+
       });
+
     }
   }
 
+
   function findDivision(name) {
+
     return bangladeshData.find(
       item => getName(item) === name
     );
+
   }
 
+
   function findDistrict(name) {
+
     for (const division of bangladeshData) {
+
       const districts = division.districts || [];
 
       const found = districts.find(
@@ -230,13 +317,18 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
 
+
   function getDivisionNames() {
+
     return bangladeshData
       .map(item => getName(item))
       .filter(Boolean);
+
   }
 
+
   function getDistrictNames(divisionName) {
+
     const division = findDivision(divisionName);
 
     if (!division) return [];
@@ -244,9 +336,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return (division.districts || [])
       .map(item => getName(item))
       .filter(Boolean);
+
   }
 
+
   function getUpazilas(districtName) {
+
     const district = findDistrict(districtName);
 
     if (!district) return [];
@@ -254,33 +349,46 @@ document.addEventListener("DOMContentLoaded", function () {
     return (district.upazilas || [])
       .map(item => getName(item))
       .filter(Boolean);
+
   }
 
+
   function getMunicipalities(districtName) {
+
     const district = findDistrict(districtName);
 
     if (!district) return [];
 
-    const upazilas = district.upazilas || [];
     const municipalities = [];
 
+    const upazilas = district.upazilas || [];
+
     upazilas.forEach(upazila => {
+
       (upazila.pourashavas || []).forEach(item => {
+
         const name = getName(item);
 
         if (name && !municipalities.includes(name)) {
           municipalities.push(name);
         }
+
       });
+
     });
 
-    // Some datasets may store pourashavas directly in the district.
+
+    // Some datasets store Pourashavas
+    // directly inside the district.
+
     (district.pourashavas || []).forEach(item => {
+
       const name = getName(item);
 
       if (name && !municipalities.includes(name)) {
         municipalities.push(name);
       }
+
     });
 
     return municipalities;
@@ -293,59 +401,88 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function setupAddress(prefix) {
 
-    // IMPORTANT: Use name selectors because the HTML
-    // does not assign IDs to these address fields.
-
     const addressType = field(prefix + "AddressType");
+
     const city = field(prefix + "City");
+
     const division = field(prefix + "Division");
+
     const district = field(prefix + "District");
+
     const areaType = field(prefix + "AreaType");
+
     const area = field(prefix + "Area");
 
     if (!addressType) return;
 
-    // City Corporation list works independently of geo data.
+
+    // City Corporation options.
+
     populateSelect(
       city,
       "Select City Corporation",
       cityCorporations
     );
 
-    populateSelect(division, "Select Division", []);
+
+    populateSelect(
+      division,
+      "Select Division",
+      locationDataLoaded ? getDivisionNames() : []
+    );
+
     populateSelect(district, "Select District", []);
+
     populateSelect(area, "Select Area", []);
 
+
+    // Update Upazila / Municipality options.
+
     function updateAreaOptions() {
+
       if (!area || !district || !areaType) return;
 
       const selectedDistrict = district.value;
+
       const selectedType = areaType.value;
 
       if (!selectedDistrict || !selectedType) {
+
         populateSelect(area, "Select Area", []);
+
         return;
       }
 
+
       if (selectedType === "upazila") {
+
         populateSelect(
           area,
           "Select Upazila",
           getUpazilas(selectedDistrict)
         );
+
       } else if (selectedType === "municipality") {
+
         populateSelect(
           area,
           "Select Municipality",
           getMunicipalities(selectedDistrict)
         );
+
       } else {
+
         populateSelect(area, "Select Area", []);
+
       }
+
     }
 
+
     // Division → District
+
     division?.addEventListener("change", function () {
+
       populateSelect(
         district,
         "Select District",
@@ -353,24 +490,33 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       populateSelect(area, "Select Area", []);
+
     });
 
-    // District → Upazila / Municipality
+
+    // District → Area
+
     district?.addEventListener("change", function () {
+
       updateAreaOptions();
+
     });
 
-    // Area Type → Upazila / Municipality
+
+    // Area Type → Area
+
     areaType?.addEventListener("change", function () {
+
       updateAreaOptions();
+
     });
 
-    // Address Type visibility
-    function updateAddressFields() {
-      const selected = addressType.value;
-      const section = addressType.closest(".form-section");
 
-      if (!section) return;
+    // Address Type visibility.
+
+    function updateAddressFields() {
+
+      const selected = addressType.value;
 
       const cityGroup = city?.closest(".form-group");
 
@@ -383,33 +529,46 @@ document.addEventListener("DOMContentLoaded", function () {
         .map(element => element?.closest(".form-group"))
         .filter(Boolean);
 
+
+      const showCity = selected === "city";
+
+      const showDistrict = selected === "district";
+
+
       if (cityGroup) {
-        cityGroup.style.display =
-          selected === "city" ? "" : "none";
+
+        cityGroup.style.display = showCity ? "" : "none";
+
+        setRequired(cityGroup, showCity);
+
       }
 
+
       districtGroups.forEach(group => {
-        group.style.display =
-          selected === "district" ? "" : "none";
+
+        group.style.display = showDistrict ? "" : "none";
+
+        setRequired(group, showDistrict);
+
       });
+
     }
 
-    addressType.addEventListener("change", updateAddressFields);
+
+    addressType.addEventListener(
+      "change",
+      updateAddressFields
+    );
 
     updateAddressFields();
 
-    // Load division list after the geo data is available.
-    if (locationDataLoaded) {
-      populateSelect(
-        division,
-        "Select Division",
-        getDivisionNames()
-      );
-    }
   }
 
-  // Initialize both address forms.
+
+  // Initialize address forms once.
+
   setupAddress("present");
+
   setupAddress("permanent");
 
 
@@ -418,25 +577,34 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   function fillWard(select, max = 99) {
+
     if (!select) return;
 
     const values = [];
 
     for (let i = 1; i <= max; i++) {
+
       const number = String(i).padStart(2, "0");
 
       values.push({
         value: number,
         label: "Ward " + number
       });
+
     }
 
-    values.push({ value: "other", label: "Others" });
+    values.push({
+      value: "other",
+      label: "Others"
+    });
 
     populateSelect(select, "Select Ward", values);
+
   }
 
+
   fillWard(field("presentWard"));
+
   fillWard(field("permanentWard"));
 
 
@@ -445,7 +613,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const sameAddress = $("sameAddress");
-  const permanentAddressFields = $("permanentAddressFields");
+
+  const permanentAddressFields =
+    $("permanentAddressFields");
+
 
   const addressSuffixes = [
     "AddressType",
@@ -461,78 +632,93 @@ document.addEventListener("DOMContentLoaded", function () {
     "Address"
   ];
 
-  function setSelectValue(select, value) {
-    if (!select) return;
-
-    const exists = Array.from(select.options).some(
-      option => option.value === value
-    );
-
-    select.value = exists ? value : "";
-  }
 
   function copyPresentToPermanent() {
+
     if (!locationDataLoaded) return;
 
-    // Copy in dependency order so the required options
-    // exist before selecting them.
 
-    const order = [
-      "AddressType",
-      "City",
-      "Division",
-      "District",
-      "AreaType",
-      "Area",
-      "Ward",
-      "Union",
-      "PostOffice",
-      "PostCode",
-      "Address"
-    ];
+    addressSuffixes.forEach(suffix => {
 
-    order.forEach(suffix => {
       const present = field("present" + suffix);
+
       const permanent = field("permanent" + suffix);
 
       if (!present || !permanent) return;
 
+
       if (permanent.tagName === "SELECT") {
+
         setSelectValue(permanent, present.value);
+
         permanent.dispatchEvent(
           new Event("change", { bubbles: true })
         );
+
       } else {
+
         permanent.value = present.value;
+
         permanent.dispatchEvent(
           new Event("input", { bubbles: true })
         );
+
       }
+
     });
+
   }
 
+
   if (sameAddress && permanentAddressFields) {
+
     sameAddress.addEventListener("change", function () {
+
       if (this.checked) {
+
+        permanentAddressFields.classList.add("hidden");
+
+        setRequired(permanentAddressFields, false);
+
         if (locationDataLoaded) {
           copyPresentToPermanent();
         }
 
-        permanentAddressFields.classList.add("hidden");
       } else {
+
         permanentAddressFields.classList.remove("hidden");
+
+        setRequired(permanentAddressFields, true);
+
       }
+
     });
 
-    document.querySelectorAll('[name^="present"]').forEach(input => {
-      input.addEventListener("change", function () {
-        if (sameAddress.checked) copyPresentToPermanent();
+
+    // Keep permanent address synchronized
+    // whenever present address changes.
+
+    document.querySelectorAll('[name^="present"]')
+      .forEach(input => {
+
+        input.addEventListener("change", function () {
+
+          if (sameAddress.checked) {
+            copyPresentToPermanent();
+          }
+
+        });
+
+        input.addEventListener("input", function () {
+
+          if (sameAddress.checked) {
+            copyPresentToPermanent();
+          }
+
+        });
+
       });
 
-      input.addEventListener("input", function () {
-        if (sameAddress.checked) copyPresentToPermanent();
-      });
-    });
   }
 
 
@@ -541,7 +727,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   $("diplomaCheck")?.addEventListener("change", function () {
+
     toggleSection("diplomaFields", this.checked);
+
   });
 
 
@@ -550,7 +738,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   $("alliedCheck")?.addEventListener("change", function () {
+
     toggleSection("alliedFields", this.checked);
+
+    updateAlliedPolytechnic();
+
   });
 
 
@@ -559,29 +751,45 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const alliedPolytechnic = $("alliedPolytechnic");
-  const alliedPolytechnicOther = $("alliedPolytechnicOther");
+
+  const alliedPolytechnicOther =
+    $("alliedPolytechnicOther");
+
 
   function updateAlliedPolytechnic() {
-    if (!alliedPolytechnic || !alliedPolytechnicOther) return;
 
-    const isOther = alliedPolytechnic.value === "other";
+    if (!alliedPolytechnic || !alliedPolytechnicOther) {
+      return;
+    }
+
+    const alliedEnabled =
+      $("alliedCheck")?.checked === true;
+
+    const isOther =
+      alliedPolytechnic.value === "other";
+
+    const showOther =
+      alliedEnabled && isOther;
+
 
     alliedPolytechnicOther.style.display =
-      isOther ? "block" : "none";
+      showOther ? "block" : "none";
 
-    alliedPolytechnicOther.required = isOther;
 
-    if (!isOther) {
+    alliedPolytechnicOther.required = showOther;
+
+
+    if (!showOther) {
       alliedPolytechnicOther.value = "";
     }
+
   }
+
 
   alliedPolytechnic?.addEventListener(
     "change",
     updateAlliedPolytechnic
   );
-
-  updateAlliedPolytechnic();
 
 
   // =========================================
@@ -589,7 +797,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const diplomaDepartment = $("diplomaDepartment");
+
   const departmentWarning = $("departmentWarning");
+
 
   const diplomaRestrictedFields = [
     "diplomaSession",
@@ -599,35 +809,46 @@ document.addEventListener("DOMContentLoaded", function () {
     "diplomaPassingYear"
   ];
 
+
   function checkDiplomaDepartment() {
+
     if (!diplomaDepartment) return;
 
     const selected = diplomaDepartment.value;
+
     const shouldDisable =
       selected !== "" && selected !== "70";
 
+
     diplomaRestrictedFields.forEach(name => {
+
       const input = field(name);
 
       if (!input) return;
 
       input.disabled = shouldDisable;
 
-      if (shouldDisable) input.value = "";
+      if (shouldDisable) {
+        input.value = "";
+      }
+
     });
 
+
     if (departmentWarning) {
+
       departmentWarning.classList.toggle(
         "show",
         shouldDisable
       );
 
       departmentWarning.textContent =
-        selected === "other"
-          ? "Other Departments are not allowed."
-          : "Only Mechanical Technology is allowed for Diploma registration.";
+        "Only Mechanical Technology is allowed for Diploma registration.";
+
     }
+
   }
+
 
   diplomaDepartment?.addEventListener(
     "change",
@@ -646,10 +867,15 @@ document.addEventListener("DOMContentLoaded", function () {
     ["otherStatusCheck", "otherStatusFields"]
   ];
 
+
   statusControls.forEach(([checkboxId, sectionId]) => {
+
     $(checkboxId)?.addEventListener("change", function () {
+
       toggleSection(sectionId, this.checked);
+
     });
+
   });
 
 
@@ -658,14 +884,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const visibilityYes = $("visibilityYes");
+
   const visibilityNo = $("visibilityNo");
 
+
   function updateContactVisibility() {
+
     toggleSection(
       "socialFields",
       Boolean(visibilityYes?.checked)
     );
+
   }
+
 
   visibilityYes?.addEventListener(
     "change",
@@ -683,23 +914,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const registrationType = $("registrationType");
+
   const accountFields = $("accountFields");
+
   const googleInfo = $("googleInfo");
 
+
   function updateRegistrationType() {
+
     const selected = registrationType?.value;
 
-    toggleSection("accountFields", selected === "email");
+    const emailSelected = selected === "email";
+
+    toggleSection("accountFields", emailSelected);
+
 
     googleInfo?.classList.toggle(
       "show",
       selected === "google"
     );
 
+
     if (accountFields) {
-      setRequired(accountFields, selected === "email");
+      setRequired(accountFields, emailSelected);
     }
+
   }
+
 
   registrationType?.addEventListener(
     "change",
@@ -712,23 +953,30 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const password = $("password");
+
   const confirmPassword = $("confirmPassword");
+
   const passwordWarning = $("passwordWarning");
 
+
   function checkPasswordMatch() {
+
     if (!password || !confirmPassword) return true;
 
     const hasValues =
       password.value !== "" &&
       confirmPassword.value !== "";
 
+
     const matched =
       password.value === confirmPassword.value;
+
 
     passwordWarning?.classList.toggle(
       "show",
       hasValues && !matched
     );
+
 
     confirmPassword.setCustomValidity(
       hasValues && !matched
@@ -736,134 +984,123 @@ document.addEventListener("DOMContentLoaded", function () {
         : ""
     );
 
+
     return !hasValues || matched;
+
   }
 
-  password?.addEventListener("input", checkPasswordMatch);
-  confirmPassword?.addEventListener("input", checkPasswordMatch);
+
+  password?.addEventListener(
+    "input",
+    checkPasswordMatch
+  );
+
+  confirmPassword?.addEventListener(
+    "input",
+    checkPasswordMatch
+  );
 
 
   // =========================================
-  // 18. LOGIN POPUP
-  // =========================================
-
-  const loginOpen = $("loginOpen");
-  const loginClose = $("loginClose");
-  const loginModal = $("loginModal");
-
-  function openLogin() {
-    if (!loginModal) return;
-
-    loginModal.classList.add("show");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeLogin() {
-    if (!loginModal) return;
-
-    loginModal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
-
-  loginOpen?.addEventListener("click", function (event) {
-    event.preventDefault();
-    openLogin();
-  });
-
-  loginClose?.addEventListener("click", closeLogin);
-
-  loginModal?.addEventListener("click", function (event) {
-    if (event.target === loginModal) closeLogin();
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeLogin();
-  });
-
-
-  // =========================================
-  // 19. REGISTRATION FORM SUBMISSION
+  // 18. REGISTRATION FORM SUBMISSION
   // =========================================
 
   const registrationForm = $("registrationForm");
 
+
   registrationForm?.addEventListener("submit", function (event) {
+
     event.preventDefault();
+
 
     checkPasswordMatch();
 
+
     if (!registrationForm.checkValidity()) {
+
       registrationForm.reportValidity();
+
       return;
     }
+
+
+    // Diploma Department validation.
 
     if (
       $("diplomaCheck")?.checked &&
       diplomaDepartment?.value !== "70"
     ) {
+
       alert(
         "Only Mechanical Technology is allowed for Diploma registration."
       );
 
       diplomaDepartment?.focus();
+
       return;
     }
+
+
+    // Allied Polytechnic validation.
 
     if (
       $("alliedCheck")?.checked &&
       alliedPolytechnic?.value === "other" &&
-      !alliedPolytechnicOther.value.trim()
+      !alliedPolytechnicOther?.value.trim()
     ) {
+
       alert("Please enter your Polytechnic Name.");
-      alliedPolytechnicOther.focus();
+
+      alliedPolytechnicOther?.focus();
+
       return;
     }
 
+
+    // Permanent address validation.
+
     if (
-      sameAddress?.checked === false &&
+      !sameAddress?.checked &&
       !field("permanentAddressType")?.value
     ) {
+
       alert("Please select your permanent address type.");
+
       field("permanentAddressType")?.focus();
+
       return;
     }
+
+
+    // Password validation.
 
     if (
       registrationType?.value === "email" &&
       password?.value !== confirmPassword?.value
     ) {
+
       alert("Passwords do not match.");
+
       confirmPassword?.focus();
+
       return;
     }
+
+
+    // Backend is not connected yet.
 
     alert(
       "Your form is validated. Registration backend is not connected yet."
     );
+
   });
 
 
   // =========================================
-  // 20. LOGIN FORM SUBMISSION
+  // 19. INITIAL PAGE STATE
   // =========================================
 
-  $("loginForm")?.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    if (!this.checkValidity()) {
-      this.reportValidity();
-      return;
-    }
-
-    alert("Login backend is not connected yet.");
-  });
-
-
-  // =========================================
-  // 21. INITIAL PAGE STATE
-  // =========================================
-
-  [
+  const initialSections = [
     "diplomaFields",
     "alliedFields",
     "higherStudiesFields",
@@ -872,22 +1109,52 @@ document.addEventListener("DOMContentLoaded", function () {
     "otherStatusFields",
     "socialFields",
     "accountFields"
-  ].forEach(id => toggleSection(id, false));
+  ];
+
+
+  initialSections.forEach(id => {
+
+    toggleSection(id, false);
+
+  });
+
 
   googleInfo?.classList.remove("show");
 
+
+  // Same address starts unchecked.
+
+  if (sameAddress) {
+    sameAddress.checked = false;
+  }
+
+
   permanentAddressFields?.classList.remove("hidden");
 
-  if (sameAddress) sameAddress.checked = false;
+  setRequired(permanentAddressFields, true);
+
+
+  // Initial state updates.
 
   updateContactVisibility();
+
   updateRegistrationType();
+
   updateAlliedPolytechnic();
+
   checkDiplomaDepartment();
 
-  // Load Bangladesh divisions, districts,
-  // upazilas and municipalities.
+
+  // =========================================
+  // 20. LOAD BANGLADESH LOCATION DATA
+  // =========================================
+
   loadBangladeshData();
+
+
+  // =========================================
+  // 21. CONSOLE MESSAGE
+  // =========================================
 
   console.log(
     "Mechanical Alumni Association Registration JS Loaded Successfully."
