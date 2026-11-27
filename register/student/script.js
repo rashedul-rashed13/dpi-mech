@@ -9,14 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const currentYear = new Date().getFullYear();
 
-  function toggleSection(id, show) {
-    const element = $(id);
-
-    if (!element) return;
-
-    element.classList.toggle("active", show);
-  }
-
   function populateSelect(select, placeholder, values) {
     if (!select) return;
 
@@ -25,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const first = document.createElement("option");
     first.value = "";
     first.textContent = placeholder;
-
     select.appendChild(first);
 
     values.forEach(item => {
@@ -43,17 +34,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  function toggleSection(id, show) {
+    const element = $(id);
+    if (element) {
+      element.classList.toggle("active", show);
+    }
+  }
+
+  function setRequired(container, required) {
+    if (!container) return;
+
+    container.querySelectorAll("input, select, textarea").forEach(field => {
+      if (field.dataset.originalRequired === undefined) {
+        field.dataset.originalRequired = field.required ? "true" : "false";
+      }
+
+      field.required = required &&
+        field.dataset.originalRequired === "true";
+    });
+  }
 
   // =========================================
   // 2. DATE OF BIRTH
   // =========================================
 
-  const dobDay = $("dobDay");
-  const dobMonth = $("dobMonth");
-  const dobYear = $("dobYear");
-
   populateSelect(
-    dobDay,
+    $("dobDay"),
     "Day",
     Array.from({ length: 31 }, (_, i) =>
       String(i + 1).padStart(2, "0")
@@ -61,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   populateSelect(
-    dobMonth,
+    $("dobMonth"),
     "Month",
     [
       { value: "01", label: "January" },
@@ -80,19 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   const dobYears = [];
-
   for (let year = currentYear; year >= 1930; year--) {
     dobYears.push(year);
   }
 
-  populateSelect(dobYear, "Year", dobYears);
+  populateSelect($("dobYear"), "Year", dobYears);
 
 
   // =========================================
-  // 3. SESSION DROPDOWN
+  // 3. DIPLOMA SESSION
   // =========================================
-
-  const sessionSelect = $("diplomaSession");
 
   const sessions = [];
 
@@ -111,24 +114,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   populateSelect(
-    sessionSelect,
+    $("diplomaSession"),
     "Select Session",
     sessions
   );
 
 
   // =========================================
-  // 4. PASSING YEAR DROPDOWNS
+  // 4. PASSING YEARS
   // =========================================
 
-  const passingYearIds = [
+  [
     "diplomaPassingYear",
     "alliedPassingYear",
     "makeupPassingYear"
-  ];
-
-  passingYearIds.forEach(id => {
-    const select = $(id);
+  ].forEach(id => {
 
     const years = [];
 
@@ -136,12 +136,12 @@ document.addEventListener("DOMContentLoaded", function () {
       years.push(year);
     }
 
-    populateSelect(select, "Select Year", years);
+    populateSelect($(id), "Select Year", years);
   });
 
 
   // =========================================
-  // 5. BANGLADESH DIVISIONS
+  // 5. BANGLADESH DIVISIONS AND DISTRICTS
   // =========================================
 
   const divisions = [
@@ -157,91 +157,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const districts = {
     Barishal: [
-      "Barguna",
-      "Barishal",
-      "Bhola",
-      "Jhalokati",
-      "Patuakhali",
-      "Pirojpur"
+      "Barguna", "Barishal", "Bhola",
+      "Jhalokati", "Patuakhali", "Pirojpur"
     ],
 
     Chattogram: [
-      "Bandarban",
-      "Brahmanbaria",
-      "Chandpur",
-      "Chattogram",
-      "Cumilla",
-      "Cox's Bazar",
-      "Feni",
-      "Khagrachhari",
-      "Lakshmipur",
-      "Noakhali",
-      "Rangamati"
+      "Bandarban", "Brahmanbaria", "Chandpur",
+      "Chattogram", "Cumilla", "Cox's Bazar",
+      "Feni", "Khagrachhari", "Lakshmipur",
+      "Noakhali", "Rangamati"
     ],
 
     Dhaka: [
-      "Dhaka",
-      "Faridpur",
-      "Gazipur",
-      "Gopalganj",
-      "Kishoreganj",
-      "Madaripur",
-      "Manikganj",
-      "Munshiganj",
-      "Narayanganj",
-      "Narsingdi",
-      "Rajbari",
-      "Shariatpur",
-      "Tangail"
+      "Dhaka", "Faridpur", "Gazipur",
+      "Gopalganj", "Kishoreganj", "Madaripur",
+      "Manikganj", "Munshiganj", "Narayanganj",
+      "Narsingdi", "Rajbari", "Shariatpur", "Tangail"
     ],
 
     Khulna: [
-      "Bagerhat",
-      "Chuadanga",
-      "Jashore",
-      "Jhenaidah",
-      "Khulna",
-      "Kushtia",
-      "Magura",
-      "Meherpur",
-      "Narail",
-      "Satkhira"
+      "Bagerhat", "Chuadanga", "Jashore",
+      "Jhenaidah", "Khulna", "Kushtia",
+      "Magura", "Meherpur", "Narail", "Satkhira"
     ],
 
     Mymensingh: [
-      "Jamalpur",
-      "Mymensingh",
-      "Netrokona",
-      "Sherpur"
+      "Jamalpur", "Mymensingh", "Netrokona", "Sherpur"
     ],
 
     Rajshahi: [
-      "Bogura",
-      "Chapainawabganj",
-      "Joypurhat",
-      "Naogaon",
-      "Natore",
-      "Pabna",
-      "Rajshahi",
-      "Sirajganj"
+      "Bogura", "Chapainawabganj", "Joypurhat",
+      "Naogaon", "Natore", "Pabna",
+      "Rajshahi", "Sirajganj"
     ],
 
     Rangpur: [
-      "Dinajpur",
-      "Gaibandha",
-      "Kurigram",
-      "Lalmonirhat",
-      "Nilphamari",
-      "Panchagarh",
-      "Rangpur",
-      "Thakurgaon"
+      "Dinajpur", "Gaibandha", "Kurigram",
+      "Lalmonirhat", "Nilphamari", "Panchagarh",
+      "Rangpur", "Thakurgaon"
     ],
 
     Sylhet: [
-      "Habiganj",
-      "Moulvibazar",
-      "Sunamganj",
-      "Sylhet"
+      "Habiganj", "Moulvibazar", "Sunamganj", "Sylhet"
     ]
   };
 
@@ -267,135 +224,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 7. ADDRESS DROPDOWN INITIALIZATION
+  // 7. ADDRESS DROPDOWN SETUP
   // =========================================
 
   function setupAddress(prefix) {
-
-    const division = $(
-      prefix + "Division"
-    );
-
-    const district = $(
-      prefix + "District"
-    );
-
-    const areaType = $(
-      prefix + "AreaType"
-    );
-
-    const area = $(
-      prefix + "Area"
-    );
 
     const addressType = document.querySelector(
       `[name="${prefix}AddressType"]`
     );
 
-    const city = $(
-      prefix + "City"
-    );
+    const city = $(prefix + "City");
+    const division = $(prefix + "Division");
+    const district = $(prefix + "District");
+    const areaType = $(prefix + "AreaType");
+    const area = $(prefix + "Area");
 
-    populateSelect(
-      division,
-      "Select Division",
-      divisions
-    );
+    if (!addressType) return;
 
-    populateSelect(
-      city,
-      "Select City Corporation",
-      cityCorporations
-    );
+    // Add classes to both Present and Permanent Address
+    city?.closest(".form-group")?.classList.add("city-field");
 
-    if (district) {
+    [division, district, areaType, area].forEach(field => {
+      field?.closest(".form-group")?.classList.add("district-field");
+    });
+
+    populateSelect(city, "Select City Corporation", cityCorporations);
+    populateSelect(division, "Select Division", divisions);
+    populateSelect(district, "Select District", []);
+    populateSelect(area, "Select Area", []);
+
+    // Division → District
+    division?.addEventListener("change", function () {
+
       populateSelect(
         district,
         "Select District",
-        []
+        districts[this.value] || []
       );
-    }
 
-    if (area) {
-      populateSelect(
-        area,
-        "Select Area",
-        []
-      );
-    }
+      populateSelect(area, "Select Area", []);
+    });
 
-    if (division && district) {
+    // Area Type
+    areaType?.addEventListener("change", function () {
 
-      division.addEventListener("change", function () {
+      const placeholder = this.value === "upazila"
+        ? "Select Upazila"
+        : this.value === "municipality"
+          ? "Select Municipality"
+          : "Select Area";
 
-        const selectedDistricts =
-          districts[this.value] || [];
+      populateSelect(area, placeholder, []);
+    });
 
-        populateSelect(
-          district,
-          "Select District",
-          selectedDistricts
-        );
+    // Address Type visibility
+    function updateAddressFields() {
 
-        populateSelect(
-          area,
-          "Select Area",
-          []
-        );
+      const selected = addressType.value;
+      const section = addressType.closest(".form-section");
 
+      if (!section) return;
+
+      section.querySelectorAll(".city-field").forEach(field => {
+        field.style.display = selected === "city" ? "" : "none";
       });
 
-    }
-
-    if (areaType && area) {
-
-      areaType.addEventListener("change", function () {
-
-        if (this.value === "upazila") {
-          populateSelect(
-            area,
-            "Select Upazila",
-            []
-          );
-        }
-
-        else if (this.value === "municipality") {
-          populateSelect(
-            area,
-            "Select Municipality",
-            []
-          );
-        }
-
+      section.querySelectorAll(".district-field").forEach(field => {
+        field.style.display = selected === "district" ? "" : "none";
       });
-
     }
 
-    if (addressType) {
+    addressType.addEventListener("change", updateAddressFields);
 
-      addressType.addEventListener("change", function () {
-
-        const isCity = this.value === "city";
-        const isDistrict = this.value === "district";
-
-        const section = this.closest(".form-section");
-
-        if (!section) return;
-
-        section.querySelectorAll(".city-field")
-          .forEach(el => {
-            el.style.display = isCity ? "" : "none";
-          });
-
-        section.querySelectorAll(".district-field")
-          .forEach(el => {
-            el.style.display = isDistrict ? "" : "none";
-          });
-
-      });
-
-    }
-
+    updateAddressFields();
   }
 
   setupAddress("present");
@@ -403,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 8. WARD DROPDOWN
+  // 8. WARD DROPDOWNS
   // =========================================
 
   function fillWard(select, max = 99) {
@@ -413,9 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const values = [];
 
     for (let i = 1; i <= max; i++) {
+      const number = String(i).padStart(2, "0");
+
       values.push({
-        value: String(i).padStart(2, "0"),
-        label: "Ward " + String(i).padStart(2, "0")
+        value: number,
+        label: "Ward " + number
       });
     }
 
@@ -427,42 +330,92 @@ document.addEventListener("DOMContentLoaded", function () {
     populateSelect(select, "Select Ward", values);
   }
 
-  fillWard(
-    document.querySelector('[name="presentWard"]'),
-    99
-  );
-
-  fillWard(
-    document.querySelector('[name="permanentWard"]'),
-    99
-  );
+  fillWard(document.querySelector('[name="presentWard"]'));
+  fillWard(document.querySelector('[name="permanentWard"]'));
 
 
   // =========================================
-  // 9. PRESENT = PERMANENT ADDRESS
+  // 9. SAME PRESENT AND PERMANENT ADDRESS
   // =========================================
 
   const sameAddress = $("sameAddress");
+  const permanentAddressFields = $("permanentAddressFields");
 
-  const permanentAddressFields =
-    $("permanentAddressFields");
+  const addressSuffixes = [
+    "AddressType",
+    "City",
+    "Division",
+    "District",
+    "AreaType",
+    "Area",
+    "Ward",
+    "Union",
+    "PostOffice",
+    "PostCode",
+    "Address"
+  ];
+
+  function copyPresentToPermanent() {
+
+    addressSuffixes.forEach(suffix => {
+
+      const present = document.querySelector(
+        `[name="present${suffix}"]`
+      );
+
+      const permanent = document.querySelector(
+        `[name="permanent${suffix}"]`
+      );
+
+      if (!present || !permanent) return;
+
+      if (present.tagName === "SELECT") {
+        const matchingOption = Array.from(permanent.options).find(
+          option => option.value === present.value
+        );
+
+        permanent.value = matchingOption ? present.value : "";
+      } else {
+        permanent.value = present.value;
+      }
+
+      permanent.dispatchEvent(new Event("change", {
+        bubbles: true
+      }));
+    });
+  }
 
   if (sameAddress && permanentAddressFields) {
 
     sameAddress.addEventListener("change", function () {
 
-      permanentAddressFields.classList.toggle(
-        "hidden",
-        this.checked
-      );
-
+      if (this.checked) {
+        copyPresentToPermanent();
+        permanentAddressFields.classList.add("hidden");
+      } else {
+        permanentAddressFields.classList.remove("hidden");
+      }
     });
 
+    document.querySelectorAll('[name^="present"]').forEach(field => {
+
+      field.addEventListener("change", function () {
+        if (sameAddress.checked) {
+          copyPresentToPermanent();
+        }
+      });
+
+      field.addEventListener("input", function () {
+        if (sameAddress.checked) {
+          copyPresentToPermanent();
+        }
+      });
+    });
   }
 
 
   // =========================================
-  // 10. DIPLOMA CHECKBOX
+  // 10. DIPLOMA SECTION
   // =========================================
 
   const diplomaCheck = $("diplomaCheck");
@@ -471,19 +424,13 @@ document.addEventListener("DOMContentLoaded", function () {
   if (diplomaCheck) {
 
     diplomaCheck.addEventListener("change", function () {
-
-      toggleSection(
-        "diplomaFields",
-        this.checked
-      );
-
+      toggleSection("diplomaFields", this.checked);
     });
-
   }
 
 
   // =========================================
-  // 11. ALLIED COURSE CHECKBOX
+  // 11. ALLIED SECTION
   // =========================================
 
   const alliedCheck = $("alliedCheck");
@@ -491,14 +438,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (alliedCheck) {
 
     alliedCheck.addEventListener("change", function () {
-
-      toggleSection(
-        "alliedFields",
-        this.checked
-      );
-
+      toggleSection("alliedFields", this.checked);
     });
-
   }
 
 
@@ -507,7 +448,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const diplomaDepartment = $("diplomaDepartment");
-
   const departmentWarning = $("departmentWarning");
 
   const diplomaRestrictedFields = [
@@ -522,54 +462,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!diplomaDepartment) return;
 
-    const isMechanical =
-      diplomaDepartment.value === "70";
-
-    const isOther =
-      diplomaDepartment.value === "other";
-
-    const shouldDisable =
-      diplomaDepartment.value !== "" && !isMechanical;
+    const selected = diplomaDepartment.value;
+    const isMechanical = selected === "70";
+    const shouldDisable = selected !== "" && !isMechanical;
 
     diplomaRestrictedFields.forEach(name => {
 
-      const field = document.querySelector(
-        `[name="${name}"]`
-      );
+      const field = document.querySelector(`[name="${name}"]`);
 
       if (!field) return;
 
       field.disabled = shouldDisable;
 
-      if (shouldDisable) {
-        field.value = "";
-      }
-
+      if (shouldDisable) field.value = "";
     });
 
     if (departmentWarning) {
-      departmentWarning.classList.toggle(
-        "show",
-        shouldDisable
-      );
 
-      departmentWarning.textContent = isOther
-        ? "Other Departments are not allowed."
-        : "Only Mechanical Technology is allowed for Diploma registration.";
+      departmentWarning.classList.toggle("show", shouldDisable);
+
+      departmentWarning.textContent =
+        selected === "other"
+          ? "Other Departments are not allowed."
+          : "Only Mechanical Technology is allowed for Diploma registration.";
     }
-
   }
 
-  if (diplomaDepartment) {
-    diplomaDepartment.addEventListener(
-      "change",
-      checkDiplomaDepartment
-    );
-  }
+  diplomaDepartment?.addEventListener(
+    "change",
+    checkDiplomaDepartment
+  );
 
 
   // =========================================
-  // 13. CURRENT STATUS CHECKBOXES
+  // 13. CURRENT STATUS SECTIONS
   // =========================================
 
   const statusControls = [
@@ -583,17 +509,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const checkbox = $(checkboxId);
 
-    if (!checkbox) return;
-
-    checkbox.addEventListener("change", function () {
-
-      toggleSection(
-        sectionId,
-        this.checked
-      );
-
+    checkbox?.addEventListener("change", function () {
+      toggleSection(sectionId, this.checked);
     });
-
   });
 
 
@@ -605,27 +523,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const visibilityNo = $("visibilityNo");
 
   function updateContactVisibility() {
-
     toggleSection(
       "socialFields",
-      visibilityYes && visibilityYes.checked
-    );
-
-  }
-
-  if (visibilityYes) {
-    visibilityYes.addEventListener(
-      "change",
-      updateContactVisibility
+      Boolean(visibilityYes?.checked)
     );
   }
 
-  if (visibilityNo) {
-    visibilityNo.addEventListener(
-      "change",
-      updateContactVisibility
-    );
-  }
+  visibilityYes?.addEventListener("change", updateContactVisibility);
+  visibilityNo?.addEventListener("change", updateContactVisibility);
 
 
   // =========================================
@@ -633,39 +538,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const registrationType = $("registrationType");
-
   const accountFields = $("accountFields");
-
   const googleInfo = $("googleInfo");
 
   function updateRegistrationType() {
 
-    if (!registrationType) return;
+    const selected = registrationType?.value;
 
-    const selected = registrationType.value;
+    toggleSection("accountFields", selected === "email");
 
-    toggleSection(
-      "accountFields",
-      selected === "email"
+    googleInfo?.classList.toggle(
+      "show",
+      selected === "google"
     );
 
-    if (googleInfo) {
-      googleInfo.classList.toggle(
-        "show",
-        selected === "google"
-      );
+    if (accountFields) {
+      setRequired(accountFields, selected === "email");
     }
-
   }
 
-  if (registrationType) {
-
-    registrationType.addEventListener(
-      "change",
-      updateRegistrationType
-    );
-
-  }
+  registrationType?.addEventListener(
+    "change",
+    updateRegistrationType
+  );
 
 
   // =========================================
@@ -673,9 +568,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const password = $("password");
-
   const confirmPassword = $("confirmPassword");
-
   const passwordWarning = $("passwordWarning");
 
   function checkPasswordMatch() {
@@ -689,12 +582,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const matched =
       password.value === confirmPassword.value;
 
-    if (passwordWarning) {
-      passwordWarning.classList.toggle(
-        "show",
-        hasValues && !matched
-      );
-    }
+    passwordWarning?.classList.toggle(
+      "show",
+      hasValues && !matched
+    );
 
     confirmPassword.setCustomValidity(
       hasValues && !matched
@@ -703,22 +594,10 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     return !hasValues || matched;
-
   }
 
-  if (password && confirmPassword) {
-
-    password.addEventListener(
-      "input",
-      checkPasswordMatch
-    );
-
-    confirmPassword.addEventListener(
-      "input",
-      checkPasswordMatch
-    );
-
-  }
+  password?.addEventListener("input", checkPasswordMatch);
+  confirmPassword?.addEventListener("input", checkPasswordMatch);
 
 
   // =========================================
@@ -726,9 +605,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   const loginOpen = $("loginOpen");
-
   const loginClose = $("loginClose");
-
   const loginModal = $("loginModal");
 
   function openLogin() {
@@ -736,9 +613,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!loginModal) return;
 
     loginModal.classList.add("show");
-
     document.body.style.overflow = "hidden";
-
   }
 
   function closeLogin() {
@@ -746,156 +621,101 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!loginModal) return;
 
     loginModal.classList.remove("show");
-
     document.body.style.overflow = "";
-
   }
 
-  if (loginOpen) {
+  loginOpen?.addEventListener("click", function (event) {
+    event.preventDefault();
+    openLogin();
+  });
 
-    loginOpen.addEventListener("click", function (event) {
+  loginClose?.addEventListener("click", closeLogin);
 
-      event.preventDefault();
-
-      openLogin();
-
-    });
-
-  }
-
-  if (loginClose) {
-    loginClose.addEventListener(
-      "click",
-      closeLogin
-    );
-  }
-
-  if (loginModal) {
-
-    loginModal.addEventListener("click", function (event) {
-
-      if (event.target === loginModal) {
-        closeLogin();
-      }
-
-    });
-
-  }
-
-  document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
+  loginModal?.addEventListener("click", function (event) {
+    if (event.target === loginModal) {
       closeLogin();
     }
+  });
 
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeLogin();
   });
 
 
   // =========================================
-  // 18. FORM SUBMISSION
+  // 18. REGISTRATION FORM SUBMISSION
   // =========================================
 
   const registrationForm = $("registrationForm");
 
-  if (registrationForm) {
+  registrationForm?.addEventListener("submit", function (event) {
 
-    registrationForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      event.preventDefault();
+    checkPasswordMatch();
 
-      checkPasswordMatch();
+    if (!registrationForm.checkValidity()) {
+      registrationForm.reportValidity();
+      return;
+    }
 
-      if (!registrationForm.checkValidity()) {
-
-        registrationForm.reportValidity();
-
-        return;
-
-      }
-
-      if (
-        diplomaCheck &&
-        diplomaCheck.checked &&
-        diplomaDepartment &&
-        diplomaDepartment.value !== "70"
-      ) {
-
-        alert(
-          "Only Mechanical Technology is allowed for Diploma registration."
-        );
-
-        diplomaDepartment.focus();
-
-        return;
-
-      }
-
-      if (
-        password &&
-        confirmPassword &&
-        registrationType &&
-        registrationType.value === "email" &&
-        password.value !== confirmPassword.value
-      ) {
-
-        alert("Passwords do not match.");
-
-        confirmPassword.focus();
-
-        return;
-
-      }
-
-      if (sameAddress && sameAddress.checked) {
-
-        const presentAddress =
-          document.querySelector(
-            '[name="presentAddress"]'
-          );
-
-        if (presentAddress) {
-          presentAddress.setCustomValidity("");
-        }
-
-      }
-
+    if (
+      diplomaCheck?.checked &&
+      diplomaDepartment?.value !== "70"
+    ) {
       alert(
-        "Your form is validated. Connect the registration backend to save your information."
+        "Only Mechanical Technology is allowed for Diploma registration."
       );
 
-    });
+      diplomaDepartment?.focus();
+      return;
+    }
 
-  }
+    if (
+      sameAddress?.checked === false &&
+      !document.querySelector('[name="permanentAddressType"]').value
+    ) {
+      alert("Please select your permanent address type.");
+      document.querySelector('[name="permanentAddressType"]').focus();
+      return;
+    }
+
+    if (
+      registrationType?.value === "email" &&
+      password?.value !== confirmPassword?.value
+    ) {
+      alert("Passwords do not match.");
+      confirmPassword?.focus();
+      return;
+    }
+
+    alert(
+      "Your form is validated. Registration backend is not connected yet."
+    );
+  });
 
 
   // =========================================
-  // 19. LOGIN FORM
+  // 19. LOGIN FORM SUBMISSION
   // =========================================
 
   const loginForm = $("loginForm");
 
-  if (loginForm) {
+  loginForm?.addEventListener("submit", function (event) {
 
-    loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      event.preventDefault();
+    if (!loginForm.checkValidity()) {
+      loginForm.reportValidity();
+      return;
+    }
 
-      if (!loginForm.checkValidity()) {
-        loginForm.reportValidity();
-        return;
-      }
-
-      alert(
-        "Login backend is not connected yet."
-      );
-
-    });
-
-  }
+    alert("Login backend is not connected yet.");
+  });
 
 
   // =========================================
-  // 20. INITIAL STATE
+  // 20. INITIAL PAGE STATE
   // =========================================
 
   toggleSection("diplomaFields", false);
@@ -906,6 +726,20 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleSection("otherStatusFields", false);
   toggleSection("socialFields", false);
   toggleSection("accountFields", false);
+
+  googleInfo?.classList.remove("show");
+
+  if (permanentAddressFields) {
+    permanentAddressFields.classList.remove("hidden");
+  }
+
+  if (sameAddress) {
+    sameAddress.checked = false;
+  }
+
+  updateContactVisibility();
+  updateRegistrationType();
+  checkDiplomaDepartment();
 
   console.log(
     "Mechanical Alumni Association Registration JS Loaded Successfully."
