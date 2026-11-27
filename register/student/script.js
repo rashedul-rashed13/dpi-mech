@@ -1,669 +1,914 @@
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-  const $ = id => document.getElementById(id);
+  // =========================================
+  // 1. HELPER FUNCTIONS
+  // =========================================
+
+  const $ = (id) => document.getElementById(id);
+
   const currentYear = new Date().getFullYear();
 
-  $('footerYear').textContent = currentYear;
+  function toggleSection(id, show) {
+    const element = $(id);
 
-  // =====================================
-  // 1. YEAR AND DATE DROPDOWNS
-  // =====================================
+    if (!element) return;
 
-  function fillYears(id, start, end, formatter = y => y) {
-    const el = $(id);
-    if (!el) return;
-
-    for (let y = start; y >= end; y--) {
-      el.add(new Option(formatter(y), y));
-    }
+    element.classList.toggle("active", show);
   }
 
-  for (let d = 1; d <= 31; d++) {
-    $('dobDay').add(
-      new Option(String(d).padStart(2, '0'), d)
-    );
+  function populateSelect(select, placeholder, values) {
+    if (!select) return;
+
+    select.innerHTML = "";
+
+    const first = document.createElement("option");
+    first.value = "";
+    first.textContent = placeholder;
+
+    select.appendChild(first);
+
+    values.forEach(item => {
+      const option = document.createElement("option");
+
+      if (typeof item === "object") {
+        option.value = item.value;
+        option.textContent = item.label;
+      } else {
+        option.value = item;
+        option.textContent = item;
+      }
+
+      select.appendChild(option);
+    });
   }
 
-  [
-    'January', 'February', 'March', 'April',
-    'May', 'June', 'July', 'August',
-    'September', 'October', 'November', 'December'
-  ].forEach((month, index) => {
-    $('dobMonth').add(new Option(month, index + 1));
-  });
 
-  fillYears('dobYear', currentYear, 1930);
+  // =========================================
+  // 2. DATE OF BIRTH
+  // =========================================
 
-  [
-    'diplomaPassing',
-    'alliedPassing',
-    'makeupPassing'
-  ].forEach(id => {
-    fillYears(id, currentYear, 1955);
-  });
+  const dobDay = $("dobDay");
+  const dobMonth = $("dobMonth");
+  const dobYear = $("dobYear");
 
-  // Session: 2026-27 format, automatically updates
+  populateSelect(
+    dobDay,
+    "Day",
+    Array.from({ length: 31 }, (_, i) =>
+      String(i + 1).padStart(2, "0")
+    )
+  );
 
-  const session = $('diplomaSession');
-
-  for (let y = currentYear; y >= 1955; y--) {
-    const nextYear = String((y + 1) % 100).padStart(2, '0');
-    const value = `${y}-${nextYear}`;
-
-    session.add(new Option(value, value));
-  }
-
-  session.add(new Option('Other', 'Other'));
-
-
-  // =====================================
-  // 2. BANGLADESH DIVISION AND DISTRICTS
-  // =====================================
-
-  const divisions = {
-
-    'Barishal': [
-      'Barguna', 'Barishal', 'Bhola',
-      'Jhalokati', 'Patuakhali', 'Pirojpur'
-    ],
-
-    'Chattogram': [
-      'Bandarban', 'Brahmanbaria', 'Chandpur',
-      'Chattogram', 'Cumilla', "Cox's Bazar",
-      'Feni', 'Khagrachhari', 'Lakshmipur',
-      'Noakhali', 'Rangamati'
-    ],
-
-    'Dhaka': [
-      'Dhaka', 'Faridpur', 'Gazipur',
-      'Gopalganj', 'Kishoreganj', 'Madaripur',
-      'Manikganj', 'Munshiganj', 'Narayanganj',
-      'Narsingdi', 'Rajbari', 'Shariatpur', 'Tangail'
-    ],
-
-    'Khulna': [
-      'Bagerhat', 'Chuadanga', 'Jashore',
-      'Jhenaidah', 'Khulna', 'Kushtia',
-      'Magura', 'Meherpur', 'Narail', 'Satkhira'
-    ],
-
-    'Mymensingh': [
-      'Jamalpur', 'Mymensingh',
-      'Netrokona', 'Sherpur'
-    ],
-
-    'Rajshahi': [
-      'Bogura', 'Chapainawabganj', 'Joypurhat',
-      'Naogaon', 'Natore', 'Pabna',
-      'Rajshahi', 'Sirajganj'
-    ],
-
-    'Rangpur': [
-      'Dinajpur', 'Gaibandha', 'Kurigram',
-      'Lalmonirhat', 'Nilphamari', 'Panchagarh',
-      'Rangpur', 'Thakurgaon'
-    ],
-
-    'Sylhet': [
-      'Habiganj', 'Moulvibazar',
-      'Sunamganj', 'Sylhet'
+  populateSelect(
+    dobMonth,
+    "Month",
+    [
+      { value: "01", label: "January" },
+      { value: "02", label: "February" },
+      { value: "03", label: "March" },
+      { value: "04", label: "April" },
+      { value: "05", label: "May" },
+      { value: "06", label: "June" },
+      { value: "07", label: "July" },
+      { value: "08", label: "August" },
+      { value: "09", label: "September" },
+      { value: "10", label: "October" },
+      { value: "11", label: "November" },
+      { value: "12", label: "December" }
     ]
+  );
 
+  const dobYears = [];
+
+  for (let year = currentYear; year >= 1930; year--) {
+    dobYears.push(year);
+  }
+
+  populateSelect(dobYear, "Year", dobYears);
+
+
+  // =========================================
+  // 3. SESSION DROPDOWN
+  // =========================================
+
+  const sessionSelect = $("diplomaSession");
+
+  const sessions = [];
+
+  for (let year = currentYear; year >= 1955; year--) {
+    const nextYear = String((year + 1) % 100).padStart(2, "0");
+
+    sessions.push({
+      value: `${year}-${nextYear}`,
+      label: `${year}-${nextYear}`
+    });
+  }
+
+  sessions.push({
+    value: "other",
+    label: "Other"
+  });
+
+  populateSelect(
+    sessionSelect,
+    "Select Session",
+    sessions
+  );
+
+
+  // =========================================
+  // 4. PASSING YEAR DROPDOWNS
+  // =========================================
+
+  const passingYearIds = [
+    "diplomaPassingYear",
+    "alliedPassingYear",
+    "makeupPassingYear"
+  ];
+
+  passingYearIds.forEach(id => {
+    const select = $(id);
+
+    const years = [];
+
+    for (let year = currentYear; year >= 1955; year--) {
+      years.push(year);
+    }
+
+    populateSelect(select, "Select Year", years);
+  });
+
+
+  // =========================================
+  // 5. BANGLADESH DIVISIONS
+  // =========================================
+
+  const divisions = [
+    "Barishal",
+    "Chattogram",
+    "Dhaka",
+    "Khulna",
+    "Mymensingh",
+    "Rajshahi",
+    "Rangpur",
+    "Sylhet"
+  ];
+
+  const districts = {
+    Barishal: [
+      "Barguna",
+      "Barishal",
+      "Bhola",
+      "Jhalokati",
+      "Patuakhali",
+      "Pirojpur"
+    ],
+
+    Chattogram: [
+      "Bandarban",
+      "Brahmanbaria",
+      "Chandpur",
+      "Chattogram",
+      "Cumilla",
+      "Cox's Bazar",
+      "Feni",
+      "Khagrachhari",
+      "Lakshmipur",
+      "Noakhali",
+      "Rangamati"
+    ],
+
+    Dhaka: [
+      "Dhaka",
+      "Faridpur",
+      "Gazipur",
+      "Gopalganj",
+      "Kishoreganj",
+      "Madaripur",
+      "Manikganj",
+      "Munshiganj",
+      "Narayanganj",
+      "Narsingdi",
+      "Rajbari",
+      "Shariatpur",
+      "Tangail"
+    ],
+
+    Khulna: [
+      "Bagerhat",
+      "Chuadanga",
+      "Jashore",
+      "Jhenaidah",
+      "Khulna",
+      "Kushtia",
+      "Magura",
+      "Meherpur",
+      "Narail",
+      "Satkhira"
+    ],
+
+    Mymensingh: [
+      "Jamalpur",
+      "Mymensingh",
+      "Netrokona",
+      "Sherpur"
+    ],
+
+    Rajshahi: [
+      "Bogura",
+      "Chapainawabganj",
+      "Joypurhat",
+      "Naogaon",
+      "Natore",
+      "Pabna",
+      "Rajshahi",
+      "Sirajganj"
+    ],
+
+    Rangpur: [
+      "Dinajpur",
+      "Gaibandha",
+      "Kurigram",
+      "Lalmonirhat",
+      "Nilphamari",
+      "Panchagarh",
+      "Rangpur",
+      "Thakurgaon"
+    ],
+
+    Sylhet: [
+      "Habiganj",
+      "Moulvibazar",
+      "Sunamganj",
+      "Sylhet"
+    ]
   };
 
 
-  // =====================================
-  // 3. CITY CORPORATION LIST
-  // =====================================
+  // =========================================
+  // 6. CITY CORPORATIONS
+  // =========================================
 
   const cityCorporations = [
-    'Dhaka North City Corporation',
-    'Dhaka South City Corporation',
-    'Chattogram City Corporation',
-    'Khulna City Corporation',
-    'Rajshahi City Corporation',
-    'Sylhet City Corporation',
-    'Barishal City Corporation',
-    'Rangpur City Corporation',
-    'Gazipur City Corporation',
-    'Narayanganj City Corporation',
-    'Cumilla City Corporation',
-    'Mymensingh City Corporation'
+    "Dhaka North City Corporation",
+    "Dhaka South City Corporation",
+    "Chattogram City Corporation",
+    "Khulna City Corporation",
+    "Rajshahi City Corporation",
+    "Barishal City Corporation",
+    "Sylhet City Corporation",
+    "Rangpur City Corporation",
+    "Gazipur City Corporation",
+    "Narayanganj City Corporation",
+    "Cumilla City Corporation",
+    "Mymensingh City Corporation"
   ];
 
 
-  // =====================================
-  // 4. ACADEMIC DEPARTMENTS
-  // =====================================
+  // =========================================
+  // 7. ADDRESS DROPDOWN INITIALIZATION
+  // =========================================
 
-  const departments = [
-    '67 - Electrical Technology',
-    '64 - Civil Technology',
-    '70 - Mechanical Technology',
-    '85 - Computer Science & Technology',
-    '71 - Power Technology',
-    '68 - Electronics Technology',
-    '61 - Architecture Technology',
-    '69 - Food Technology',
-    '63 - Chemical Technology',
-    '72 - Refrigeration & Air-Conditioning (RAC) Technology',
-    '62 - Automobile Technology',
-    '90 - Environmental Technology',
-    'Other'
-  ];
+  function setupAddress(prefix) {
 
-  departments.forEach(value => {
-    $('diplomaDepartment').add(
-      new Option(value, value)
-    );
-  });
-
-
-  // =====================================
-  // 5. POLYTECHNIC LIST
-  // =====================================
-
-  const polytechnics = [
-    'Dhaka Polytechnic Institute',
-    'Chattogram Polytechnic Institute',
-    'Rajshahi Polytechnic Institute',
-    'Khulna Polytechnic Institute',
-    'Barishal Polytechnic Institute',
-    'Sylhet Polytechnic Institute',
-    'Rangpur Polytechnic Institute',
-    'Bogura Polytechnic Institute',
-    'Cumilla Polytechnic Institute',
-    'Mymensingh Polytechnic Institute',
-    'Feni Polytechnic Institute',
-    'Pabna Polytechnic Institute',
-    'Other'
-  ];
-
-  polytechnics.forEach(value => {
-    $('polytechnic').add(
-      new Option(value, value)
-    );
-  });
-
-
-  // =====================================
-  // 6. ADDRESS DROPDOWNS
-  // =====================================
-
-  document.querySelectorAll('.address-kind').forEach(select => {
-
-    const prefix = select.id.replace('Kind', '');
-
-    // Division list
-
-    Object.keys(divisions).forEach(value => {
-      $(prefix + 'Division').add(
-        new Option(value, value)
-      );
-    });
-
-    // City Corporation list
-
-    cityCorporations.forEach(value => {
-      $(prefix + 'City').add(
-        new Option(value, value)
-      );
-    });
-
-    // City Corporation Ward 01-99
-
-    for (let n = 1; n <= 99; n++) {
-      const ward = String(n).padStart(2, '0');
-
-      $(prefix + 'WardCity').add(
-        new Option(`Ward - ${ward}`, n)
-      );
-    }
-
-    $(prefix + 'WardCity').add(
-      new Option('Others', 'Other')
+    const division = $(
+      prefix + "Division"
     );
 
-    // Municipality Ward 01-15
-
-    for (let n = 1; n <= 15; n++) {
-      const ward = String(n).padStart(2, '0');
-
-      $(prefix + 'WardMuni').add(
-        new Option(`Ward - ${ward}`, n)
-      );
-    }
-
-    $(prefix + 'WardMuni').add(
-      new Option('Others', 'Other')
+    const district = $(
+      prefix + "District"
     );
 
-    select.addEventListener('change', () => {
-      refreshAddress(prefix);
-    });
+    const areaType = $(
+      prefix + "AreaType"
+    );
 
-    $(prefix + 'Division').addEventListener('change', () => {
-      populateDistrict(prefix);
-    });
+    const area = $(
+      prefix + "Area"
+    );
 
-    $(prefix + 'District').addEventListener('change', () => {
-      populateLocalAreas(prefix);
-    });
+    const addressType = document.querySelector(
+      `[name="${prefix}AddressType"]`
+    );
 
-    $(prefix + 'AreaType').addEventListener('change', () => {
-      refreshAddress(prefix);
-    });
+    const city = $(
+      prefix + "City"
+    );
 
-    refreshAddress(prefix);
+    populateSelect(
+      division,
+      "Select Division",
+      divisions
+    );
 
-  });
-
-
-  // District dropdown
-
-  function populateDistrict(prefix) {
-
-    const district = $(prefix + 'District');
-
-    district.innerHTML =
-      '<option value="">Select District</option>';
-
-    const selectedDivision =
-      $(prefix + 'Division').value;
-
-    (divisions[selectedDivision] || []).forEach(value => {
-      district.add(new Option(value, value));
-    });
-
-    populateLocalAreas(prefix);
-  }
-
-
-  // Upazila and Municipality dropdown
-  // Complete official local-government data is not included yet.
-
-  function populateLocalAreas(prefix) {
-
-    const district = $(prefix + 'District').value;
-
-    const upazila = $(prefix + 'Upazila');
-    const municipality = $(prefix + 'Municipality');
-
-    upazila.innerHTML =
-      '<option value="">Select Upazila</option>';
-
-    municipality.innerHTML =
-      '<option value="">Select Municipality</option>';
+    populateSelect(
+      city,
+      "Select City Corporation",
+      cityCorporations
+    );
 
     if (district) {
-      upazila.add(
-        new Option(
-          'Local list not configured — add official dataset',
-          ''
-        )
-      );
-
-      municipality.add(
-        new Option(
-          'Local list not configured — add official dataset',
-          ''
-        )
+      populateSelect(
+        district,
+        "Select District",
+        []
       );
     }
-  }
 
-
-  // Show address fields depending on address type
-
-  function refreshAddress(prefix) {
-
-    const kind = $(prefix + 'Kind').value;
-    const area = $(prefix + 'AreaType').value;
-
-    const root = $(prefix + 'AddressFields');
-
-    root.querySelectorAll('.conditional').forEach(element => {
-      element.style.display = 'none';
-    });
-
-    if (kind === 'city') {
-
-      root.querySelectorAll(
-        '.city-fields, .ward-city'
-      ).forEach(element => {
-        element.style.display = 'flex';
-      });
-
+    if (area) {
+      populateSelect(
+        area,
+        "Select Area",
+        []
+      );
     }
 
-    else if (kind === 'district') {
+    if (division && district) {
 
-      root.querySelectorAll(
-        '.district-fields'
-      ).forEach(element => {
-        element.style.display = 'flex';
-      });
+      division.addEventListener("change", function () {
 
-      if (area === 'upazila') {
+        const selectedDistricts =
+          districts[this.value] || [];
 
-        root.querySelectorAll(
-          '.upazila-fields'
-        ).forEach(element => {
-          element.style.display = 'flex';
-        });
+        populateSelect(
+          district,
+          "Select District",
+          selectedDistricts
+        );
 
-      }
-
-      if (area === 'municipality') {
-
-        root.querySelectorAll(
-          '.municipality-fields, .ward-muni'
-        ).forEach(element => {
-          element.style.display = 'flex';
-        });
-
-      }
-
-    }
-
-  }
-
-
-  // Ward Others input
-
-  ['present', 'permanent'].forEach(prefix => {
-
-    [
-      [prefix + 'WardCity', prefix + 'WardOther'],
-      [prefix + 'WardMuni', prefix + 'WardOther']
-    ].forEach(([selectId, inputId]) => {
-
-      $(selectId).addEventListener('change', () => {
-
-        $(inputId).classList.toggle(
-          'hidden',
-          $(selectId).value !== 'Other'
+        populateSelect(
+          area,
+          "Select Area",
+          []
         );
 
       });
 
+    }
+
+    if (areaType && area) {
+
+      areaType.addEventListener("change", function () {
+
+        if (this.value === "upazila") {
+          populateSelect(
+            area,
+            "Select Upazila",
+            []
+          );
+        }
+
+        else if (this.value === "municipality") {
+          populateSelect(
+            area,
+            "Select Municipality",
+            []
+          );
+        }
+
+      });
+
+    }
+
+    if (addressType) {
+
+      addressType.addEventListener("change", function () {
+
+        const isCity = this.value === "city";
+        const isDistrict = this.value === "district";
+
+        const section = this.closest(".form-section");
+
+        if (!section) return;
+
+        section.querySelectorAll(".city-field")
+          .forEach(el => {
+            el.style.display = isCity ? "" : "none";
+          });
+
+        section.querySelectorAll(".district-field")
+          .forEach(el => {
+            el.style.display = isDistrict ? "" : "none";
+          });
+
+      });
+
+    }
+
+  }
+
+  setupAddress("present");
+  setupAddress("permanent");
+
+
+  // =========================================
+  // 8. WARD DROPDOWN
+  // =========================================
+
+  function fillWard(select, max = 99) {
+
+    if (!select) return;
+
+    const values = [];
+
+    for (let i = 1; i <= max; i++) {
+      values.push({
+        value: String(i).padStart(2, "0"),
+        label: "Ward " + String(i).padStart(2, "0")
+      });
+    }
+
+    values.push({
+      value: "other",
+      label: "Others"
     });
 
-  });
+    populateSelect(select, "Select Ward", values);
+  }
+
+  fillWard(
+    document.querySelector('[name="presentWard"]'),
+    99
+  );
+
+  fillWard(
+    document.querySelector('[name="permanentWard"]'),
+    99
+  );
 
 
-  // =====================================
-  // 7. ACADEMIC INFORMATION
-  // =====================================
+  // =========================================
+  // 9. PRESENT = PERMANENT ADDRESS
+  // =========================================
 
-  function toggle(checkId, panelId) {
+  const sameAddress = $("sameAddress");
 
-    $(checkId).addEventListener('change', () => {
+  const permanentAddressFields =
+    $("permanentAddressFields");
 
-      $(panelId).classList.toggle(
-        'hidden',
-        !$(checkId).checked
+  if (sameAddress && permanentAddressFields) {
+
+    sameAddress.addEventListener("change", function () {
+
+      permanentAddressFields.classList.toggle(
+        "hidden",
+        this.checked
       );
 
     });
 
   }
 
-  toggle('diplomaCheck', 'diplomaPanel');
-  toggle('alliedCheck', 'alliedPanel');
+
+  // =========================================
+  // 10. DIPLOMA CHECKBOX
+  // =========================================
+
+  const diplomaCheck = $("diplomaCheck");
+  const diplomaFields = $("diplomaFields");
+
+  if (diplomaCheck) {
+
+    diplomaCheck.addEventListener("change", function () {
+
+      toggleSection(
+        "diplomaFields",
+        this.checked
+      );
+
+    });
+
+  }
 
 
-  // Mechanical Technology restriction
+  // =========================================
+  // 11. ALLIED COURSE CHECKBOX
+  // =========================================
 
-  $('diplomaDepartment').addEventListener('change', () => {
+  const alliedCheck = $("alliedCheck");
 
-    const selected =
-      $('diplomaDepartment').value;
+  if (alliedCheck) {
 
-    const allowed =
-      selected === '70 - Mechanical Technology';
+    alliedCheck.addEventListener("change", function () {
 
-    $('departmentWarning').classList.toggle(
-      'hidden',
-      !selected || allowed
-    );
+      toggleSection(
+        "alliedFields",
+        this.checked
+      );
 
-    $('diplomaPanel')
-      .querySelectorAll('input, select')
-      .forEach(element => {
+    });
 
-        if (element.id !== 'diplomaDepartment') {
-          element.disabled = !!selected && !allowed;
-        }
-
-      });
-
-  });
+  }
 
 
-  // Other Session
+  // =========================================
+  // 12. DIPLOMA DEPARTMENT VALIDATION
+  // =========================================
 
-  $('diplomaSession').addEventListener('change', () => {
+  const diplomaDepartment = $("diplomaDepartment");
 
-    $('diplomaSessionOther').classList.toggle(
-      'hidden',
-      $('diplomaSession').value !== 'Other'
-    );
+  const departmentWarning = $("departmentWarning");
 
-  });
-
-
-  // Other Polytechnic
-
-  $('polytechnic').addEventListener('change', () => {
-
-    $('polytechnicOther').classList.toggle(
-      'hidden',
-      $('polytechnic').value !== 'Other'
-    );
-
-  });
-
-
-  // =====================================
-  // 8. CURRENT STATUS
-  // =====================================
-
-  const statusPairs = [
-    ['statusStudy', 'studyPanel'],
-    ['statusJob', 'jobPanel'],
-    ['statusBusiness', 'businessPanel'],
-    ['statusOther', 'otherStatusPanel']
+  const diplomaRestrictedFields = [
+    "diplomaSession",
+    "diplomaRoll",
+    "diplomaReg",
+    "diplomaCGPA",
+    "diplomaPassingYear"
   ];
 
-  statusPairs.forEach(([checkId, panelId]) => {
-    toggle(checkId, panelId);
+  function checkDiplomaDepartment() {
+
+    if (!diplomaDepartment) return;
+
+    const isMechanical =
+      diplomaDepartment.value === "70";
+
+    const isOther =
+      diplomaDepartment.value === "other";
+
+    const shouldDisable =
+      diplomaDepartment.value !== "" && !isMechanical;
+
+    diplomaRestrictedFields.forEach(name => {
+
+      const field = document.querySelector(
+        `[name="${name}"]`
+      );
+
+      if (!field) return;
+
+      field.disabled = shouldDisable;
+
+      if (shouldDisable) {
+        field.value = "";
+      }
+
+    });
+
+    if (departmentWarning) {
+      departmentWarning.classList.toggle(
+        "show",
+        shouldDisable
+      );
+
+      departmentWarning.textContent = isOther
+        ? "Other Departments are not allowed."
+        : "Only Mechanical Technology is allowed for Diploma registration.";
+    }
+
+  }
+
+  if (diplomaDepartment) {
+    diplomaDepartment.addEventListener(
+      "change",
+      checkDiplomaDepartment
+    );
+  }
+
+
+  // =========================================
+  // 13. CURRENT STATUS CHECKBOXES
+  // =========================================
+
+  const statusControls = [
+    ["higherStudiesCheck", "higherStudiesFields"],
+    ["jobCheck", "jobFields"],
+    ["businessCheck", "businessFields"],
+    ["otherStatusCheck", "otherStatusFields"]
+  ];
+
+  statusControls.forEach(([checkboxId, sectionId]) => {
+
+    const checkbox = $(checkboxId);
+
+    if (!checkbox) return;
+
+    checkbox.addEventListener("change", function () {
+
+      toggleSection(
+        sectionId,
+        this.checked
+      );
+
+    });
+
   });
 
 
-  // Government / Private organization label
+  // =========================================
+  // 14. CONTACT VISIBILITY
+  // =========================================
 
-  $('jobType').addEventListener('change', () => {
+  const visibilityYes = $("visibilityYes");
+  const visibilityNo = $("visibilityNo");
 
-    $('jobOrgLabel').textContent =
-      $('jobType').value === 'Government Service'
-        ? 'Organization Name'
-        : 'Organization / Company';
+  function updateContactVisibility() {
+
+    toggleSection(
+      "socialFields",
+      visibilityYes && visibilityYes.checked
+    );
+
+  }
+
+  if (visibilityYes) {
+    visibilityYes.addEventListener(
+      "change",
+      updateContactVisibility
+    );
+  }
+
+  if (visibilityNo) {
+    visibilityNo.addEventListener(
+      "change",
+      updateContactVisibility
+    );
+  }
+
+
+  // =========================================
+  // 15. ACCOUNT REGISTRATION
+  // =========================================
+
+  const registrationType = $("registrationType");
+
+  const accountFields = $("accountFields");
+
+  const googleInfo = $("googleInfo");
+
+  function updateRegistrationType() {
+
+    if (!registrationType) return;
+
+    const selected = registrationType.value;
+
+    toggleSection(
+      "accountFields",
+      selected === "email"
+    );
+
+    if (googleInfo) {
+      googleInfo.classList.toggle(
+        "show",
+        selected === "google"
+      );
+    }
+
+  }
+
+  if (registrationType) {
+
+    registrationType.addEventListener(
+      "change",
+      updateRegistrationType
+    );
+
+  }
+
+
+  // =========================================
+  // 16. PASSWORD MATCH VALIDATION
+  // =========================================
+
+  const password = $("password");
+
+  const confirmPassword = $("confirmPassword");
+
+  const passwordWarning = $("passwordWarning");
+
+  function checkPasswordMatch() {
+
+    if (!password || !confirmPassword) return true;
+
+    const hasValues =
+      password.value !== "" &&
+      confirmPassword.value !== "";
+
+    const matched =
+      password.value === confirmPassword.value;
+
+    if (passwordWarning) {
+      passwordWarning.classList.toggle(
+        "show",
+        hasValues && !matched
+      );
+    }
+
+    confirmPassword.setCustomValidity(
+      hasValues && !matched
+        ? "Passwords do not match."
+        : ""
+    );
+
+    return !hasValues || matched;
+
+  }
+
+  if (password && confirmPassword) {
+
+    password.addEventListener(
+      "input",
+      checkPasswordMatch
+    );
+
+    confirmPassword.addEventListener(
+      "input",
+      checkPasswordMatch
+    );
+
+  }
+
+
+  // =========================================
+  // 17. LOGIN POPUP
+  // =========================================
+
+  const loginOpen = $("loginOpen");
+
+  const loginClose = $("loginClose");
+
+  const loginModal = $("loginModal");
+
+  function openLogin() {
+
+    if (!loginModal) return;
+
+    loginModal.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+  }
+
+  function closeLogin() {
+
+    if (!loginModal) return;
+
+    loginModal.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+  }
+
+  if (loginOpen) {
+
+    loginOpen.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      openLogin();
+
+    });
+
+  }
+
+  if (loginClose) {
+    loginClose.addEventListener(
+      "click",
+      closeLogin
+    );
+  }
+
+  if (loginModal) {
+
+    loginModal.addEventListener("click", function (event) {
+
+      if (event.target === loginModal) {
+        closeLogin();
+      }
+
+    });
+
+  }
+
+  document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+      closeLogin();
+    }
 
   });
 
 
-  // =====================================
-  // 9. CONTACT VISIBILITY
-  // =====================================
+  // =========================================
+  // 18. FORM SUBMISSION
+  // =========================================
 
-  $('visibilityYes').addEventListener('change', () => {
+  const registrationForm = $("registrationForm");
 
-    $('visibilityPanel').classList.toggle(
-      'hidden',
-      !$('visibilityYes').checked
-    );
+  if (registrationForm) {
 
-  });
+    registrationForm.addEventListener("submit", function (event) {
 
-  $('visibilityNo').addEventListener('change', () => {
+      event.preventDefault();
 
-    $('visibilityPanel').classList.toggle(
-      'hidden',
-      !$('visibilityYes').checked
-    );
+      checkPasswordMatch();
 
-  });
+      if (!registrationForm.checkValidity()) {
 
+        registrationForm.reportValidity();
 
-  // =====================================
-  // 10. ACCOUNT REGISTRATION
-  // =====================================
+        return;
 
-  $('registrationType').addEventListener('change', () => {
+      }
 
-    const email =
-      $('registrationType').value === 'email';
+      if (
+        diplomaCheck &&
+        diplomaCheck.checked &&
+        diplomaDepartment &&
+        diplomaDepartment.value !== "70"
+      ) {
 
-    const google =
-      $('registrationType').value === 'google';
+        alert(
+          "Only Mechanical Technology is allowed for Diploma registration."
+        );
 
-    $('accountPanel').classList.toggle(
-      'hidden',
-      !email
-    );
+        diplomaDepartment.focus();
 
-    $('googleInfo').classList.toggle(
-      'hidden',
-      !google
-    );
+        return;
 
-  });
+      }
 
+      if (
+        password &&
+        confirmPassword &&
+        registrationType &&
+        registrationType.value === "email" &&
+        password.value !== confirmPassword.value
+      ) {
 
-  // =====================================
-  // 11. SAME PRESENT AND PERMANENT ADDRESS
-  // =====================================
+        alert("Passwords do not match.");
 
-  $('sameAddress').addEventListener('change', () => {
+        confirmPassword.focus();
 
-    const hide = $('sameAddress').checked;
+        return;
 
-    $('permanentAddressFields').classList.toggle(
-      'hidden',
-      hide
-    );
+      }
 
-    $('permanentSection').classList.toggle(
-      'hidden',
-      hide
-    );
+      if (sameAddress && sameAddress.checked) {
 
-    if (hide) {
+        const presentAddress =
+          document.querySelector(
+            '[name="presentAddress"]'
+          );
 
-      const presentFields =
-        $('presentAddressFields')
-          .querySelectorAll('input, select, textarea');
-
-      const permanentFields =
-        $('permanentAddressFields')
-          .querySelectorAll('input, select, textarea');
-
-      permanentFields.forEach((element, index) => {
-
-        const source = presentFields[index];
-
-        if (source && element.type !== 'file') {
-          element.value = source.value;
+        if (presentAddress) {
+          presentAddress.setCustomValidity("");
         }
 
-      });
+      }
 
-    }
+      alert(
+        "Your form is validated. Connect the registration backend to save your information."
+      );
 
-  });
+    });
 
-
-  // =====================================
-  // 12. FORM VALIDATION
-  // =====================================
-
-  $('registrationForm').addEventListener('submit', event => {
-
-    event.preventDefault();
-
-    const message = $('formMessage');
-
-    message.textContent = '';
-    message.style.color = '#b43c30';
-
-    // At least one exam must be selected
-
-    if (
-      !$('diplomaCheck').checked &&
-      !$('alliedCheck').checked
-    ) {
-
-      message.textContent =
-        'Please select at least one examination.';
-
-      return;
-    }
+  }
 
 
-    // Department restriction
+  // =========================================
+  // 19. LOGIN FORM
+  // =========================================
 
-    if (
-      $('diplomaCheck').checked &&
-      $('diplomaDepartment').value !==
-      '70 - Mechanical Technology'
-    ) {
+  const loginForm = $("loginForm");
 
-      message.textContent =
-        'Other Departments are not allowed. Please select 70 - Mechanical Technology.';
+  if (loginForm) {
 
-      return;
-    }
+    loginForm.addEventListener("submit", function (event) {
 
+      event.preventDefault();
 
-    // Google login notice
+      if (!loginForm.checkValidity()) {
+        loginForm.reportValidity();
+        return;
+      }
 
-    if ($('registrationType').value === 'google') {
+      alert(
+        "Login backend is not connected yet."
+      );
 
-      message.textContent =
-        'Google sign-in is not connected yet. Configure Google OAuth before enabling registration.';
+    });
 
-      return;
-    }
-
-
-    // Password matching
-
-    if (
-      $('registrationType').value === 'email' &&
-      $('password').value !== $('confirmPassword').value
-    ) {
-
-      message.textContent =
-        'Password and Confirm Password do not match.';
-
-      return;
-    }
+  }
 
 
-    // Browser required-field validation
+  // =========================================
+  // 20. INITIAL STATE
+  // =========================================
 
-    if (!$('registrationForm').reportValidity()) {
-      return;
-    }
+  toggleSection("diplomaFields", false);
+  toggleSection("alliedFields", false);
+  toggleSection("higherStudiesFields", false);
+  toggleSection("jobFields", false);
+  toggleSection("businessFields", false);
+  toggleSection("otherStatusFields", false);
+  toggleSection("socialFields", false);
+  toggleSection("accountFields", false);
 
-
-    message.style.color = '#176b47';
-
-    message.textContent =
-      'Form validation successful. Connect a backend/database to save registrations.';
-
-  });
+  console.log(
+    "Mechanical Alumni Association Registration JS Loaded Successfully."
+  );
 
 });
