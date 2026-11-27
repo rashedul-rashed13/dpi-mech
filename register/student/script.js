@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // 1. HELPER FUNCTIONS
   // =========================================
 
-  const $ = (id) => document.getElementById(id);
-
+  const $ = id => document.getElementById(id);
   const currentYear = new Date().getFullYear();
 
-  function populateSelect(select, placeholder, values) {
+  const field = name =>
+    document.querySelector(`[name="${name}"]`);
+
+  function populateSelect(select, placeholder, values = []) {
     if (!select) return;
 
     select.innerHTML = "";
@@ -36,22 +38,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function toggleSection(id, show) {
     const element = $(id);
-    if (element) {
-      element.classList.toggle("active", show);
-    }
+    if (element) element.classList.toggle("active", show);
   }
 
   function setRequired(container, required) {
     if (!container) return;
 
-    container.querySelectorAll("input, select, textarea").forEach(field => {
-      if (field.dataset.originalRequired === undefined) {
-        field.dataset.originalRequired = field.required ? "true" : "false";
-      }
+    container.querySelectorAll("input, select, textarea")
+      .forEach(input => {
+        if (input.dataset.originalRequired === undefined) {
+          input.dataset.originalRequired =
+            input.required ? "true" : "false";
+        }
 
-      field.required = required &&
-        field.dataset.originalRequired === "true";
-    });
+        input.required =
+          required && input.dataset.originalRequired === "true";
+      });
+  }
+
+  function getName(item) {
+    if (typeof item === "string") return item;
+    return item?.name || item?.en_name || item?.english_name || "";
   }
 
   // =========================================
@@ -66,30 +73,25 @@ document.addEventListener("DOMContentLoaded", function () {
     )
   );
 
-  populateSelect(
-    $("dobMonth"),
-    "Month",
-    [
-      { value: "01", label: "January" },
-      { value: "02", label: "February" },
-      { value: "03", label: "March" },
-      { value: "04", label: "April" },
-      { value: "05", label: "May" },
-      { value: "06", label: "June" },
-      { value: "07", label: "July" },
-      { value: "08", label: "August" },
-      { value: "09", label: "September" },
-      { value: "10", label: "October" },
-      { value: "11", label: "November" },
-      { value: "12", label: "December" }
-    ]
-  );
+  populateSelect($("dobMonth"), "Month", [
+    { value: "01", label: "January" },
+    { value: "02", label: "February" },
+    { value: "03", label: "March" },
+    { value: "04", label: "April" },
+    { value: "05", label: "May" },
+    { value: "06", label: "June" },
+    { value: "07", label: "July" },
+    { value: "08", label: "August" },
+    { value: "09", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" }
+  ]);
 
   const dobYears = [];
   for (let year = currentYear; year >= 1930; year--) {
     dobYears.push(year);
   }
-
   populateSelect($("dobYear"), "Year", dobYears);
 
 
@@ -108,16 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  sessions.push({
-    value: "other",
-    label: "Other"
-  });
+  sessions.push({ value: "other", label: "Other" });
 
-  populateSelect(
-    $("diplomaSession"),
-    "Select Session",
-    sessions
-  );
+  populateSelect($("diplomaSession"), "Select Session", sessions);
 
 
   // =========================================
@@ -129,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "alliedPassingYear",
     "makeupPassingYear"
   ].forEach(id => {
-
     const years = [];
 
     for (let year = currentYear; year >= 1955; year--) {
@@ -141,70 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 5. BANGLADESH DIVISIONS AND DISTRICTS
-  // =========================================
-
-  const divisions = [
-    "Barishal",
-    "Chattogram",
-    "Dhaka",
-    "Khulna",
-    "Mymensingh",
-    "Rajshahi",
-    "Rangpur",
-    "Sylhet"
-  ];
-
-  const districts = {
-    Barishal: [
-      "Barguna", "Barishal", "Bhola",
-      "Jhalokati", "Patuakhali", "Pirojpur"
-    ],
-
-    Chattogram: [
-      "Bandarban", "Brahmanbaria", "Chandpur",
-      "Chattogram", "Cumilla", "Cox's Bazar",
-      "Feni", "Khagrachhari", "Lakshmipur",
-      "Noakhali", "Rangamati"
-    ],
-
-    Dhaka: [
-      "Dhaka", "Faridpur", "Gazipur",
-      "Gopalganj", "Kishoreganj", "Madaripur",
-      "Manikganj", "Munshiganj", "Narayanganj",
-      "Narsingdi", "Rajbari", "Shariatpur", "Tangail"
-    ],
-
-    Khulna: [
-      "Bagerhat", "Chuadanga", "Jashore",
-      "Jhenaidah", "Khulna", "Kushtia",
-      "Magura", "Meherpur", "Narail", "Satkhira"
-    ],
-
-    Mymensingh: [
-      "Jamalpur", "Mymensingh", "Netrokona", "Sherpur"
-    ],
-
-    Rajshahi: [
-      "Bogura", "Chapainawabganj", "Joypurhat",
-      "Naogaon", "Natore", "Pabna",
-      "Rajshahi", "Sirajganj"
-    ],
-
-    Rangpur: [
-      "Dinajpur", "Gaibandha", "Kurigram",
-      "Lalmonirhat", "Nilphamari", "Panchagarh",
-      "Rangpur", "Thakurgaon"
-    ],
-
-    Sylhet: [
-      "Habiganj", "Moulvibazar", "Sunamganj", "Sylhet"
-    ]
-  };
-
-
-  // =========================================
-  // 6. CITY CORPORATIONS
+  // 5. CITY CORPORATION LIST
   // =========================================
 
   const cityCorporations = [
@@ -224,81 +155,260 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 7. ADDRESS DROPDOWN SETUP
+  // 6. BANGLADESH GEO DATA
+  // =========================================
+
+  let bangladeshData = [];
+  let locationDataLoaded = false;
+
+  const GEO_DATA_URL =
+    "https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json";
+
+  async function loadBangladeshData() {
+    try {
+      const response = await fetch(GEO_DATA_URL);
+
+      if (!response.ok) {
+        throw new Error("Location data could not be loaded.");
+      }
+
+      const data = await response.json();
+
+      // Dataset root is expected to contain divisions.
+      bangladeshData = Array.isArray(data)
+        ? data
+        : data.divisions || data.data || [];
+
+      if (!bangladeshData.length) {
+        throw new Error("Invalid location data.");
+      }
+
+      locationDataLoaded = true;
+
+      setupAddress("present");
+      setupAddress("permanent");
+
+      // If Same Address was checked before data finished loading
+      if ($("sameAddress")?.checked) {
+        copyPresentToPermanent();
+      }
+
+      console.log("Bangladesh location data loaded.");
+
+    } catch (error) {
+      console.error("Location data error:", error);
+
+      document.querySelectorAll(
+        '[name="presentDivision"], [name="permanentDivision"]'
+      ).forEach(select => {
+        populateSelect(
+          select,
+          "Location data unavailable - reload page",
+          []
+        );
+      });
+    }
+  }
+
+  function findDivision(name) {
+    return bangladeshData.find(
+      item => getName(item) === name
+    );
+  }
+
+  function findDistrict(name) {
+    for (const division of bangladeshData) {
+      const districts = division.districts || [];
+
+      const found = districts.find(
+        item => getName(item) === name
+      );
+
+      if (found) return found;
+    }
+
+    return null;
+  }
+
+  function getDivisionNames() {
+    return bangladeshData
+      .map(item => getName(item))
+      .filter(Boolean);
+  }
+
+  function getDistrictNames(divisionName) {
+    const division = findDivision(divisionName);
+
+    if (!division) return [];
+
+    return (division.districts || [])
+      .map(item => getName(item))
+      .filter(Boolean);
+  }
+
+  function getUpazilas(districtName) {
+    const district = findDistrict(districtName);
+
+    if (!district) return [];
+
+    return (district.upazilas || [])
+      .map(item => getName(item))
+      .filter(Boolean);
+  }
+
+  function getMunicipalities(districtName) {
+    const district = findDistrict(districtName);
+
+    if (!district) return [];
+
+    const upazilas = district.upazilas || [];
+    const municipalities = [];
+
+    upazilas.forEach(upazila => {
+      (upazila.pourashavas || []).forEach(item => {
+        const name = getName(item);
+
+        if (name && !municipalities.includes(name)) {
+          municipalities.push(name);
+        }
+      });
+    });
+
+    // Some datasets may store pourashavas directly in the district.
+    (district.pourashavas || []).forEach(item => {
+      const name = getName(item);
+
+      if (name && !municipalities.includes(name)) {
+        municipalities.push(name);
+      }
+    });
+
+    return municipalities;
+  }
+
+
+  // =========================================
+  // 7. ADDRESS DROPDOWNS
   // =========================================
 
   function setupAddress(prefix) {
 
-    const addressType = document.querySelector(
-      `[name="${prefix}AddressType"]`
-    );
+    // IMPORTANT: Use name selectors because the HTML
+    // does not assign IDs to these address fields.
 
-    const city = $(prefix + "City");
-    const division = $(prefix + "Division");
-    const district = $(prefix + "District");
-    const areaType = $(prefix + "AreaType");
-    const area = $(prefix + "Area");
+    const addressType = field(prefix + "AddressType");
+    const city = field(prefix + "City");
+    const division = field(prefix + "Division");
+    const district = field(prefix + "District");
+    const areaType = field(prefix + "AreaType");
+    const area = field(prefix + "Area");
 
     if (!addressType) return;
 
-    // Add classes to both Present and Permanent Address
-    city?.closest(".form-group")?.classList.add("city-field");
+    // City Corporation list works independently of geo data.
+    populateSelect(
+      city,
+      "Select City Corporation",
+      cityCorporations
+    );
 
-    [division, district, areaType, area].forEach(field => {
-      field?.closest(".form-group")?.classList.add("district-field");
-    });
-
-    populateSelect(city, "Select City Corporation", cityCorporations);
-    populateSelect(division, "Select Division", divisions);
+    populateSelect(division, "Select Division", []);
     populateSelect(district, "Select District", []);
     populateSelect(area, "Select Area", []);
 
+    function updateAreaOptions() {
+      if (!area || !district || !areaType) return;
+
+      const selectedDistrict = district.value;
+      const selectedType = areaType.value;
+
+      if (!selectedDistrict || !selectedType) {
+        populateSelect(area, "Select Area", []);
+        return;
+      }
+
+      if (selectedType === "upazila") {
+        populateSelect(
+          area,
+          "Select Upazila",
+          getUpazilas(selectedDistrict)
+        );
+      } else if (selectedType === "municipality") {
+        populateSelect(
+          area,
+          "Select Municipality",
+          getMunicipalities(selectedDistrict)
+        );
+      } else {
+        populateSelect(area, "Select Area", []);
+      }
+    }
+
     // Division → District
     division?.addEventListener("change", function () {
-
       populateSelect(
         district,
         "Select District",
-        districts[this.value] || []
+        getDistrictNames(this.value)
       );
 
       populateSelect(area, "Select Area", []);
     });
 
-    // Area Type
+    // District → Upazila / Municipality
+    district?.addEventListener("change", function () {
+      updateAreaOptions();
+    });
+
+    // Area Type → Upazila / Municipality
     areaType?.addEventListener("change", function () {
-
-      const placeholder = this.value === "upazila"
-        ? "Select Upazila"
-        : this.value === "municipality"
-          ? "Select Municipality"
-          : "Select Area";
-
-      populateSelect(area, placeholder, []);
+      updateAreaOptions();
     });
 
     // Address Type visibility
     function updateAddressFields() {
-
       const selected = addressType.value;
       const section = addressType.closest(".form-section");
 
       if (!section) return;
 
-      section.querySelectorAll(".city-field").forEach(field => {
-        field.style.display = selected === "city" ? "" : "none";
-      });
+      const cityGroup = city?.closest(".form-group");
 
-      section.querySelectorAll(".district-field").forEach(field => {
-        field.style.display = selected === "district" ? "" : "none";
+      const districtGroups = [
+        division,
+        district,
+        areaType,
+        area
+      ]
+        .map(element => element?.closest(".form-group"))
+        .filter(Boolean);
+
+      if (cityGroup) {
+        cityGroup.style.display =
+          selected === "city" ? "" : "none";
+      }
+
+      districtGroups.forEach(group => {
+        group.style.display =
+          selected === "district" ? "" : "none";
       });
     }
 
     addressType.addEventListener("change", updateAddressFields);
 
     updateAddressFields();
+
+    // Load division list after the geo data is available.
+    if (locationDataLoaded) {
+      populateSelect(
+        division,
+        "Select Division",
+        getDivisionNames()
+      );
+    }
   }
 
+  // Initialize both address forms.
   setupAddress("present");
   setupAddress("permanent");
 
@@ -308,7 +418,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
 
   function fillWard(select, max = 99) {
-
     if (!select) return;
 
     const values = [];
@@ -322,16 +431,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    values.push({
-      value: "other",
-      label: "Others"
-    });
+    values.push({ value: "other", label: "Others" });
 
     populateSelect(select, "Select Ward", values);
   }
 
-  fillWard(document.querySelector('[name="presentWard"]'));
-  fillWard(document.querySelector('[name="permanentWard"]'));
+  fillWard(field("presentWard"));
+  fillWard(field("permanentWard"));
 
 
   // =========================================
@@ -355,60 +461,76 @@ document.addEventListener("DOMContentLoaded", function () {
     "Address"
   ];
 
+  function setSelectValue(select, value) {
+    if (!select) return;
+
+    const exists = Array.from(select.options).some(
+      option => option.value === value
+    );
+
+    select.value = exists ? value : "";
+  }
+
   function copyPresentToPermanent() {
+    if (!locationDataLoaded) return;
 
-    addressSuffixes.forEach(suffix => {
+    // Copy in dependency order so the required options
+    // exist before selecting them.
 
-      const present = document.querySelector(
-        `[name="present${suffix}"]`
-      );
+    const order = [
+      "AddressType",
+      "City",
+      "Division",
+      "District",
+      "AreaType",
+      "Area",
+      "Ward",
+      "Union",
+      "PostOffice",
+      "PostCode",
+      "Address"
+    ];
 
-      const permanent = document.querySelector(
-        `[name="permanent${suffix}"]`
-      );
+    order.forEach(suffix => {
+      const present = field("present" + suffix);
+      const permanent = field("permanent" + suffix);
 
       if (!present || !permanent) return;
 
-      if (present.tagName === "SELECT") {
-        const matchingOption = Array.from(permanent.options).find(
-          option => option.value === present.value
+      if (permanent.tagName === "SELECT") {
+        setSelectValue(permanent, present.value);
+        permanent.dispatchEvent(
+          new Event("change", { bubbles: true })
         );
-
-        permanent.value = matchingOption ? present.value : "";
       } else {
         permanent.value = present.value;
+        permanent.dispatchEvent(
+          new Event("input", { bubbles: true })
+        );
       }
-
-      permanent.dispatchEvent(new Event("change", {
-        bubbles: true
-      }));
     });
   }
 
   if (sameAddress && permanentAddressFields) {
-
     sameAddress.addEventListener("change", function () {
-
       if (this.checked) {
-        copyPresentToPermanent();
+        if (locationDataLoaded) {
+          copyPresentToPermanent();
+        }
+
         permanentAddressFields.classList.add("hidden");
       } else {
         permanentAddressFields.classList.remove("hidden");
       }
     });
 
-    document.querySelectorAll('[name^="present"]').forEach(field => {
-
-      field.addEventListener("change", function () {
-        if (sameAddress.checked) {
-          copyPresentToPermanent();
-        }
+    document.querySelectorAll('[name^="present"]').forEach(input => {
+      input.addEventListener("change", function () {
+        if (sameAddress.checked) copyPresentToPermanent();
       });
 
-      field.addEventListener("input", function () {
-        if (sameAddress.checked) {
-          copyPresentToPermanent();
-        }
+      input.addEventListener("input", function () {
+        if (sameAddress.checked) copyPresentToPermanent();
       });
     });
   }
@@ -418,33 +540,52 @@ document.addEventListener("DOMContentLoaded", function () {
   // 10. DIPLOMA SECTION
   // =========================================
 
-  const diplomaCheck = $("diplomaCheck");
-  const diplomaFields = $("diplomaFields");
-
-  if (diplomaCheck) {
-
-    diplomaCheck.addEventListener("change", function () {
-      toggleSection("diplomaFields", this.checked);
-    });
-  }
+  $("diplomaCheck")?.addEventListener("change", function () {
+    toggleSection("diplomaFields", this.checked);
+  });
 
 
   // =========================================
   // 11. ALLIED SECTION
   // =========================================
 
-  const alliedCheck = $("alliedCheck");
-
-  if (alliedCheck) {
-
-    alliedCheck.addEventListener("change", function () {
-      toggleSection("alliedFields", this.checked);
-    });
-  }
+  $("alliedCheck")?.addEventListener("change", function () {
+    toggleSection("alliedFields", this.checked);
+  });
 
 
   // =========================================
-  // 12. DIPLOMA DEPARTMENT VALIDATION
+  // 12. ALLIED POLYTECHNIC OTHER OPTION
+  // =========================================
+
+  const alliedPolytechnic = $("alliedPolytechnic");
+  const alliedPolytechnicOther = $("alliedPolytechnicOther");
+
+  function updateAlliedPolytechnic() {
+    if (!alliedPolytechnic || !alliedPolytechnicOther) return;
+
+    const isOther = alliedPolytechnic.value === "other";
+
+    alliedPolytechnicOther.style.display =
+      isOther ? "block" : "none";
+
+    alliedPolytechnicOther.required = isOther;
+
+    if (!isOther) {
+      alliedPolytechnicOther.value = "";
+    }
+  }
+
+  alliedPolytechnic?.addEventListener(
+    "change",
+    updateAlliedPolytechnic
+  );
+
+  updateAlliedPolytechnic();
+
+
+  // =========================================
+  // 13. DIPLOMA DEPARTMENT VALIDATION
   // =========================================
 
   const diplomaDepartment = $("diplomaDepartment");
@@ -459,27 +600,27 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   function checkDiplomaDepartment() {
-
     if (!diplomaDepartment) return;
 
     const selected = diplomaDepartment.value;
-    const isMechanical = selected === "70";
-    const shouldDisable = selected !== "" && !isMechanical;
+    const shouldDisable =
+      selected !== "" && selected !== "70";
 
     diplomaRestrictedFields.forEach(name => {
+      const input = field(name);
 
-      const field = document.querySelector(`[name="${name}"]`);
+      if (!input) return;
 
-      if (!field) return;
+      input.disabled = shouldDisable;
 
-      field.disabled = shouldDisable;
-
-      if (shouldDisable) field.value = "";
+      if (shouldDisable) input.value = "";
     });
 
     if (departmentWarning) {
-
-      departmentWarning.classList.toggle("show", shouldDisable);
+      departmentWarning.classList.toggle(
+        "show",
+        shouldDisable
+      );
 
       departmentWarning.textContent =
         selected === "other"
@@ -495,7 +636,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 13. CURRENT STATUS SECTIONS
+  // 14. CURRENT STATUS SECTIONS
   // =========================================
 
   const statusControls = [
@@ -506,17 +647,14 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   statusControls.forEach(([checkboxId, sectionId]) => {
-
-    const checkbox = $(checkboxId);
-
-    checkbox?.addEventListener("change", function () {
+    $(checkboxId)?.addEventListener("change", function () {
       toggleSection(sectionId, this.checked);
     });
   });
 
 
   // =========================================
-  // 14. CONTACT VISIBILITY
+  // 15. CONTACT VISIBILITY
   // =========================================
 
   const visibilityYes = $("visibilityYes");
@@ -529,12 +667,19 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  visibilityYes?.addEventListener("change", updateContactVisibility);
-  visibilityNo?.addEventListener("change", updateContactVisibility);
+  visibilityYes?.addEventListener(
+    "change",
+    updateContactVisibility
+  );
+
+  visibilityNo?.addEventListener(
+    "change",
+    updateContactVisibility
+  );
 
 
   // =========================================
-  // 15. ACCOUNT REGISTRATION
+  // 16. ACCOUNT REGISTRATION
   // =========================================
 
   const registrationType = $("registrationType");
@@ -542,7 +687,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const googleInfo = $("googleInfo");
 
   function updateRegistrationType() {
-
     const selected = registrationType?.value;
 
     toggleSection("accountFields", selected === "email");
@@ -564,7 +708,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 16. PASSWORD MATCH VALIDATION
+  // 17. PASSWORD MATCH VALIDATION
   // =========================================
 
   const password = $("password");
@@ -572,7 +716,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const passwordWarning = $("passwordWarning");
 
   function checkPasswordMatch() {
-
     if (!password || !confirmPassword) return true;
 
     const hasValues =
@@ -601,7 +744,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 17. LOGIN POPUP
+  // 18. LOGIN POPUP
   // =========================================
 
   const loginOpen = $("loginOpen");
@@ -609,7 +752,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginModal = $("loginModal");
 
   function openLogin() {
-
     if (!loginModal) return;
 
     loginModal.classList.add("show");
@@ -617,7 +759,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function closeLogin() {
-
     if (!loginModal) return;
 
     loginModal.classList.remove("show");
@@ -632,9 +773,7 @@ document.addEventListener("DOMContentLoaded", function () {
   loginClose?.addEventListener("click", closeLogin);
 
   loginModal?.addEventListener("click", function (event) {
-    if (event.target === loginModal) {
-      closeLogin();
-    }
+    if (event.target === loginModal) closeLogin();
   });
 
   document.addEventListener("keydown", function (event) {
@@ -643,13 +782,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 18. REGISTRATION FORM SUBMISSION
+  // 19. REGISTRATION FORM SUBMISSION
   // =========================================
 
   const registrationForm = $("registrationForm");
 
   registrationForm?.addEventListener("submit", function (event) {
-
     event.preventDefault();
 
     checkPasswordMatch();
@@ -660,7 +798,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (
-      diplomaCheck?.checked &&
+      $("diplomaCheck")?.checked &&
       diplomaDepartment?.value !== "70"
     ) {
       alert(
@@ -672,11 +810,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (
+      $("alliedCheck")?.checked &&
+      alliedPolytechnic?.value === "other" &&
+      !alliedPolytechnicOther.value.trim()
+    ) {
+      alert("Please enter your Polytechnic Name.");
+      alliedPolytechnicOther.focus();
+      return;
+    }
+
+    if (
       sameAddress?.checked === false &&
-      !document.querySelector('[name="permanentAddressType"]').value
+      !field("permanentAddressType")?.value
     ) {
       alert("Please select your permanent address type.");
-      document.querySelector('[name="permanentAddressType"]').focus();
+      field("permanentAddressType")?.focus();
       return;
     }
 
@@ -696,17 +844,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 19. LOGIN FORM SUBMISSION
+  // 20. LOGIN FORM SUBMISSION
   // =========================================
 
-  const loginForm = $("loginForm");
-
-  loginForm?.addEventListener("submit", function (event) {
-
+  $("loginForm")?.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    if (!loginForm.checkValidity()) {
-      loginForm.reportValidity();
+    if (!this.checkValidity()) {
+      this.reportValidity();
       return;
     }
 
@@ -715,31 +860,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =========================================
-  // 20. INITIAL PAGE STATE
+  // 21. INITIAL PAGE STATE
   // =========================================
 
-  toggleSection("diplomaFields", false);
-  toggleSection("alliedFields", false);
-  toggleSection("higherStudiesFields", false);
-  toggleSection("jobFields", false);
-  toggleSection("businessFields", false);
-  toggleSection("otherStatusFields", false);
-  toggleSection("socialFields", false);
-  toggleSection("accountFields", false);
+  [
+    "diplomaFields",
+    "alliedFields",
+    "higherStudiesFields",
+    "jobFields",
+    "businessFields",
+    "otherStatusFields",
+    "socialFields",
+    "accountFields"
+  ].forEach(id => toggleSection(id, false));
 
   googleInfo?.classList.remove("show");
 
-  if (permanentAddressFields) {
-    permanentAddressFields.classList.remove("hidden");
-  }
+  permanentAddressFields?.classList.remove("hidden");
 
-  if (sameAddress) {
-    sameAddress.checked = false;
-  }
+  if (sameAddress) sameAddress.checked = false;
 
   updateContactVisibility();
   updateRegistrationType();
+  updateAlliedPolytechnic();
   checkDiplomaDepartment();
+
+  // Load Bangladesh divisions, districts,
+  // upazilas and municipalities.
+  loadBangladeshData();
 
   console.log(
     "Mechanical Alumni Association Registration JS Loaded Successfully."
