@@ -4,543 +4,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#103e35">
-  <title>Alumni Registration | Mechanical Alumni Association</title>
+  <meta name="theme-color" content="#063b2d">
+  <title>Registration | Mechanical Alumni Association</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to Home</a>
+    <a class="login-link" href="login.html">Login</a>
+  </div>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="header-inner">
-      <div class="logo-area">
-        <img src="assets/alumni.png" alt="Association Logo">
-      </div>
-
+      <img class="header-logo" src="assets/alumni.png" alt="Mechanical Alumni Association Logo">
       <div class="header-title">
-        <h1>MECHANICAL ALUMNI ASSOCIATION</h1>
+        <h1>Mechanical Alumni Association</h1>
         <p>Dhaka Govt. Polytechnic Institute</p>
       </div>
-
-      <div class="logo-area">
-        <img src="assets/dpi.png" alt="Institute Logo">
-      </div>
+      <img class="header-logo dpi-logo" src="assets/dpi.png" alt="Dhaka Polytechnic Institute Logo">
     </div>
   </header>
 
-  <!-- REGISTRATION FORM -->
-  <main class="registration-container">
-
-    <div class="form-heading">
+  <main class="page-wrap">
+    <div class="page-heading">
+      <span class="eyebrow">ALUMNI NETWORK</span>
       <h2>Alumni Registration Form</h2>
-      <p>Join the Mechanical Alumni Association of DPI</p>
+      <p>Please complete the information below to join the association.</p>
     </div>
 
-    <form id="registrationForm">
-
-      <!-- PERSONAL INFORMATION -->
+    <form id="registrationForm" novalidate>
       <section class="form-section">
-        <h3>Personal & Contact Information</h3>
-        <p class="section-description">
-          General and mandatory information for all applicants.
-        </p>
-
-        <div class="form-group">
-          <label for="photo">Photo Upload</label>
-          <input type="file" id="photo" name="photo" accept="image/*">
-        </div>
-
+        <div class="section-heading"><span>01</span><div><h3>Personal &amp; Contact Information</h3><p>সবার জন্য সাধারণ ও বাধ্যতামূলক অংশ</p></div></div>
         <div class="form-grid">
-          <div class="form-group">
-            <label for="name">Name as per Certificate *</label>
-            <input type="text" id="name" name="name"
-              placeholder="Enter your full name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="fatherName">Father's Name *</label>
-            <input type="text" id="fatherName" name="fatherName"
-              placeholder="Father's name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="motherName">Mother's Name *</label>
-            <input type="text" id="motherName" name="motherName"
-              placeholder="Mother's name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="dob">Date of Birth *</label>
-            <input type="date" id="dob" name="dob" required>
-          </div>
-
-          <div class="form-group">
-            <label for="bloodGroup">Blood Group *</label>
-            <select id="bloodGroup" name="bloodGroup" required>
-              <option value="">Select Blood Group</option>
-              <option>A+</option>
-              <option>A-</option>
-              <option>B+</option>
-              <option>B-</option>
-              <option>O+</option>
-              <option>O-</option>
-              <option>AB+</option>
-              <option>AB-</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Contact Number *</label>
-            <input type="tel" id="phone" name="phone"
-              placeholder="01XXXXXXXXX" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email"
-              placeholder="example@email.com" required>
-          </div>
+          <div class="field full"><label for="photo">Photo Upload</label><input id="photo" name="photo" type="file" accept="image/*"></div>
+          <div class="field"><label for="fullName">Name as per Certificate <b>*</b></label><input id="fullName" name="fullName" placeholder="e.g. RASHEDUL ISLAM" required></div>
+          <div class="field"><label for="fatherName">Father Name <b>*</b></label><input id="fatherName" name="fatherName" required></div>
+          <div class="field"><label for="motherName">Mother Name <b>*</b></label><input id="motherName" name="motherName" required></div>
+          <div class="field"><label>Date of Birth <b>*</b></label><div class="triple">
+            <select id="dobDay" required><option value="">Day</option></select>
+            <select id="dobMonth" required><option value="">Month</option></select>
+            <select id="dobYear" required><option value="">Year</option></select>
+          </div></div>
+          <div class="field"><label for="bloodGroup">Blood Group <b>*</b></label><select id="bloodGroup" required><option value="">Select Blood Group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select></div>
+          <div class="field"><label for="phone">Contact Number <b>*</b></label><input id="phone" name="phone" type="tel" placeholder="01XXXXXXXXX" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="name@example.com"></div>
         </div>
       </section>
 
-      <!-- PRESENT ADDRESS -->
       <section class="form-section">
-        <h3>Present Address</h3>
-
-        <div class="form-group">
-          <label for="presentType">Address Type *</label>
-          <select id="presentType" name="presentType" required>
-            <option value="">Select Address Type</option>
-            <option value="city">City Corporation</option>
-            <option value="district">District</option>
-          </select>
-        </div>
-
-        <div id="presentAddressFields" class="form-grid">
-          <div class="form-group">
-            <label for="presentDivision">Division</label>
-            <select id="presentDivision" name="presentDivision">
-              <option value="">Select Division</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="presentDistrict">District / City</label>
-            <select id="presentDistrict" name="presentDistrict">
-              <option value="">Select District</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="presentArea">Area / Upazila</label>
-            <input type="text" id="presentArea" name="presentArea"
-              placeholder="Enter area or upazila">
-          </div>
-
-          <div class="form-group">
-            <label for="presentPost">Post Office</label>
-            <input type="text" id="presentPost" name="presentPost"
-              placeholder="Post Office">
-          </div>
-
-          <div class="form-group">
-            <label for="presentPostCode">Post Code</label>
-            <input type="text" id="presentPostCode" name="presentPostCode"
-              placeholder="Post Code">
-          </div>
-
-          <div class="form-group full-width">
-            <label for="presentAddress">House, Road, Area & Address</label>
-            <textarea id="presentAddress" name="presentAddress"
-              placeholder="Enter full present address"></textarea>
-          </div>
-        </div>
-      </section>
-
-      <!-- PERMANENT ADDRESS -->
-      <section class="form-section">
-        <h3>Permanent Address</h3>
-
-        <div class="form-group checkbox-group">
-          <label>
-            <input type="checkbox" id="sameAddress">
-            Same as Present Address
-          </label>
-        </div>
-
-        <div id="permanentAddressFields">
-          <div class="form-group">
-            <label for="permanentType">Address Type *</label>
-            <select id="permanentType" name="permanentType" required>
-              <option value="">Select Address Type</option>
-              <option value="city">City Corporation</option>
-              <option value="district">District</option>
-            </select>
-          </div>
-
+        <div class="section-heading"><span>02</span><div><h3>Present Address</h3><p>আপনার বর্তমান ঠিকানা</p></div></div>
+        <label class="checkline"><input type="checkbox" id="sameAddress"> Present Address ও Permanent Address একই</label>
+        <div id="presentAddressFields" class="address-block">
           <div class="form-grid">
-            <div class="form-group">
-              <label for="permanentDivision">Division</label>
-              <select id="permanentDivision" name="permanentDivision">
-                <option value="">Select Division</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="permanentDistrict">District / City</label>
-              <select id="permanentDistrict" name="permanentDistrict">
-                <option value="">Select District</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="permanentArea">Area / Upazila</label>
-              <input type="text" id="permanentArea" name="permanentArea"
-                placeholder="Enter area or upazila">
-            </div>
-
-            <div class="form-group">
-              <label for="permanentPost">Post Office</label>
-              <input type="text" id="permanentPost" name="permanentPost"
-                placeholder="Post Office">
-            </div>
-
-            <div class="form-group">
-              <label for="permanentPostCode">Post Code</label>
-              <input type="text" id="permanentPostCode"
-                name="permanentPostCode" placeholder="Post Code">
-            </div>
-
-            <div class="form-group full-width">
-              <label for="permanentAddress">House, Road, Area & Address</label>
-              <textarea id="permanentAddress" name="permanentAddress"
-                placeholder="Enter full permanent address"></textarea>
-            </div>
+            <div class="field"><label for="presentKind">Address Type <b>*</b></label><select id="presentKind" class="address-kind"><option value="">Select City Corporation / District</option><option value="city">City Corporation</option><option value="district">District</option></select></div>
+            <div class="field conditional city-fields"><label for="presentCity">City Corporation <b>*</b></label><select id="presentCity"><option value="">Select City Corporation</option></select></div>
+            <div class="field conditional district-fields"><label for="presentDivision">Division <b>*</b></label><select id="presentDivision"><option value="">Select Division</option></select></div>
+            <div class="field conditional district-fields"><label for="presentDistrict">District <b>*</b></label><select id="presentDistrict"><option value="">Select District</option></select></div>
+            <div class="field conditional district-fields"><label for="presentAreaType">Area Type <b>*</b></label><select id="presentAreaType"><option value="">Select Area Type</option><option value="upazila">Upazilla</option><option value="municipality">Municipality</option></select></div>
+            <div class="field conditional upazila-fields"><label for="presentUpazila">Upazila <b>*</b></label><select id="presentUpazila"><option value="">Select Upazila</option></select></div>
+            <div class="field conditional upazila-fields"><label for="presentUnion">Union</label><input id="presentUnion" placeholder="Enter Union"></div>
+            <div class="field conditional municipality-fields"><label for="presentMunicipality">Municipality / Pourashava <b>*</b></label><select id="presentMunicipality"><option value="">Select Municipality</option></select></div>
+            <div class="field conditional ward-city"><label for="presentWardCity">Ward <b>*</b></label><select id="presentWardCity"></select></div>
+            <div class="field conditional ward-muni"><label for="presentWardMuni">Ward <b>*</b></label><select id="presentWardMuni"></select></div>
+            <div class="field conditional ward-other"><label for="presentWardOther">Other Ward</label><input id="presentWardOther" placeholder="Write ward number"></div>
+            <div class="field"><label for="presentPost">Post Office</label><input id="presentPost"></div>
+            <div class="field"><label for="presentPostCode">Post Code</label><input id="presentPostCode" inputmode="numeric"></div>
+            <div class="field full"><label for="presentAddress">Address (House, Area, City) <b>*</b></label><textarea id="presentAddress" rows="2" required></textarea></div>
           </div>
         </div>
       </section>
 
-      <!-- ACADEMIC INFORMATION -->
-      <section class="form-section">
-        <h3>Academic Information</h3>
-        <p class="section-description">
-          Which was your last exam at DPI? You can select both.
-        </p>
-
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="diplomaCheck">
-            Diploma in Engineering
-          </label>
-
-          <label>
-            <input type="checkbox" id="alliedCheck">
-            Allied Group Make-up Course
-          </label>
+      <section class="form-section" id="permanentSection">
+        <div class="section-heading"><span>03</span><div><h3>Permanent Address</h3><p>আপনার স্থায়ী ঠিকানা</p></div></div>
+        <div id="permanentAddressFields" class="address-block">
+          <div class="form-grid">
+            <div class="field"><label for="permanentKind">Address Type <b>*</b></label><select id="permanentKind" class="address-kind"><option value="">Select City Corporation / District</option><option value="city">City Corporation</option><option value="district">District</option></select></div>
+            <div class="field conditional city-fields"><label for="permanentCity">City Corporation <b>*</b></label><select id="permanentCity"><option value="">Select City Corporation</option></select></div>
+            <div class="field conditional district-fields"><label for="permanentDivision">Division <b>*</b></label><select id="permanentDivision"><option value="">Select Division</option></select></div>
+            <div class="field conditional district-fields"><label for="permanentDistrict">District <b>*</b></label><select id="permanentDistrict"><option value="">Select District</option></select></div>
+            <div class="field conditional district-fields"><label for="permanentAreaType">Area Type <b>*</b></label><select id="permanentAreaType"><option value="">Select Area Type</option><option value="upazila">Upazilla</option><option value="municipality">Municipality</option></select></div>
+            <div class="field conditional upazila-fields"><label for="permanentUpazila">Upazila <b>*</b></label><select id="permanentUpazila"><option value="">Select Upazila</option></select></div>
+            <div class="field conditional upazila-fields"><label for="permanentUnion">Union</label><input id="permanentUnion" placeholder="Enter Union"></div>
+            <div class="field conditional municipality-fields"><label for="permanentMunicipality">Municipality / Pourashava <b>*</b></label><select id="permanentMunicipality"><option value="">Select Municipality</option></select></div>
+            <div class="field conditional ward-city"><label for="permanentWardCity">Ward <b>*</b></label><select id="permanentWardCity"></select></div>
+            <div class="field conditional ward-muni"><label for="permanentWardMuni">Ward <b>*</b></label><select id="permanentWardMuni"></select></div>
+            <div class="field conditional ward-other"><label for="permanentWardOther">Other Ward</label><input id="permanentWardOther" placeholder="Write ward number"></div>
+            <div class="field"><label for="permanentPost">Post Office</label><input id="permanentPost"></div>
+            <div class="field"><label for="permanentPostCode">Post Code</label><input id="permanentPostCode" inputmode="numeric"></div>
+            <div class="field full"><label for="permanentAddress">Address (House, Area, City) <b>*</b></label><textarea id="permanentAddress" rows="2" required></textarea></div>
+          </div>
         </div>
+      </section>
 
-        <div id="diplomaFields" class="conditional-fields hidden">
+      <section class="form-section">
+        <div class="section-heading"><span>04</span><div><h3>Academic Information</h3><p>Which was your last exam at DPI?</p></div></div>
+        <p class="helper">Select one or both examinations, if applicable.</p>
+        <div class="choice-row">
+          <label class="check-card"><input type="checkbox" id="diplomaCheck"> Diploma in Engineering</label>
+          <label class="check-card"><input type="checkbox" id="alliedCheck"> Allied Group Make-up Course</label>
+        </div>
+        <div id="diplomaPanel" class="sub-panel hidden">
           <h4>Diploma in Engineering</h4>
-
           <div class="form-grid">
-            <div class="form-group">
-              <label for="department">Department *</label>
-              <select id="department" name="department">
-                <option value="">Select Department</option>
-                <option value="67">67 Electrical Technology</option>
-                <option value="64">64 Civil Technology</option>
-                <option value="70">70 Mechanical Technology</option>
-                <option value="85">85 Computer Science & Technology</option>
-                <option value="71">71 Power Technology</option>
-                <option value="68">68 Electronics Technology</option>
-                <option value="61">61 Architecture Technology</option>
-                <option value="69">69 Food Technology</option>
-                <option value="63">63 Chemical Technology</option>
-                <option value="72">72 Refrigeration & Air-Conditioning</option>
-                <option value="62">62 Automobile Technology</option>
-                <option value="90">90 Environmental Technology</option>
-                <option value="other">Other</option>
-              </select>
-              <small id="departmentWarning" class="warning hidden">
-                Other Departments are not allowed.
-              </small>
-            </div>
-
-            <div class="form-group">
-              <label for="session">Session *</label>
-              <select id="session" name="session">
-                <option value="">Select Session</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="diplomaRoll">Diploma Roll *</label>
-              <input type="text" id="diplomaRoll" name="diplomaRoll">
-            </div>
-
-            <div class="form-group">
-              <label for="diplomaReg">Diploma Registration *</label>
-              <input type="text" id="diplomaReg" name="diplomaReg">
-            </div>
-
-            <div class="form-group">
-              <label for="diplomaCGPA">CGPA</label>
-              <input type="number" id="diplomaCGPA" name="diplomaCGPA"
-                min="0" max="4" step="0.01">
-            </div>
-
-            <div class="form-group">
-              <label for="diplomaPassing">Passing Year</label>
-              <select id="diplomaPassing" name="diplomaPassing">
-                <option value="">Select Year</option>
-              </select>
-            </div>
+            <div class="field"><label for="diplomaDepartment">Department <b>*</b></label><select id="diplomaDepartment"><option value="">Select Department</option></select><small id="departmentWarning" class="warning hidden">Other Departments are not allowed.</small></div>
+            <div class="field"><label for="diplomaSession">Session <b>*</b></label><select id="diplomaSession"><option value="">Select Session</option></select></div>
+            <div class="field"><label for="diplomaSessionOther">Other Session</label><input id="diplomaSessionOther" class="hidden" placeholder="Write session (e.g. 1954-55)"></div>
+            <div class="field"><label for="diplomaRoll">Diploma Roll <b>*</b></label><input id="diplomaRoll"></div>
+            <div class="field"><label for="diplomaReg">Diploma Reg <b>*</b></label><input id="diplomaReg"></div>
+            <div class="field"><label for="diplomaCgpa">CGPA <b>*</b></label><input id="diplomaCgpa" type="number" min="0" max="4" step="0.01"></div>
+            <div class="field"><label for="diplomaPassing">Passing Year <b>*</b></label><select id="diplomaPassing"><option value="">Select Passing Year</option></select></div>
           </div>
         </div>
-
-        <div id="alliedFields" class="conditional-fields hidden">
+        <div id="alliedPanel" class="sub-panel hidden">
           <h4>Allied Group Make-up Course</h4>
-
           <div class="form-grid">
-            <div class="form-group">
-              <label for="polytechnic">Polytechnic Name</label>
-              <input type="text" id="polytechnic" name="polytechnic"
-                placeholder="Enter Polytechnic Name">
-            </div>
-
-            <div class="form-group">
-              <label for="alliedDepartment">Department</label>
-              <select id="alliedDepartment" name="alliedDepartment">
-                <option value="">Select Department</option>
-                <option>71 Power Technology</option>
-                <option>72 Refrigeration & Air-Conditioning</option>
-                <option>62 Automobile Technology</option>
-                <option>92 Mechatronics</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="boardRoll">Diploma Board Roll</label>
-              <input type="text" id="boardRoll" name="boardRoll">
-            </div>
-
-            <div class="form-group">
-              <label for="boardReg">Diploma Board Registration</label>
-              <input type="text" id="boardReg" name="boardReg">
-            </div>
-
-            <div class="form-group">
-              <label for="alliedCGPA">CGPA</label>
-              <input type="number" id="alliedCGPA" name="alliedCGPA"
-                min="0" max="4" step="0.01">
-            </div>
-
-            <div class="form-group">
-              <label for="alliedPassing">Passing Year</label>
-              <select id="alliedPassing" name="alliedPassing">
-                <option value="">Select Year</option>
-              </select>
-            </div>
+            <div class="field"><label for="polytechnic">Polytechnic Name <b>*</b></label><select id="polytechnic"><option value="">Select Polytechnic</option></select></div>
+            <div class="field"><label for="polytechnicOther">Other Polytechnic</label><input id="polytechnicOther" class="hidden" placeholder="Write Polytechnic Name"></div>
+            <div class="field"><label for="alliedDepartment">Department <b>*</b></label><select id="alliedDepartment"><option value="">Select Department</option><option>71 - Power Technology</option><option>72 - Refrigeration &amp; Air-Conditioning (RAC) Technology</option><option>62 - Automobile Technology</option><option>92 - Mechatronics Technology</option></select></div>
+            <div class="field"><label for="boardRoll">Diploma Board Roll <b>*</b></label><input id="boardRoll"></div>
+            <div class="field"><label for="boardReg">Diploma Board Reg <b>*</b></label><input id="boardReg"></div>
+            <div class="field"><label for="alliedCgpa">CGPA <b>*</b></label><input id="alliedCgpa" type="number" min="0" max="4" step="0.01"></div>
+            <div class="field"><label for="alliedPassing">Passing Year <b>*</b></label><select id="alliedPassing"><option value="">Select Passing Year</option></select></div>
           </div>
-
-          <h4>Make-Up Course Details</h4>
+          <h4 class="sub-title">Make-Up Course Details</h4>
           <div class="form-grid">
-            <div class="form-group">
-              <label for="makeupRoll">Roll No</label>
-              <input type="text" id="makeupRoll" name="makeupRoll">
-            </div>
-
-            <div class="form-group">
-              <label for="makeupReg">Registration No</label>
-              <input type="text" id="makeupReg" name="makeupReg">
-            </div>
-
-            <div class="form-group">
-              <label for="makeupYear">Passing Year</label>
-              <input type="number" id="makeupYear" name="makeupYear">
-            </div>
+            <div class="field"><label for="makeupRoll">Roll No <b>*</b></label><input id="makeupRoll"></div>
+            <div class="field"><label for="makeupReg">Registration No <b>*</b></label><input id="makeupReg"></div>
+            <div class="field"><label for="makeupPassing">Passing Year <b>*</b></label><select id="makeupPassing"><option value="">Select Passing Year</option></select></div>
           </div>
         </div>
       </section>
 
-      <!-- CURRENT STATUS -->
       <section class="form-section">
-        <h3>Current Status</h3>
-
-        <div class="form-group">
-          <label for="currentStatus">Select Current Status *</label>
-          <select id="currentStatus" name="currentStatus" required>
-            <option value="">Select Status</option>
-            <option value="higher">Higher Studies</option>
-            <option value="job">Job Holder</option>
-            <option value="business">Entrepreneur / Business</option>
-            <option value="other">Others</option>
-          </select>
+        <div class="section-heading"><span>05</span><div><h3>Current Status</h3><p>Select all that apply.</p></div></div>
+        <div class="choice-row four">
+          <label class="check-card"><input type="checkbox" name="status" value="Higher Studies" id="statusStudy"> Higher Studies</label>
+          <label class="check-card"><input type="checkbox" name="status" value="Job Holder" id="statusJob"> Job Holder</label>
+          <label class="check-card"><input type="checkbox" name="status" value="Entrepreneur / Business" id="statusBusiness"> Entrepreneur / Business</label>
+          <label class="check-card"><input type="checkbox" name="status" value="Others" id="statusOther"> Others</label>
         </div>
-
-        <div id="higherFields" class="conditional-fields hidden">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="instituteName">Institute Name</label>
-              <input type="text" id="instituteName" name="instituteName">
-            </div>
-            <div class="form-group">
-              <label for="higherDepartment">Department</label>
-              <input type="text" id="higherDepartment"
-                name="higherDepartment">
-            </div>
-          </div>
-        </div>
-
-        <div id="jobFields" class="conditional-fields hidden">
-          <div class="form-group">
-            <label for="jobType">Service Type</label>
-            <select id="jobType" name="jobType">
-              <option value="">Select Service Type</option>
-              <option value="government">Government Service</option>
-              <option value="private">Private Service</option>
-            </select>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="organization">Organization / Company</label>
-              <input type="text" id="organization" name="organization">
-            </div>
-            <div class="form-group">
-              <label for="designation">Designation</label>
-              <input type="text" id="designation" name="designation">
-            </div>
-            <div class="form-group">
-              <label for="jobDepartment">Department</label>
-              <input type="text" id="jobDepartment" name="jobDepartment">
-            </div>
-            <div class="form-group">
-              <label for="jobLocation">Location</label>
-              <input type="text" id="jobLocation" name="jobLocation">
-            </div>
-          </div>
-        </div>
-
-        <div id="businessFields" class="conditional-fields hidden">
-          <div class="form-group">
-            <label for="businessName">Business Name</label>
-            <input type="text" id="businessName" name="businessName">
-          </div>
-          <div class="form-group">
-            <label for="businessDetails">Business Details</label>
-            <textarea id="businessDetails" name="businessDetails"></textarea>
-          </div>
-        </div>
-
-        <div id="otherStatusFields" class="conditional-fields hidden">
-          <div class="form-group">
-            <label for="otherStatus">Please Specify</label>
-            <input type="text" id="otherStatus" name="otherStatus">
-          </div>
-        </div>
+        <div id="studyPanel" class="sub-panel hidden"><h4>Higher Studies</h4><div class="form-grid"><div class="field"><label for="studyInstitute">Institute Name (University or College)</label><input id="studyInstitute"></div><div class="field"><label for="studyDepartment">Department</label><input id="studyDepartment"></div></div></div>
+        <div id="jobPanel" class="sub-panel hidden"><h4>Job Information</h4><div class="form-grid"><div class="field"><label for="jobType">Service Type</label><select id="jobType"><option value="">Select Service Type</option><option value="Private">Private</option><option value="Government Service">Government Service</option></select></div><div class="field"><label for="jobOrg" id="jobOrgLabel">Organization / Company</label><input id="jobOrg"></div><div class="field"><label for="jobDesignation">Designation</label><input id="jobDesignation"></div><div class="field"><label for="jobDepartment">Department</label><input id="jobDepartment"></div><div class="field"><label for="jobLocation">Location</label><input id="jobLocation"></div></div></div>
+        <div id="businessPanel" class="sub-panel hidden"><h4>Entrepreneur / Business</h4><div class="form-grid"><div class="field"><label for="businessName">Business Name</label><input id="businessName"></div><div class="field"><label for="businessType">Business Type</label><input id="businessType"></div><div class="field"><label for="businessLocation">Business Location</label><input id="businessLocation"></div></div></div>
+        <div id="otherStatusPanel" class="sub-panel hidden"><h4>Others</h4><div class="field"><label for="otherStatusDetails">Please specify</label><input id="otherStatusDetails"></div></div>
       </section>
 
-      <!-- ASSOCIATION DETAILS -->
       <section class="form-section">
-        <h3>Association Details</h3>
-
-        <div class="form-group">
-          <label for="suggestions">
-            Please tell us your suggestions regarding the Mechanical Alumni
-            Association of DPI *
-          </label>
-          <textarea id="suggestions" name="suggestions"
-            placeholder="Write your valuable suggestions..." required></textarea>
-        </div>
+        <div class="section-heading"><span>06</span><div><h3>Association Details</h3><p>Your thoughts and suggestions</p></div></div>
+        <div class="field"><label for="suggestions">Please tell us suggestions regarding the Mechanical Alumni Association of DPI <b>*</b></label><textarea id="suggestions" rows="4" required placeholder="Write your suggestions here..."></textarea></div>
       </section>
 
-      <!-- CONTACT VISIBILITY -->
       <section class="form-section">
-        <h3>Contact Information Visibility</h3>
-
-        <p class="section-description">
-          Do you want to display your contact details to others?
-          Displaying your contact details can help friends, seniors,
-          juniors and teachers contact you.
-        </p>
-
-        <div class="form-group">
-          <label for="visibility">Choose Your Preference *</label>
-          <select id="visibility" name="visibility" required>
-            <option value="">Select Preference</option>
-            <option value="yes">Yes, Show My Contact Details</option>
-            <option value="no">No, Keep My Details Private</option>
-          </select>
-        </div>
-
-        <div id="socialFields" class="conditional-fields hidden">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="whatsapp">WhatsApp</label>
-              <input type="text" id="whatsapp" name="whatsapp">
-            </div>
-            <div class="form-group">
-              <label for="publicEmail">Email</label>
-              <input type="email" id="publicEmail" name="publicEmail">
-            </div>
-            <div class="form-group">
-              <label for="facebook">Facebook Profile</label>
-              <input type="url" id="facebook" name="facebook">
-            </div>
-            <div class="form-group">
-              <label for="linkedin">LinkedIn Profile</label>
-              <input type="url" id="linkedin" name="linkedin">
-            </div>
-            <div class="form-group">
-              <label for="instagram">Instagram Profile</label>
-              <input type="url" id="instagram" name="instagram">
-            </div>
-          </div>
-        </div>
+        <div class="section-heading"><span>07</span><div><h3>Contact Visibility</h3><p>Do you want to display your contact details to others?</p></div></div>
+        <p class="helper">Allowing this makes it easier for your friends, seniors, juniors, and teachers to reach you. You can choose to show your mobile number, WhatsApp, email, Facebook, and LinkedIn.</p>
+        <div class="choice-row"><label class="check-card"><input type="radio" name="visibility" value="yes" id="visibilityYes"> Yes, show my contact details</label><label class="check-card"><input type="radio" name="visibility" value="no" id="visibilityNo" checked> No, keep them private</label></div>
+        <div id="visibilityPanel" class="sub-panel hidden"><div class="form-grid"><div class="field"><label for="publicWhatsapp">WhatsApp</label><input id="publicWhatsapp" type="tel"></div><div class="field"><label for="publicEmail">Email</label><input id="publicEmail" type="email"></div><div class="field"><label for="facebook">Facebook</label><input id="facebook" type="url" placeholder="https://"></div><div class="field"><label for="linkedin">LinkedIn</label><input id="linkedin" type="url" placeholder="https://"></div><div class="field"><label for="instagram">Instagram</label><input id="instagram" type="url" placeholder="https://"></div></div></div>
       </section>
 
-      <!-- LOGIN -->
       <section class="form-section">
-        <h3>Login & Manage Your Profile</h3>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="loginId">Email / Mobile Number *</label>
-            <input type="text" id="loginId" name="loginId" required>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password *</label>
-            <input type="password" id="password" name="password"
-              minlength="8" required>
-          </div>
-        </div>
-
-        <button type="button" id="googleSignIn" class="google-button">
-          Sign in with Google
-        </button>
+        <div class="section-heading"><span>08</span><div><h3>Account Registration</h3><p>(যা পরবর্তীতে লগইন করতে ব্যবহৃত হবে)</p></div></div>
+        <div class="field"><label for="registrationType">Registration Type <b>*</b></label><select id="registrationType" required><option value="">Select Registration Type</option><option value="email">Email / Mobile</option><option value="google">Sign in with Google</option></select></div>
+        <div id="accountPanel" class="sub-panel hidden"><div class="form-grid"><div class="field"><label for="loginId">Email / Mobile <b>*</b></label><input id="loginId" placeholder="Enter email or mobile number"></div><div class="field"><label for="password">Password <b>*</b></label><input id="password" type="password" minlength="8" autocomplete="new-password"></div><div class="field"><label for="confirmPassword">Confirm Password <b>*</b></label><input id="confirmPassword" type="password" minlength="8" autocomplete="new-password"></div></div><p class="helper">The email or mobile number entered here will be used for future login.</p></div>
+        <div id="googleInfo" class="notice hidden">Google sign-in requires Google OAuth and server-side configuration. Connect the authentication service to enable this option.</div>
       </section>
 
-      <!-- SUBMIT -->
-      <div class="form-actions">
-        <button type="reset" class="reset-button">Reset Form</button>
-        <button type="submit" class="submit-button">
-          Submit Registration
-        </button>
-      </div>
-
+      <div class="submit-area"><button type="submit" class="submit-btn">Submit Registration <span>→</span></button><p id="formMessage" role="status"></p></div>
     </form>
+    <footer>© <span id="footerYear"></span> Mechanical Alumni Association · Dhaka Govt. Polytechnic Institute</footer>
   </main>
-
-  <footer class="site-footer">
-    <p>
-      © <span id="currentYear"></span>
-      Mechanical Alumni Association of DPI. All Rights Reserved.
-    </p>
-  </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
