@@ -22,16 +22,23 @@
   <!-- HEADER -->
   <header class="site-header">
     <div class="header-content">
-      <img src="assets/alumni.png" alt="Association Logo" class="header-logo">
+
+      <img
+        src="assets/alumni.png"
+        alt="Association Logo"
+        class="header-logo"
+      >
 
       <div class="header-title">
         <h1>MECHANICAL ALUMNI ASSOCIATION</h1>
         <p>Dhaka Govt. Polytechnic Institute</p>
       </div>
+
     </div>
   </header>
 
-  <!-- PAGE TITLE -->
+
+  <!-- MAIN REGISTRATION -->
   <main class="registration-container">
 
     <div class="page-heading">
@@ -39,9 +46,13 @@
       <p>Join the Mechanical Alumni Association Community</p>
     </div>
 
+
     <form id="registrationForm">
 
-      <!-- PERSONAL INFORMATION -->
+      <!-- =====================================
+           PERSONAL INFORMATION
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Personal &amp; Contact Information</h3>
@@ -50,14 +61,22 @@
 
           <div class="form-group full-width">
             <label>Photo Upload *</label>
-            <input type="file" name="photo" accept="image/*" required>
+            <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              required
+            >
           </div>
 
-          <!-- ONLY NAME GETS FULL WIDTH -->
           <div class="form-group full-width">
             <label>Name as per Certificate *</label>
-            <input type="text" name="fullName"
-              placeholder="e.g. RASHEDUL ISLAM" required>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="e.g. RASHEDUL ISLAM"
+              required
+            >
           </div>
 
           <div class="form-group">
@@ -72,7 +91,9 @@
 
           <div class="form-group">
             <label>Date of Birth *</label>
+
             <div class="three-columns">
+
               <select name="dobDay" id="dobDay" required>
                 <option value="">Day</option>
               </select>
@@ -84,11 +105,13 @@
               <select name="dobYear" id="dobYear" required>
                 <option value="">Year</option>
               </select>
+
             </div>
           </div>
 
           <div class="form-group">
             <label>Blood Group *</label>
+
             <select name="bloodGroup" required>
               <option value="">Select Blood Group</option>
               <option>A+</option>
@@ -104,21 +127,32 @@
 
           <div class="form-group">
             <label>Contact Number *</label>
-            <input type="tel" name="phone"
-              placeholder="01XXXXXXXXX" required>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="01XXXXXXXXX"
+              required
+            >
           </div>
 
           <div class="form-group">
             <label>Email Address *</label>
-            <input type="email" name="email"
-              placeholder="name@example.com" required>
+            <input
+              type="email"
+              name="email"
+              placeholder="name@example.com"
+              required
+            >
           </div>
 
         </div>
       </section>
 
 
-      <!-- PRESENT ADDRESS -->
+      <!-- =====================================
+           PRESENT ADDRESS
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Present Address</h3>
@@ -127,36 +161,49 @@
 
           <div class="form-group">
             <label>Address Type *</label>
-            <select name="presentAddressType" class="address-type" required>
+
+            <select
+              name="presentAddressType"
+              class="address-type"
+              required
+            >
               <option value="">Select Address Type</option>
               <option value="city">City Corporation</option>
               <option value="district">District</option>
             </select>
           </div>
 
+
           <div class="form-group city-field">
             <label>City Corporation</label>
+
             <select name="presentCity">
               <option value="">Select City Corporation</option>
             </select>
           </div>
 
+
           <div class="form-group district-field">
             <label>Division</label>
+
             <select name="presentDivision">
               <option value="">Select Division</option>
             </select>
           </div>
 
+
           <div class="form-group district-field">
             <label>District</label>
+
             <select name="presentDistrict">
               <option value="">Select District</option>
             </select>
           </div>
 
+
           <div class="form-group district-field">
             <label>Area Type</label>
+
             <select name="presentAreaType">
               <option value="">Select Area Type</option>
               <option value="upazila">Upazila</option>
@@ -164,57 +211,61 @@
             </select>
           </div>
 
+
           <div class="form-group district-field">
             <label>Upazila / Municipality</label>
+
             <select name="presentArea">
               <option value="">Select Area</option>
             </select>
           </div>
 
+
           <div class="form-group">
             <label>Ward</label>
+
             <select name="presentWard">
               <option value="">Select Ward</option>
-              <option>Ward 01</option>
-              <option>Ward 02</option>
-              <option>Ward 03</option>
-              <option>Ward 04</option>
-              <option>Ward 05</option>
-              <option>Ward 06</option>
-              <option>Ward 07</option>
-              <option>Ward 08</option>
-              <option>Ward 09</option>
-              <option>Ward 10</option>
-              <option>Others</option>
             </select>
           </div>
+
 
           <div class="form-group">
             <label>Union</label>
             <input type="text" name="presentUnion">
           </div>
 
+
           <div class="form-group">
             <label>Post Office</label>
             <input type="text" name="presentPostOffice">
           </div>
+
 
           <div class="form-group">
             <label>Post Code</label>
             <input type="text" name="presentPostCode">
           </div>
 
+
           <div class="form-group full-width">
             <label>Address (House, Area, City) *</label>
-            <textarea name="presentAddress"
-              placeholder="Enter your full present address" required></textarea>
+
+            <textarea
+              name="presentAddress"
+              placeholder="Enter your full present address"
+              required
+            ></textarea>
           </div>
 
         </div>
       </section>
 
 
-      <!-- PERMANENT ADDRESS -->
+      <!-- =====================================
+           PERMANENT ADDRESS
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Permanent Address</h3>
@@ -224,10 +275,12 @@
           Present Address and Permanent Address are the same
         </label>
 
+
         <div class="form-grid" id="permanentAddressFields">
 
           <div class="form-group">
             <label>Address Type *</label>
+
             <select name="permanentAddressType">
               <option value="">Select Address Type</option>
               <option value="city">City Corporation</option>
@@ -235,29 +288,37 @@
             </select>
           </div>
 
+
           <div class="form-group">
             <label>City Corporation</label>
+
             <select name="permanentCity">
               <option value="">Select City Corporation</option>
             </select>
           </div>
 
+
           <div class="form-group">
             <label>Division</label>
+
             <select name="permanentDivision">
               <option value="">Select Division</option>
             </select>
           </div>
 
+
           <div class="form-group">
             <label>District</label>
+
             <select name="permanentDistrict">
               <option value="">Select District</option>
             </select>
           </div>
 
+
           <div class="form-group">
             <label>Area Type</label>
+
             <select name="permanentAreaType">
               <option value="">Select Area Type</option>
               <option value="upazila">Upazila</option>
@@ -265,50 +326,60 @@
             </select>
           </div>
 
+
           <div class="form-group">
             <label>Upazila / Municipality</label>
+
             <select name="permanentArea">
               <option value="">Select Area</option>
             </select>
           </div>
 
+
           <div class="form-group">
             <label>Ward</label>
+
             <select name="permanentWard">
               <option value="">Select Ward</option>
-              <option>Ward 01</option>
-              <option>Ward 02</option>
-              <option>Ward 03</option>
-              <option>Others</option>
             </select>
           </div>
+
 
           <div class="form-group">
             <label>Union</label>
             <input type="text" name="permanentUnion">
           </div>
 
+
           <div class="form-group">
             <label>Post Office</label>
             <input type="text" name="permanentPostOffice">
           </div>
+
 
           <div class="form-group">
             <label>Post Code</label>
             <input type="text" name="permanentPostCode">
           </div>
 
+
           <div class="form-group full-width">
             <label>Address (House, Area, City) *</label>
-            <textarea name="permanentAddress"
-              placeholder="Enter your full permanent address"></textarea>
+
+            <textarea
+              name="permanentAddress"
+              placeholder="Enter your full permanent address"
+            ></textarea>
           </div>
 
         </div>
       </section>
 
 
-      <!-- ACADEMIC INFORMATION -->
+      <!-- =====================================
+           ACADEMIC INFORMATION
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Academic Information</h3>
@@ -316,6 +387,7 @@
         <p class="section-description">
           Which was your last examination at DPI?
         </p>
+
 
         <div class="checkbox-grid">
 
@@ -333,6 +405,7 @@
 
 
         <!-- DIPLOMA -->
+
         <div class="conditional-section" id="diplomaFields">
 
           <h4>Diploma in Engineering</h4>
@@ -341,50 +414,70 @@
 
             <div class="form-group">
               <label>Department *</label>
-              <select name="diplomaDepartment" id="diplomaDepartment">
+
+              <select
+                name="diplomaDepartment"
+                id="diplomaDepartment"
+              >
                 <option value="">Select Department</option>
                 <option value="67">67 - Electrical Technology</option>
                 <option value="64">64 - Civil Technology</option>
                 <option value="70">70 - Mechanical Technology</option>
-                <option value="85">85 - Computer Science & Technology</option>
+                <option value="85">85 - Computer Science &amp; Technology</option>
                 <option value="71">71 - Power Technology</option>
                 <option value="68">68 - Electronics Technology</option>
                 <option value="61">61 - Architecture Technology</option>
                 <option value="69">69 - Food Technology</option>
                 <option value="63">63 - Chemical Technology</option>
-                <option value="72">72 - Refrigeration & Air-Conditioning Technology</option>
+                <option value="72">72 - Refrigeration &amp; Air-Conditioning Technology</option>
                 <option value="62">62 - Automobile Technology</option>
                 <option value="90">90 - Environmental Technology</option>
                 <option value="other">Other</option>
               </select>
             </div>
 
+
             <div class="form-group">
               <label>Session *</label>
+
               <select name="diplomaSession" id="diplomaSession">
                 <option value="">Select Session</option>
               </select>
             </div>
+
 
             <div class="form-group">
               <label>Diploma Roll *</label>
               <input type="text" name="diplomaRoll">
             </div>
 
+
             <div class="form-group">
               <label>Diploma Registration *</label>
               <input type="text" name="diplomaReg">
             </div>
 
+
             <div class="form-group">
               <label>CGPA *</label>
-              <input type="number" name="diplomaCGPA"
-                min="0" max="4" step="0.01">
+
+              <input
+                type="number"
+                name="diplomaCGPA"
+                min="0"
+                max="4"
+                step="0.01"
+              >
             </div>
+
 
             <div class="form-group">
               <label>Passing Year *</label>
-              <select name="diplomaPassingYear" id="diplomaPassingYear">
+
+              <select
+                name="diplomaPassingYear"
+                id="diplomaPassingYear"
+              >
                 <option value="">Select Year</option>
               </select>
             </div>
@@ -399,6 +492,7 @@
 
 
         <!-- ALLIED GROUP -->
+
         <div class="conditional-section" id="alliedFields">
 
           <h4>Allied Group Make-up Course</h4>
@@ -407,47 +501,76 @@
 
             <div class="form-group">
               <label>Polytechnic Name *</label>
-              <select name="alliedPolytechnic">
-                <option value="">Select Polytechnic</option>
-                <option value="other">Others</option>
+
+              <select
+                name="alliedPolytechnic"
+                id="alliedPolytechnic"
+                required
+              >
+                <option value="Dhaka Govt. Polytechnic Institute">
+                  Dhaka Govt. Polytechnic Institute
+                </option>
+                <option value="other">Other</option>
               </select>
+
+              <input
+                type="text"
+                name="alliedPolytechnicOther"
+                id="alliedPolytechnicOther"
+                placeholder="Enter Polytechnic Name"
+                style="display:none;"
+              >
             </div>
+
 
             <div class="form-group">
               <label>Department *</label>
+
               <select name="alliedDepartment">
                 <option value="">Select Department</option>
                 <option value="71">71 - Power Technology</option>
-                <option value="72">72 - Refrigeration & Air-Conditioning Technology</option>
+                <option value="72">72 - Refrigeration &amp; Air-Conditioning Technology</option>
                 <option value="62">62 - Automobile Technology</option>
                 <option value="92">92 - Mechatronics Technology</option>
               </select>
             </div>
+
 
             <div class="form-group">
               <label>Diploma Board Roll *</label>
               <input type="text" name="boardRoll">
             </div>
 
+
             <div class="form-group">
               <label>Diploma Board Registration *</label>
               <input type="text" name="boardReg">
             </div>
 
+
             <div class="form-group">
               <label>CGPA *</label>
-              <input type="number" name="alliedCGPA"
-                min="0" max="4" step="0.01">
+
+              <input
+                type="number"
+                name="alliedCGPA"
+                min="0"
+                max="4"
+                step="0.01"
+              >
             </div>
+
 
             <div class="form-group">
               <label>Passing Year *</label>
+
               <select name="alliedPassingYear" id="alliedPassingYear">
                 <option value="">Select Year</option>
               </select>
             </div>
 
           </div>
+
 
           <h4>Make-Up Course Details</h4>
 
@@ -458,13 +581,16 @@
               <input type="text" name="makeupRoll">
             </div>
 
+
             <div class="form-group">
               <label>Registration No *</label>
               <input type="text" name="makeupReg">
             </div>
 
+
             <div class="form-group">
               <label>Passing Year *</label>
+
               <select name="makeupPassingYear" id="makeupPassingYear">
                 <option value="">Select Year</option>
               </select>
@@ -477,7 +603,10 @@
       </section>
 
 
-      <!-- CURRENT STATUS -->
+      <!-- =====================================
+           CURRENT STATUS
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Current Status</h3>
@@ -508,9 +637,11 @@
 
 
         <div class="conditional-section" id="higherStudiesFields">
+
           <h4>Higher Studies Information</h4>
 
           <div class="form-grid">
+
             <div class="form-group">
               <label>Institute Name</label>
               <input type="text" name="instituteName">
@@ -520,15 +651,18 @@
               <label>Department</label>
               <input type="text" name="higherStudiesDepartment">
             </div>
+
           </div>
         </div>
 
 
         <div class="conditional-section" id="jobFields">
+
           <h4>Employment Information</h4>
 
           <div class="form-group">
             <label>Service Type</label>
+
             <select name="serviceType" id="serviceType">
               <option value="">Select Service Type</option>
               <option value="private">Private Service</option>
@@ -563,9 +697,11 @@
 
 
         <div class="conditional-section" id="businessFields">
+
           <h4>Business Information</h4>
 
           <div class="form-grid">
+
             <div class="form-group">
               <label>Business Name</label>
               <input type="text" name="businessName">
@@ -575,40 +711,55 @@
               <label>Business Type</label>
               <input type="text" name="businessType">
             </div>
+
           </div>
         </div>
 
 
         <div class="conditional-section" id="otherStatusFields">
+
           <h4>Other Information</h4>
 
           <div class="form-group">
             <label>Please Specify</label>
             <input type="text" name="otherStatus">
           </div>
+
         </div>
 
       </section>
 
 
-      <!-- ASSOCIATION DETAILS -->
+      <!-- =====================================
+           ASSOCIATION DETAILS
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Association Details</h3>
 
         <div class="form-group">
+
           <label>
             Please tell us suggestions regarding the Mechanical Alumni Association of DPI *
           </label>
 
-          <textarea name="suggestions" rows="5"
-            placeholder="Write your suggestions here..." required></textarea>
+          <textarea
+            name="suggestions"
+            rows="5"
+            placeholder="Write your suggestions here..."
+            required
+          ></textarea>
+
         </div>
 
       </section>
 
 
-      <!-- CONTACT VISIBILITY -->
+      <!-- =====================================
+           CONTACT VISIBILITY
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Contact Visibility</h3>
@@ -623,21 +774,32 @@
           number, WhatsApp, email, Facebook, and LinkedIn.
         </p>
 
+
         <div class="checkbox-grid">
 
           <label class="checkbox-card">
-            <input type="radio" name="contactVisibility" value="yes"
-              id="visibilityYes">
+            <input
+              type="radio"
+              name="contactVisibility"
+              value="yes"
+              id="visibilityYes"
+            >
             Yes, show my contact details
           </label>
 
           <label class="checkbox-card">
-            <input type="radio" name="contactVisibility" value="no"
-              id="visibilityNo" checked>
+            <input
+              type="radio"
+              name="contactVisibility"
+              value="no"
+              id="visibilityNo"
+              checked
+            >
             No, keep them private
           </label>
 
         </div>
+
 
         <div class="conditional-section" id="socialFields">
 
@@ -671,13 +833,15 @@
             </div>
 
           </div>
-
         </div>
 
       </section>
 
 
-      <!-- ACCOUNT REGISTRATION -->
+      <!-- =====================================
+           ACCOUNT REGISTRATION
+      ====================================== -->
+
       <section class="form-section">
 
         <h3>Account Registration</h3>
@@ -686,15 +850,23 @@
           Your account will be used for future login.
         </p>
 
+
         <div class="form-group">
+
           <label>Registration Type *</label>
 
-          <select name="registrationType" id="registrationType" required>
+          <select
+            name="registrationType"
+            id="registrationType"
+            required
+          >
             <option value="">Select Registration Type</option>
             <option value="google">Google Sign-in</option>
             <option value="email">Email / Mobile</option>
           </select>
+
         </div>
+
 
         <div class="conditional-section" id="accountFields">
 
@@ -707,14 +879,24 @@
 
             <div class="form-group">
               <label>Password *</label>
-              <input type="password" name="password"
-                id="password" autocomplete="new-password">
+
+              <input
+                type="password"
+                name="password"
+                id="password"
+                autocomplete="new-password"
+              >
             </div>
 
             <div class="form-group">
               <label>Confirm Password *</label>
-              <input type="password" name="confirmPassword"
-                id="confirmPassword" autocomplete="new-password">
+
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                autocomplete="new-password"
+              >
             </div>
 
           </div>
@@ -725,6 +907,7 @@
 
         </div>
 
+
         <div class="google-info" id="googleInfo">
           Google Sign-in requires a configured authentication service.
         </div>
@@ -732,11 +915,16 @@
       </section>
 
 
-      <!-- SUBMIT -->
+      <!-- =====================================
+           SUBMIT BUTTON
+      ====================================== -->
+
       <div class="form-submit">
+
         <button type="submit" class="submit-btn">
           Submit Registration →
         </button>
+
       </div>
 
     </form>
@@ -744,31 +932,54 @@
   </main>
 
 
-  <!-- LOGIN POPUP -->
+  <!-- =====================================
+       LOGIN POPUP
+  ====================================== -->
+
   <div class="login-modal" id="loginModal">
 
     <div class="login-box">
 
       <div class="login-header">
+
         <h3>Member Login</h3>
-        <button type="button" id="loginClose" class="close-btn">
+
+        <button
+          type="button"
+          id="loginClose"
+          class="close-btn"
+        >
           &times;
         </button>
+
       </div>
+
 
       <form id="loginForm">
 
         <div class="form-group">
           <label>Email / Mobile</label>
-          <input type="text" name="loginIdentity"
-            placeholder="Enter Email or Mobile" required>
+
+          <input
+            type="text"
+            name="loginIdentity"
+            placeholder="Enter Email or Mobile"
+            required
+          >
         </div>
+
 
         <div class="form-group">
           <label>Password</label>
-          <input type="password" name="loginPassword"
-            placeholder="Enter Password" required>
+
+          <input
+            type="password"
+            name="loginPassword"
+            placeholder="Enter Password"
+            required
+          >
         </div>
+
 
         <button type="submit" class="login-submit">
           Login
@@ -781,15 +992,21 @@
   </div>
 
 
-  <!-- FOOTER -->
+  <!-- =====================================
+       FOOTER
+  ====================================== -->
+
   <footer class="site-footer">
+
     <p>
       © Mechanical Alumni Association |
       Dhaka Govt. Polytechnic Institute
     </p>
+
   </footer>
 
 
+  <!-- JAVASCRIPT -->
   <script src="script.js"></script>
 
 </body>
