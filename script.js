@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
-  // Event Delegation for dynamically loaded header
+
   document.addEventListener("click", function (event) {
 
     const menuToggle = event.target.closest("#menuToggle");
@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const isOpen = navMenu.classList.toggle("active");
 
       menuToggle.setAttribute("aria-expanded", isOpen);
+
       menuToggle.setAttribute(
         "aria-label",
         isOpen ? "Close Menu" : "Open Menu"
@@ -41,24 +42,33 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Close menu after clicking a navigation link
+
+    // Close menu after clicking navigation link
+
     if (
       navMenu &&
       event.target.closest("#navMenu a")
     ) {
+
       closeMobileMenu();
+
       return;
     }
 
+
     // Close menu when clicking outside
+
     if (
       navMenu &&
       !navMenu.contains(event.target)
     ) {
+
       closeMobileMenu();
+
     }
 
   });
+
 
 
   // =====================================
@@ -67,20 +77,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", function (event) {
 
-    const languageToggle = event.target.closest("#languageToggle");
+    const languageToggle =
+      event.target.closest("#languageToggle");
 
     if (!languageToggle) return;
 
-    const currentLanguage = document.documentElement.lang;
+    const currentLanguage =
+      document.documentElement.lang;
 
     if (currentLanguage === "en") {
 
       document.documentElement.lang = "bn";
+
       languageToggle.textContent = "(EN)";
 
     } else {
 
       document.documentElement.lang = "en";
+
       languageToggle.textContent = "(BN)";
 
     }
@@ -88,15 +102,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+
   // =====================================
   // 3. MODAL ELEMENTS
   // =====================================
 
-  const registerModal = document.getElementById("registerModal");
-  const loginModal = document.getElementById("loginModal");
+  const registerModal =
+    document.getElementById("registerModal");
 
-  const closeRegisterBtn = document.getElementById("closeRegisterModal");
-  const closeLoginBtn = document.getElementById("closeLoginModal");
+  const loginModal =
+    document.getElementById("loginModal");
+
+  const closeRegisterBtn =
+    document.getElementById("closeRegisterModal");
+
+  const closeLoginBtn =
+    document.getElementById("closeLoginModal");
+
 
 
   // =====================================
@@ -110,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!modal) return;
 
       modal.classList.remove("active");
+
       modal.setAttribute("aria-hidden", "true");
 
     });
@@ -117,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.remove("modal-open");
 
   }
+
 
 
   // =====================================
@@ -130,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
     closeAllModals();
 
     modal.classList.add("active");
+
     modal.setAttribute("aria-hidden", "false");
 
     document.body.classList.add("modal-open");
@@ -137,16 +162,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+
   // =====================================
   // 6. GLOBAL LOGIN & REGISTER TRIGGERS
   // =====================================
 
-  // Works with dynamically loaded Global Header
-
   document.addEventListener("click", function (event) {
 
-    const registerTrigger = event.target.closest(".register-trigger");
-    const loginTrigger = event.target.closest(".login-trigger");
+    const registerTrigger =
+      event.target.closest(".register-trigger");
+
+    const loginTrigger =
+      event.target.closest(".login-trigger");
+
+
+    // Register Popup
 
     if (registerTrigger) {
 
@@ -156,6 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       return;
     }
+
+
+    // Login Popup
 
     if (loginTrigger) {
 
@@ -169,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+
   // =====================================
   // 7. STUDENT & TEACHER REGISTRATION
   // =====================================
@@ -177,7 +211,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!link) return;
 
-    const destination = link.getAttribute("href");
+    const destination =
+      link.getAttribute("href");
 
     if (!destination || destination === "#") {
 
@@ -193,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+
   document.addEventListener("click", function (event) {
 
     const studentLink = event.target.closest(
@@ -203,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "#registerModal .teacher-option"
     );
 
+
     if (studentLink) {
 
       event.preventDefault();
@@ -211,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       return;
     }
+
 
     if (teacherLink) {
 
@@ -222,6 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   });
+
 
 
   // =====================================
@@ -237,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
+
   if (closeLoginBtn) {
 
     closeLoginBtn.addEventListener(
@@ -247,6 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+
   // =====================================
   // 9. CLICK OUTSIDE MODAL
   // =====================================
@@ -254,8 +295,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (event) {
 
     if (
-      event.target.classList.contains("register-modal-overlay") ||
-      event.target.classList.contains("login-modal-overlay")
+      event.target.classList.contains(
+        "register-modal-overlay"
+      ) ||
+
+      event.target.classList.contains(
+        "login-modal-overlay"
+      )
     ) {
 
       closeAllModals();
@@ -263,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   });
+
 
 
   // =====================================
@@ -274,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.key === "Escape") {
 
       closeAllModals();
+
       closeMobileMenu();
 
     }
@@ -281,29 +329,86 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+
   // =====================================
-  // 11. OPEN LOGIN FROM URL
+  // 11. OPEN LOGIN FROM REGISTRATION PAGE
   // =====================================
 
   function openLoginPopupFromLink() {
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+      new URLSearchParams(window.location.search);
 
-    if (params.get("openLogin") !== "true") return;
+    const openLogin =
+      params.get("openLogin");
 
-    openModal(loginModal);
+
+    // Support both:
+    // ?openLogin=1
+    // ?openLogin=true
+
+    if (
+      openLogin !== "1" &&
+      openLogin !== "true"
+    ) {
+
+      return;
+    }
+
+
+    // Open existing Homepage Login Popup
+
+    if (loginModal) {
+
+      openModal(loginModal);
+
+    } else {
+
+      console.warn("Login Modal not found.");
+
+    }
+
+
+    // Remove URL parameter without page reload
 
     window.history.replaceState(
       {},
       document.title,
-      window.location.pathname + window.location.hash
+      window.location.pathname +
+      window.location.hash
     );
 
   }
 
+
   openLoginPopupFromLink();
 
 
-  console.log("DTSC Alumni Main Script Loaded Successfully!");
+
+  // =====================================
+  // 12. INITIAL MODAL STATE
+  // =====================================
+
+  [registerModal, loginModal].forEach(function (modal) {
+
+    if (!modal) return;
+
+    if (!modal.classList.contains("active")) {
+
+      modal.setAttribute("aria-hidden", "true");
+
+    }
+
+  });
+
+
+
+  // =====================================
+  // 13. CONSOLE MESSAGE
+  // =====================================
+
+  console.log(
+    "Mechanical Alumni Association Main Script Loaded Successfully!"
+  );
 
 });
